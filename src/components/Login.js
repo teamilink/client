@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const Login = () => {
+const Login = ({activeUser}) => {
 
     const initialFormData = {
         user: "",
@@ -13,6 +13,7 @@ const Login = () => {
         e.preventDefault ()
         console.log("clicked")
         console.log(formData)
+        activeUser(formData.user)
         setUser(initialFormData)
     }
 
