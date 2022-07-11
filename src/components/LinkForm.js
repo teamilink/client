@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../utils/LinkContext";
 
-const LinkForm = ({ id }) => {
+const LinkForm = () => {
   const { formData, setFormData } = useGlobalState();
   const { title, linkAddress } = formData;
   const [switchBtn, setSwitchBtn] = useState(false);
@@ -27,12 +27,12 @@ const LinkForm = ({ id }) => {
 
   const handleSubmit = (e) => {
     console.log("submitted");
-    e.preventDefault();
     console.log(formData);
+    e.preventDefault();
     // POST the data
   };
   return (
-    <>
+    <div style={{ padding: "1rem" }}>
       <button onClick={handleSwitchBtn}>
         {switchBtn ? "Inactive" : "Active"}
       </button>
@@ -43,7 +43,7 @@ const LinkForm = ({ id }) => {
           <input
             type="text"
             name={`title`}
-            placeholder="Link title"
+            placeholder={title ? title : "Link title"}
             value={title}
             onChange={handleChange}
             required
@@ -67,7 +67,7 @@ const LinkForm = ({ id }) => {
           <input type="submit" />
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -1,15 +1,15 @@
 import React from "react";
+import { useGlobalState } from "../utils/LinkContext";
 import LinkForm from "./LinkForm";
 
 const LinkFormList = () => {
-  // const id = [1, 2, 3];
+  // const { initialFormState } = useGlobalState();
+
   return (
     <div className="link-form-lisk">
-      {/* {id.map((item) => (
-        <LinkForm id={item} key={item} />
+      {/* {initialFormState.map((item, key) => (
+        <LinkForm eachForm={item} key={key} />
       ))} */}
-      <LinkForm />
-      <LinkForm />
       <LinkForm />
     </div>
   );

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import LinkFormList from "./LinkFormList";
 import Preview from "./Preview";
 import { LinkContext } from "../utils/LinkContext";
+import LinkForm from "./LinkForm";
 
 const DashboardPage = () => {
-  const initialFormState = [
-    {
-      title: "",
-      linkAddress: "",
-    },
-  ];
+  const initialFormState = {
+    title: "",
+    linkAddress: "",
+  };
 
   const [formData, setFormData] = useState(initialFormState);
 
