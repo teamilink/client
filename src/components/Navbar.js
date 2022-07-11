@@ -1,29 +1,31 @@
-const Navbar = ({loggedInUser, activeUser}) => {
-    const logout = (e) => {
-        e.preventDefault()
-        activeUser("")
-    }
-    return (
-        <nav>
-            
-     
-            { loggedInUser ?
-                <>
-                    {loggedInUser}
-                    <a href="/">Links</a>
-                    <a href="/">Appearance</a>
-                    <a href="/">Upgrade</a>
-                    <a href="/" onClick={logout}>Logout</a>
-                </>
-                :
-                <>
-                    guest
-                    <a href="/">Login</a>
-                    <a href="/">SignUp</a>  
-                </>
-                }
-        </nav>
-    )
-}
+import { NavLink } from "react-router-dom";
 
-export default Navbar
+const Navbar = ({ loggedInUser, activeUser }) => {
+  const logout = (e) => {
+    e.preventDefault();
+    activeUser("");
+  };
+  return (
+    <nav>
+      {loggedInUser ? (
+        <>
+          {loggedInUser}
+          <NavLink to="/dashboard">Links</NavLink>
+          <NavLink to="/dashbaord/appearance">Appearance</NavLink>
+          <NavLink to="/upgrade">Upgrade</NavLink>
+          <NavLink to="/logout" onClick={logout}>
+            Logout
+          </NavLink>
+        </>
+      ) : (
+        <>
+          guest
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">SignUp</NavLink>
+        </>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

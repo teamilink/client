@@ -1,24 +1,26 @@
-import React, {useState} from 'react'
-import Login from './components/Login'
-import Navbar from './components/Navbar'
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
 
 const App = () => {
-  const [loggedInUser, setLoggedUser] = useState("")
+  const [loggedInUser, setLoggedUser] = useState("");
 
   const activeUser = (email) => {
-    setLoggedUser(email)
-  }
-
+    setLoggedUser(email);
+  };
 
   return (
-    <div>
-      
-      <Navbar loggedInUser={loggedInUser} activeUser={activeUser}/>
-      <h1>iLink Client</h1>
-      { !loggedInUser && <Login activeUser={activeUser}/>}
-     
-    </div>
+    <Router>
+      <Navbar loggedInUser={loggedInUser} activeUser={activeUser} />
+      <Routes>
+        <Route
+          path="login"
+          element={!loggedInUser && <Login activeUser={activeUser} />}
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
