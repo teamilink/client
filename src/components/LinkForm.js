@@ -30,7 +30,7 @@ const LinkForm = () => {
     console.log("submitted");
     e.preventDefault();
     console.log(formData);
-    console.log("works!");
+    // POST the data
   };
   return (
     <>
@@ -48,6 +48,7 @@ const LinkForm = () => {
             value={formData.title}
             onChange={handleChange}
             required
+            disabled={switchBtn ? false : true}
           />
         </div>
         <div>
@@ -60,13 +61,10 @@ const LinkForm = () => {
             value={formData.linkAddress}
             onChange={handleChange}
             required
+            disabled={switchBtn ? false : true}
           />
         </div>
-        <div>
-          <button type="submit" value="Submit">
-            Submit
-          </button>
-        </div>
+        <div>{/* <input type="submit" /> */}</div>
       </form>
       {/* display */}
       <div>
