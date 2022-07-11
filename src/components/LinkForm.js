@@ -1,13 +1,9 @@
 import React, { useState } from "react";
+import { useGlobalState } from "../utils/LinkContext";
 
 const LinkForm = () => {
-  const initialFormState = {
-    title: "",
-    linkAddress: "",
-  };
-
+  const { formData, setFormData } = useGlobalState();
   const [switchBtn, setSwitchBtn] = useState(false);
-  const [formData, setFormData] = useState(initialFormState);
 
   // toggle the switch
   const handleSwitchBtn = () => {
@@ -15,7 +11,10 @@ const LinkForm = () => {
   };
 
   const clearForm = () => {
-    setFormData(initialFormState);
+    setFormData({
+      title: "",
+      linkAddress: "",
+    });
   };
 
   const handleChange = (e) => {
@@ -23,7 +22,6 @@ const LinkForm = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(formData);
   };
 
   const handleSubmit = (e) => {
@@ -66,16 +64,6 @@ const LinkForm = () => {
         </div>
         <div>{/* <input type="submit" /> */}</div>
       </form>
-      {/* display */}
-      <div>
-        <a
-          href={formData.linkAddress}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {formData.title}
-        </a>
-      </div>
     </>
   );
 };
