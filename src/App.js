@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LinkForm from "./components/LinkForm";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <Router>
       <Navbar loggedInUser={loggedInUser} activeUser={activeUser} />
+      <LinkForm />
       <Routes>
         <Route
           path="login"
