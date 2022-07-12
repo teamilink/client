@@ -5,30 +5,7 @@ import { LinkContext } from "../utils/LinkContext";
 import LinkForm from "./LinkForm";
 
 const DashboardPage = () => {
-  // const initialFormState = {
-  //   form1: {
-  //     title: "",
-  //     linkAddress: "",
-  //   },
-  //   form2: {
-  //     title: "",
-  //     linkAddress: "",
-  //   },
-  //   form3: {
-  //     title: "",
-  //     linkAddress: "",
-  //   },
-  // };
-
   const initialFormState = [
-    {
-      title: "",
-      linkAddress: "",
-    },
-    {
-      title: "",
-      linkAddress: "",
-    },
     {
       title: "",
       linkAddress: "",
