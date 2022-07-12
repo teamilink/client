@@ -20,7 +20,7 @@ const Preview = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {formData.title}
+          {/* {formData.map((data) => data.title)} */}
         </a>
       </div>
     </section>

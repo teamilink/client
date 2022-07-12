@@ -5,10 +5,35 @@ import { LinkContext } from "../utils/LinkContext";
 import LinkForm from "./LinkForm";
 
 const DashboardPage = () => {
-  const initialFormState = {
-    title: "",
-    linkAddress: "",
-  };
+  // const initialFormState = {
+  //   form1: {
+  //     title: "",
+  //     linkAddress: "",
+  //   },
+  //   form2: {
+  //     title: "",
+  //     linkAddress: "",
+  //   },
+  //   form3: {
+  //     title: "",
+  //     linkAddress: "",
+  //   },
+  // };
+
+  const initialFormState = [
+    {
+      title: "",
+      linkAddress: "",
+    },
+    {
+      title: "",
+      linkAddress: "",
+    },
+    {
+      title: "",
+      linkAddress: "",
+    },
+  ];
 
   const [formData, setFormData] = useState(initialFormState);
 
@@ -21,7 +46,7 @@ const DashboardPage = () => {
   // }, []);
 
   return (
-    <LinkContext.Provider value={{ formData, setFormData }}>
+    <LinkContext.Provider value={{ formData, setFormData, initialFormState }}>
       <section className="wrapper" style={{ display: "flex" }}>
         <LinkFormList />
         <Preview />

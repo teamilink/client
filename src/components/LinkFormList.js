@@ -4,13 +4,19 @@ import LinkForm from "./LinkForm";
 
 const LinkFormList = () => {
   // const { initialFormState } = useGlobalState();
+  // console.log(Object.keys(initialFormState));
+
+  const index = [0, 1, 2];
 
   return (
     <div className="link-form-lisk">
-      {/* {initialFormState.map((item, key) => (
-        <LinkForm eachForm={item} key={key} />
+      {/* {Object.values(initialFormState).map((item, key) => (
+        <LinkForm eachFormData={item} key={key} />
       ))} */}
-      <LinkForm />
+
+      {index.map((num, key) => (
+        <LinkForm index={num} key={key} />
+      ))}
     </div>
   );
 };
