@@ -9,18 +9,18 @@ const LinkForm = ({ index }) => {
   const initialEachFormState = [
     {
       id: 0,
-      title: "",
-      linkAddress: "",
+      title: sessionStorage.getItem(`title${index}`) || "",
+      linkAddress: sessionStorage.getItem(`linkAddress${index}`) || "",
     },
     {
       id: 1,
-      title: "",
-      linkAddress: "",
+      title: sessionStorage.getItem(`title${index}`) || "",
+      linkAddress: sessionStorage.getItem(`linkAddress${index}`) || "",
     },
     {
       id: 2,
-      title: "",
-      linkAddress: "",
+      title: sessionStorage.getItem(`title${index}`) || "",
+      linkAddress: sessionStorage.getItem(`linkAddress${index}`) || "",
     },
     // {
     //   0: {
@@ -108,8 +108,42 @@ const LinkForm = ({ index }) => {
 
   const handleSubmit = (e) => {
     console.log("submitted");
-
     e.preventDefault();
+
+    switch (index) {
+      case 0:
+        sessionStorage.setItem(`title${index}`, e.target.elements.title0.value);
+        sessionStorage.setItem(
+          `linkAddress${index}`,
+          e.target.elements.linkAddress0.value
+        );
+        break;
+      case 1:
+        sessionStorage.setItem(`title${index}`, e.target.elements.title1.value);
+        sessionStorage.setItem(
+          `linkAddress${index}`,
+          e.target.elements.linkAddress1.value
+        );
+        break;
+      case 2:
+        sessionStorage.setItem(`title${index}`, e.target.elements.title2.value);
+        sessionStorage.setItem(
+          `linkAddress${index}`,
+          e.target.elements.linkAddress2.value
+        );
+        break;
+      default:
+    }
+
+    console.log(e);
+    const a = e.target.elements.title;
+    const b = index;
+    console.log(a + b);
+    // let titleValue = eval(`${e.target.elements}.title${index}.value`);
+    // let titleValue = e.target.elements.title2.value;
+    // let titleValue = e.target.elements.(title + index).value;
+    // console.log(titleValue);
+    // let addressValue = `${e.target.elements}.linkAddress${index}.value`;
     // POST the data
   };
   return (
