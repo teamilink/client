@@ -23,24 +23,6 @@ const LinkForm = ({ index }) => {
       linkAddress: sessionStorage.getItem(`linkAddress${index}`) || "",
     },
     // {
-    //   0: {
-    //     title: "",
-    //     linkAddress: "",
-    //   },
-    // },
-    // {
-    //   1: {
-    //     title: "",
-    //     linkAddress: "",
-    //   },
-    // },
-    // {
-    //   2: {
-    //     title: "",
-    //     linkAddress: "",
-    //   },
-    // },
-    // {
     //   [`${index === 0 && 0}`]: {
     //     title: "",
     //     linkAddress: "",
@@ -134,17 +116,6 @@ const LinkForm = ({ index }) => {
         break;
       default:
     }
-
-    console.log(e);
-    const a = e.target.elements.title;
-    const b = index;
-    console.log(a + b);
-    // let titleValue = eval(`${e.target.elements}.title${index}.value`);
-    // let titleValue = e.target.elements.title2.value;
-    // let titleValue = e.target.elements.(title + index).value;
-    // console.log(titleValue);
-    // let addressValue = `${e.target.elements}.linkAddress${index}.value`;
-    // POST the data
   };
   return (
     <div style={{ padding: "1rem" }} id={`input${index}`}>
