@@ -26,7 +26,8 @@ const LinkForm = ({ link, onSave, onCancel }) => {
   const clearForm = () => {
     setTitle("");
     setLinkAddress("");
-    onCancel();
+    // to avoid <TypeError: onCancel is not a function> error
+    onCancel && typeof onCancel === "function" && onCancel();
   };
 
   const handleTitleChange = (event) => {
