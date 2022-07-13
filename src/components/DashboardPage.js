@@ -3,6 +3,8 @@ import LinkFormList from "./LinkFormList";
 import Preview from "./Preview";
 
 const DashboardPage = () => {
+  // links state accumulates each link created by each user
+  // and it will controll the preview
   const [links, setLinks] = useState([]);
 
   const handleSubmit = (link) => {
