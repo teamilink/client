@@ -14,13 +14,6 @@ const LinkFormList = ({ links, onSave, onUpdate, onDelete }) => {
           onDelete={onDelete}
         />
       ))}
-      {/* {links.length === 0 ? (
-        <LinkForm onAdd={onAdd} />
-      ) : (
-        links.map((link, key) => (
-          <LinkForm link={link} onAdd={onAdd} key={key} />
-        ))
-      )} */}
     </div>
   );
 };
