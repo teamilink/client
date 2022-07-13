@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DashboardPage from "./components/DashboardPage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 
@@ -18,6 +19,7 @@ const App = () => {
           path="login"
           element={!loggedInUser && <Login activeUser={activeUser} />}
         />
+        <Route path="dashboard" element={<DashboardPage />} />
       </Routes>
     </Router>
   );
