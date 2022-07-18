@@ -6,17 +6,22 @@ import Navbar from "./components/Navbar";
 import SignUp from "./components/Signup";
 
 const App = () => {
-  const [loggedInUser, setLoggedUser] = useState("");
+  const [loggedInUser, setLoggedUser, newSignUp] = useState("");
 
   const activeUser = (email) => {
     setLoggedUser(email);
+    newSignUp(email)
   };
 
   return (
     <Router>
       <Navbar loggedInUser={loggedInUser} activeUser={activeUser} />
-      <SignUp />
+     
       <Routes>
+        <Route
+          path="signup"
+          element={!newSignUp && <SignUp activeUser={activeUser} />}
+        />
         <Route
           path="login"
           element={!loggedInUser && <Login activeUser={activeUser} />}
