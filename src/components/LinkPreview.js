@@ -27,7 +27,6 @@ const LinkPreview = ({ onUpdate, onDelete, ...link }) => {
         <LinkForm link={link} onSave={onUpdate} onCancel={toggleEdit} />
       ) : (
         <>
-          <h3>Link Preview</h3>
           <div className="edit-button">
             <button type="button" className="edit" onClick={toggleEdit}>
               Edit
@@ -37,7 +36,6 @@ const LinkPreview = ({ onUpdate, onDelete, ...link }) => {
             </button>
           </div>
           <div className="link-card">
-            <h4>id: {link.id}</h4>
             <a href={link.link_address} target="_blank" rel="noreferrer">
               <h4>{link.title}</h4>
             </a>

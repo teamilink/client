@@ -1,11 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Toolbar, Tabs, Tab } from "@mui/material";
 
 const Navbar = ({ loggedInUser, activeUser }) => {
+  const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
     activeUser("");
     sessionStorage.clear();
+    navigate("/");
   };
 
   return (
