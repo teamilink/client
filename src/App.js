@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DashboardPage from "./components/DashboardPage";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
+import SignUp from "./components/Signup";
 
 const App = () => {
   const [loggedInUser, setLoggedUser] = useState("");
@@ -14,6 +15,7 @@ const App = () => {
   return (
     <Router>
       <Navbar loggedInUser={loggedInUser} activeUser={activeUser} />
+      <SignUp />
       <Routes>
         <Route
           path="login"
