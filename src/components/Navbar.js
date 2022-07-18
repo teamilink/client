@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { Toolbar, Tabs, Tab } from "@mui/material";
-import { useState } from "react";
 
 const Navbar = ({ loggedInUser, activeUser }) => {
   const logout = (e) => {
