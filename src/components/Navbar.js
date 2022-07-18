@@ -5,13 +5,14 @@ const Navbar = ({ loggedInUser, activeUser }) => {
   const logout = (e) => {
     e.preventDefault();
     activeUser("");
+    sessionStorage.clear();
   };
 
   return (
     <Toolbar>
       {loggedInUser ? (
         <Tabs value={false} aria-label="nav tabs">
-          {loggedInUser}
+          Hi {loggedInUser}
           <Tab
             label="Links"
             value="/dashboard"
