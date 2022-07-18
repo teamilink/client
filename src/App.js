@@ -16,6 +16,7 @@ const App = () => {
     <Router>
       <Container maxWidth="lg">
         <Navbar loggedInUser={loggedInUser} activeUser={activeUser} />
+
         <Routes>
           <Route
             path="login"

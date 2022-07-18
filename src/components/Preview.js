@@ -1,8 +1,9 @@
+import { Container } from "@mui/material";
 import React, { useState } from "react";
 
 const Preview = ({ links }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <Container sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
       <h1>Preview</h1>
       {links.map((link) => (
         <a
@@ -14,7 +15,7 @@ const Preview = ({ links }) => {
           {link.title}
         </a>
       ))}
-    </div>
+    </Container>
   );
 };
 

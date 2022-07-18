@@ -1,3 +1,6 @@
+import { Container } from "@mui/material";
+// import { display, flex, flexDirection } from "@mui/system";
+
 import React, { useState } from "react";
 import LinkFormList from "./LinkFormList";
 import Preview from "./Preview";
@@ -25,7 +28,14 @@ const DashboardPage = () => {
   };
 
   return (
-    <div style={{ display: "flex", padding: "1rem" }}>
+    <Container
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginTop: "2rem",
+      }}
+    >
       <LinkFormList
         links={links}
         onSave={handleSubmit}
@@ -33,7 +43,7 @@ const DashboardPage = () => {
         onDelete={handleDelete}
       />
       <Preview links={links} />
-    </div>
+    </Container>
   );
 };
 
