@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
 import DashboardPage from "./components/DashboardPage";
@@ -7,37 +7,37 @@ import Navbar from "./components/Navbar";
 import SignUp from "./components/Signup";
 import Home from "./components/Home";
 import Appearance from "./components/Appearance";
+import { reducer } from "./utils/reducer";
+import { StateContext } from "./utils/stateContext";
 
 const App = () => {
-  const [loggedInUser, setLoggedUser] = useState("");
-  const [newSignUp, setNewSignUp] = useState("");
-
-  const activeUser = (email) => {
-    setLoggedUser(email);
-    setNewSignUp(email);
+  const initialState = {
+    loggedInUser: sessionStorage.getItem("username") || null,
+    token: sessionStorage.getItem("token") || null,
   };
 
+  // loggedInUser state needs to be accessed in different heirachy of this app
+  // To store more states and set functions by creating reducer and context
+  const [store, dispatch] = useReducer(reducer, initialState);
+  const { loggedInUser } = store;
+
   return (
-    <Router>
-      <Container maxWidth="lg">
-        <Navbar loggedInUser={loggedInUser} activeUser={activeUser} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="dashboard">
-            <Route index element={<DashboardPage />} />
-            <Route path="appearance" element={<Appearance />} />
-          </Route>
-          <Route
-            path="signup"
-            element={!newSignUp && <SignUp activeUser={activeUser} />}
-          />
-          <Route
-            path="login"
-            element={!loggedInUser && <Login activeUser={activeUser} />}
-          />
-        </Routes>
-      </Container>
-    </Router>
+    <StateContext.Provider value={{ store, dispatch }}>
+      <Router>
+        <Container maxWidth="lg">
+          <Navbar loggedInUser={loggedInUser} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="dashboard">
+              <Route index element={<DashboardPage />} />
+              <Route path="appearance" element={<Appearance />} />
+            </Route>
+            <Route path="signup" element={<SignUp />} />
+            <Route path="login" element={<Login />} />
+          </Routes>
+        </Container>
+      </Router>
+    </StateContext.Provider>
   );
 };
 
