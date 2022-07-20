@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInUser } from "../services/authServices";
+import { useGlobalState } from "../utils/stateContext";
 
-const Login = ({ activeUser }) => {
+const Login = () => {
+  console.log("Login");
+  const { dispatch } = useGlobalState();
+
   const navigate = useNavigate();
   const initialFormData = {
     email: "",
@@ -17,12 +21,17 @@ const Login = ({ activeUser }) => {
     console.log(formData);
     signInUser(formData).then((user) => {
       console.log("signin user", user);
+      dispatch({
+        type: "setLoggedInUser",
+        data: user.username,
+      });
+      sessionStorage.setItem("id", user.id);
       sessionStorage.setItem("username", user.username);
       sessionStorage.setItem("token", user.jwt);
+      navigate("/dashboard", { state: { id: user.id } });
     });
-    activeUser(formData.email);
+
     setUser(initialFormData);
-    navigate("/dashbaord");
   };
 
   const handleUserData = (e) => {

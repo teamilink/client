@@ -1,12 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Toolbar, Tabs, Tab } from "@mui/material";
+import { useGlobalState } from "../utils/stateContext";
 
-const Navbar = ({ loggedInUser, activeUser }) => {
+const Navbar = () => {
+  const { store, dispatch } = useGlobalState();
+  const { loggedInUser } = store;
+  console.log("navbar - loggedInUser ?", loggedInUser);
   const navigate = useNavigate();
   const logout = (e) => {
     e.preventDefault();
-    activeUser("");
     sessionStorage.clear();
+    dispatch({
+      type: "setLoggedInUser",
+      data: null,
+    });
     navigate("/");
   };
 
@@ -40,18 +47,12 @@ const Navbar = ({ loggedInUser, activeUser }) => {
             to="logout"
             onClick={logout}
           />
-          {/* <NavLink to="/dashboard">Links</NavLink> */}
-          {/* <NavLink to="/dashbaord/appearance">Appearance</NavLink> */}
-          {/* <NavLink to="/upgrade">Upgrade</NavLink> */}
-          {/* <NavLink to="/logout" onClick={logout}>Logout</NavLink> */}
         </Tabs>
       ) : (
         <Tabs value={false} aria-label="nav tabs">
           guest
           <Tab label="Login" value="/login" component={NavLink} to="login" />
           <Tab label="SignUp" value="/signup" component={NavLink} to="signup" />
-          {/* <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">SignUp</NavLink> */}
         </Tabs>
       )}
     </Toolbar>
