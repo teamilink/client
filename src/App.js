@@ -6,17 +6,18 @@ import Navbar from "./components/Navbar";
 import SignUp from "./components/Signup";
 
 const App = () => {
-  const [loggedInUser, setLoggedUser, newSignUp] = useState("");
+  const [loggedInUser, setLoggedUser] = useState("");
+  const [newSignUp, setNewSignUp] = useState("");
 
   const activeUser = (email) => {
     setLoggedUser(email);
-    newSignUp(email)
+    setNewSignUp(email);
   };
 
   return (
     <Router>
       <Navbar loggedInUser={loggedInUser} activeUser={activeUser} />
-     
+
       <Routes>
         <Route
           path="signup"
