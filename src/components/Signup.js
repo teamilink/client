@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signUpUser } from "../services/authServices";
 
 const SignUp = ({ activeUser }) => {
+  console.log("Signup");
+  const navigate = useNavigate();
   const initialFormData = {
     username: "",
     email: "",
@@ -13,6 +17,13 @@ const SignUp = ({ activeUser }) => {
     e.preventDefault();
     console.log("clicked");
     console.log(formData);
+    signUpUser(formData).then((user) => {
+      console.log("signup user", user);
+      sessionStorage.setItem("username", user.username);
+      sessionStorage.setItem("token", user.jwt);
+      navigate("/dashboard", { state: { id: user.id } });
+    });
+
     activeUser(formData.user);
     setUser(initialFormData);
   };

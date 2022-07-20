@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signInUser } from "../services/authServices";
 
 const Login = ({ activeUser }) => {
+  console.log("Login");
   const navigate = useNavigate();
   const initialFormData = {
     email: "",
@@ -19,10 +20,10 @@ const Login = ({ activeUser }) => {
       console.log("signin user", user);
       sessionStorage.setItem("username", user.username);
       sessionStorage.setItem("token", user.jwt);
+      navigate("/dashboard", { state: { id: user.id } });
     });
     activeUser(formData.email);
     setUser(initialFormData);
-    navigate("/dashbaord");
   };
 
   const handleUserData = (e) => {

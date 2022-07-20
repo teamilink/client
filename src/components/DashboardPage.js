@@ -2,10 +2,15 @@ import { Container } from "@mui/material";
 // import { display, flex, flexDirection } from "@mui/system";
 
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import LinkFormList from "./LinkFormList";
 import Preview from "./Preview";
 
 const DashboardPage = () => {
+  console.log("Dashboard");
+  const location = useLocation();
+  console.log(location.state);
+
   // links state accumulates each link created by each user
   // and it will controll the preview
   const [links, setLinks] = useState([]);
