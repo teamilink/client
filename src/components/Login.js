@@ -1,45 +1,64 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInUser } from "../services/authServices";
 
-const Login = ({activeUser}) => {
+const Login = ({ activeUser }) => {
+  const navigate = useNavigate();
+  const initialFormData = {
+    email: "",
+    password: "",
+  };
 
-    const initialFormData = {
-        user: "",
-        password: ""
-    }
+  const [formData, setUser] = useState(initialFormData);
 
-    const [formData, setUser] = useState(initialFormData)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+    console.log(formData);
+    signInUser(formData).then((user) => {
+      console.log("signin user", user);
+      sessionStorage.setItem("username", user.username);
+      sessionStorage.setItem("token", user.jwt);
+    });
+    activeUser(formData.email);
+    setUser(initialFormData);
+    navigate("/dashbaord");
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault ()
-        console.log("clicked")
-        console.log(formData)
-        activeUser(formData.user)
-        setUser(initialFormData)
-    }
+  const handleUserData = (e) => {
+    setUser({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
 
-    const handleUserData = (e) => {
-  
-        setUser({
-            ...formData,
-            [e.target.id]: e.target.value
-        })
-    }
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Email:</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleUserData}
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={formData.password}
+            onChange={handleUserData}
+          />
+        </div>
+        <input type="submit" value="Login" />
+      </form>
+    </>
+  );
+};
 
-    return (
-        <> 
-           <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input type="text" name="user" id="user" value = {formData.user} onChange={handleUserData}/>
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password" id="password" value = {formData.password} onChange={handleUserData} />
-                </div>
-                <input type="submit" value="Login" />
-           </form>
-        </>
-    )
-}
-
-export default Login 
+export default Login;

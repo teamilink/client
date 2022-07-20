@@ -1,3 +1,14 @@
+export const getLinks = async (user) => {
+  console.log("getLinks -service triggered");
+  console.log(user);
+  const response = await fetch("http://localhost:4000/dashboard", {
+    method: "GET",
+    headers: { Authorization: `Bearer ${user.jwt}` },
+  });
+  const data = await response.json();
+  return data;
+};
+
 export const saveLink = (link) => {
   console.log("saveLink -service triggered");
   return link.id ? updateLink(link) : createLink(link);
