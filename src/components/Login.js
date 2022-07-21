@@ -25,8 +25,13 @@ const Login = () => {
         type: "setLoggedInUser",
         data: user.username,
       });
+      dispatch({
+        type: "setCurrentUser",
+        data: user.id,
+      });
       sessionStorage.setItem("id", user.id);
       sessionStorage.setItem("username", user.username);
+      sessionStorage.setItem("email", user.email);
       sessionStorage.setItem("token", user.jwt);
       navigate("/dashboard", { state: { id: user.id } });
     });

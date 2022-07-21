@@ -1,43 +1,35 @@
-export const getLinks = async (user) => {
+import iLinkAPI from "../config/api";
+
+export const getLinks = async (token) => {
   console.log("getLinks -service triggered");
-  console.log(user);
-  const response = await fetch("http://localhost:4000/dashboard", {
-    method: "GET",
-    headers: { Authorization: `Bearer ${user.jwt}` },
-  });
-  const data = await response.json();
-  return data;
+
+  const response = await iLinkAPI.get("/dashboard");
+  return response.data;
 };
 
 export const saveLink = (link) => {
   console.log("saveLink -service triggered");
+  console.log("saveLink - service - link.id? ", link);
   return link.id ? updateLink(link) : createLink(link);
 };
 
-export const createLink = (link) => {
+export const createLink = async (link) => {
   console.log("createLink -service triggered");
-  return fetch("http://localhost:4000/links", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(link),
-  }).then((res) => res.json());
+  const response = await iLinkAPI.post("/links", link);
+
+  return response.data;
 };
 
-export const updateLink = (link) => {
+export const updateLink = async (link) => {
   console.log("updateLink -service triggered");
+  const response = await iLinkAPI.put(`/links/${link.id}`, link);
 
-  return fetch(`http://localhost:4000/links/${link.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(link),
-  }).then((res) => res.json());
+  return response.data;
 };
 
-export const deleteLink = (id) => {
+export const deleteLink = async (id) => {
   console.log("deleteLink -service triggered");
-  return fetch(`http://localhost:4000/links/${id}`, { method: "DELETE" });
+  const response = await iLinkAPI.delete(`/links/${id}`);
+
+  return response.data;
 };

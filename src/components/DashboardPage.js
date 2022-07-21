@@ -1,33 +1,57 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import LinkFormList from "./LinkFormList";
+import React, { useEffect, useState } from "react";
+import Editor from "./Editor";
 import Preview from "./Preview";
 import { Container } from "@mui/material";
+import { deleteLink, getLinks, saveLink } from "../services/linksServices";
+import { useGlobalState } from "../utils/stateContext";
 
 const DashboardPage = () => {
   console.log("Dashboard");
-  const location = useLocation();
-  console.log(location.state);
+
+  const { store } = useGlobalState();
+  const { token, currentUserId } = store;
 
   // links state accumulates each link created by each user
   // and it will controll the preview
   const [links, setLinks] = useState([]);
 
-  const handleSubmit = (link) => {
+  useEffect(() => {
+    getLinks(token) //
+      .then((data) => {
+        setLinks(data);
+        console.log(data);
+      });
+  }, [token]);
+
+  const handleAdd = (link) => {
     console.log("submit triggered - DashboardPage");
-    setLinks([...links, link]);
+    link.user_id = currentUserId;
+
+    console.log("link data", link);
+
+    // saveLink in services will post this data to the DB
+    // then store them in links state in DashboardPage
+    saveLink(link).then((response) => {
+      console.log(response);
+      setLinks([...links, response]);
+    });
   };
 
   const handleUpdate = (link) => {
     console.log("eidt triggered - DashboardPage");
-    setLinks((prevState) =>
-      prevState.map((c) => (c.id === link.id ? link : c))
+    setLinks((links) =>
+      links.map((item) => (item.id === link.id ? link : item))
     );
+    saveLink(link).then((response) => {
+      console.log(response);
+    });
   };
 
   const handleDelete = (id) => {
     console.log("delete triggered - DashboardPage");
-    setLinks((prevState) => prevState.filter((c) => c.id !== id));
+    console.log("id", id);
+    setLinks((links) => links.filter((link) => link.id !== id));
+    deleteLink(id).then(() => window.location.reload());
   };
 
   return (
@@ -39,9 +63,9 @@ const DashboardPage = () => {
         marginTop: "2rem",
       }}
     >
-      <LinkFormList
+      <Editor
         links={links}
-        onSave={handleSubmit}
+        onSave={handleAdd}
         onUpdate={handleUpdate}
         onDelete={handleDelete}
       />
