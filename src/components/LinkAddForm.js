@@ -1,21 +1,22 @@
-import React, { useRef, useState } from "react";
-import { Box, TextField } from "@mui/material";
-import Buttons from "./Buttons";
+import React, { useState } from "react";
+import { TextField, Button } from "@mui/material";
 
 const LinkAddForm = ({ onSave }) => {
   console.log("LinkAddForm");
-  const formRef = useRef();
 
-  const [newLink, setNewLink] = useState({
+  const initialLinkState = {
     title: null,
     link_address: null,
-  });
+  };
+
+  const [newLink, setNewLink] = useState(initialLinkState);
 
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("clicked onSubmit");
     onSave(newLink);
-    formRef.current.reset();
+    event.target.reset();
+    setNewLink(initialLinkState);
   };
 
   const handleChange = (event) => {
@@ -30,44 +31,47 @@ const LinkAddForm = ({ onSave }) => {
   };
 
   const clearForm = () => {
-    formRef.current.reset();
+    console.log("clicked clearForm");
+    setNewLink(initialLinkState);
   };
 
   return (
     <>
-      <Box
-        component="form"
-        id="link-form"
-        onSubmit={onSubmit}
-        ref={formRef}
-        onReset={clearForm}
-      >
-        <div id="link-form-title">
-          <TextField
-            sx={{ width: "100%" }}
-            required
-            label="Link Title"
-            variant="standard"
-            id="title"
-            name="title"
-            value={newLink.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div id="link-form-address">
-          <TextField
-            sx={{ width: "100%" }}
-            required
-            label="Link Address"
-            variant="standard"
-            id="link_address"
-            name="link_address"
-            value={newLink.link_address}
-            onChange={handleChange}
-          />
-        </div>
-        <Buttons />
-      </Box>
+      <form id="link-form" onSubmit={onSubmit}>
+        <TextField
+          sx={{ width: "100%" }}
+          required
+          label="Link Title"
+          variant="standard"
+          id="title"
+          name="title"
+          value={newLink.title || null}
+          onChange={handleChange}
+        />
+
+        <TextField
+          sx={{ width: "100%" }}
+          required
+          label="Link Address"
+          variant="standard"
+          id="link_address"
+          name="link_address"
+          value={newLink.link_address || null}
+          onChange={handleChange}
+        />
+
+        <Button variant="text" type="submit" color="secondary">
+          Save
+        </Button>
+        <Button
+          variant="text"
+          type="reset"
+          onClick={clearForm}
+          color="secondary"
+        >
+          Clear
+        </Button>
+      </form>
     </>
   );
 };

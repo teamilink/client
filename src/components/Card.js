@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Card.module.css";
 
 const Card = ({ links }) => {
-  // user.id -> links = [] << link_ids
-  // user.id -> appearance = {profile_title, bio, img_url, bg_color, bg_img_url}
   const testLinks = [
     {
       id: 1,
@@ -31,11 +29,7 @@ const Card = ({ links }) => {
     bg_img_url: null,
   };
 
-  // const [links, setLinks] = useState(testLinks || []);
   const [bio, setBio] = useState(testBio || {});
-
-  // useEffect(() => {
-  // }, [links, bio])
 
   return (
     <div className={styles.cardContainer}>

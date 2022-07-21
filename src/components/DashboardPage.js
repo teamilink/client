@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import Editor from "./Editor";
 import Preview from "./Preview";
 import { Container } from "@mui/material";
@@ -8,8 +7,6 @@ import { useGlobalState } from "../utils/stateContext";
 
 const DashboardPage = () => {
   console.log("Dashboard");
-  // const location = useLocation();
-  // console.log(location.state);
 
   const { store } = useGlobalState();
   const { token, currentUserId } = store;
@@ -42,10 +39,9 @@ const DashboardPage = () => {
 
   const handleUpdate = (link) => {
     console.log("eidt triggered - DashboardPage");
-    setLinks((prevState) =>
-      prevState.map((c) => (c.id === link.id ? link : c))
+    setLinks((links) =>
+      links.map((item) => (item.id === link.id ? link : item))
     );
-
     saveLink(link).then((response) => {
       console.log(response);
     });
@@ -54,8 +50,8 @@ const DashboardPage = () => {
   const handleDelete = (id) => {
     console.log("delete triggered - DashboardPage");
     console.log("id", id);
-    deleteLink(id);
-    setLinks((prevState) => prevState.filter((c) => c.id !== id));
+    setLinks((links) => links.filter((link) => link.id !== id));
+    deleteLink(id).then(() => window.location.reload());
   };
 
   return (

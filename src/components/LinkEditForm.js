@@ -1,6 +1,5 @@
-import React, { useRef } from "react";
-import { Box, TextField } from "@mui/material";
-import Buttons from "./Buttons";
+import React from "react";
+import { TextField, Button } from "@mui/material";
 
 // !important!
 // To change the preview in real time,
@@ -10,9 +9,6 @@ import Buttons from "./Buttons";
 
 const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
   console.log("LinkEditForm");
-
-  const titleRef = useRef();
-  const linkAddressRef = useRef();
 
   const { id, title, link_address } = link;
 
@@ -27,13 +23,14 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
     });
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    onDelete(event.currentTarget.id);
+  };
+
   return (
     <>
-      <Box
-        component="form"
-        id="link-form"
-        // onSubmit={onSubmit}
-      >
+      <form id="link-form">
         <div id="link-form-title">
           <TextField
             sx={{ width: "100%" }}
@@ -44,7 +41,6 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
             name="title"
             value={title}
             onChange={handleChange}
-            ref={titleRef}
           />
         </div>
         <div id="link-form-address">
@@ -57,12 +53,22 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
             name="link_address"
             value={link_address}
             onChange={handleChange}
-            ref={linkAddressRef}
           />
         </div>
-
-        <Buttons id={id} onDelete={onDelete} />
-      </Box>
+        <Button variant="text" type="submit" color="secondary">
+          Update
+        </Button>
+        <Button
+          variant="text"
+          type="submit"
+          color="secondary"
+          name={id}
+          id={id}
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </form>
     </>
   );
 };

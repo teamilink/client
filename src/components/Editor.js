@@ -19,7 +19,7 @@ const Editor = ({ links, onSave, onUpdate, onDelete }) => {
       ) : (
         <h1>no links available</h1>
       )}
-      <LinkAddForm links={links} onSave={onSave} />
+      <LinkAddForm onSave={onSave} />
     </Container>
   );
 };
