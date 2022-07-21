@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Editor from "./Editor";
 import Preview from "./Preview";
 import { Container } from "@mui/material";
-import { getLinks, saveLink } from "../services/linksServices";
+import { deleteLink, getLinks, saveLink } from "../services/linksServices";
 import { useGlobalState } from "../utils/stateContext";
 
 const DashboardPage = () => {
@@ -12,7 +12,7 @@ const DashboardPage = () => {
   // console.log(location.state);
 
   const { store } = useGlobalState();
-  const { token } = store;
+  const { token, currentUserId } = store;
 
   // links state accumulates each link created by each user
   // and it will controll the preview
@@ -28,6 +28,8 @@ const DashboardPage = () => {
 
   const handleAdd = (link) => {
     console.log("submit triggered - DashboardPage");
+    link.user_id = currentUserId;
+
     console.log("link data", link);
 
     // saveLink in services will post this data to the DB
@@ -52,7 +54,8 @@ const DashboardPage = () => {
   const handleDelete = (id) => {
     console.log("delete triggered - DashboardPage");
     console.log("id", id);
-    // setLinks((prevState) => prevState.filter((c) => c.id !== id));
+    deleteLink(id);
+    setLinks((prevState) => prevState.filter((c) => c.id !== id));
   };
 
   return (

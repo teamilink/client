@@ -13,7 +13,7 @@ import { StateContext } from "./utils/stateContext";
 const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("username") || null,
-    currentUser: sessionStorage.getItem("email") || null,
+    currentUserId: sessionStorage.getItem("id") || null,
     token: sessionStorage.getItem("token") || null,
   };
 

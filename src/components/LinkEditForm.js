@@ -44,8 +44,6 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
             variant="standard"
             id="title"
             name="title"
-            // id={`title_${id ? id : "new"}`}
-            // name={`title_${id ? id : "new"}`}
             value={title}
             onChange={handleChange}
             ref={titleRef}
@@ -57,8 +55,6 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
             required
             label="Link Address"
             variant="standard"
-            // id={`link_address_${id ? id : "new"}`}
-            // name={`link_address_${id ? id : "new"}`}
             id="link_address"
             name="link_address"
             value={link_address}

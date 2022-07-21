@@ -27,7 +27,7 @@ const Login = () => {
       });
       dispatch({
         type: "setCurrentUser",
-        data: user.email,
+        data: user.id,
       });
       sessionStorage.setItem("id", user.id);
       sessionStorage.setItem("username", user.username);
