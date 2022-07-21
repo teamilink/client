@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-// import { saveLink } from "../services/linksServices";
+import React, { useRef } from "react";
 import { Box, TextField } from "@mui/material";
 import Buttons from "./Buttons";
 
@@ -14,8 +13,7 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
 
   const titleRef = useRef();
   const linkAddressRef = useRef();
-  // if there's no link created, the id is undefined
-  // id will be assigned once it stores in DB
+
   const { id, title, link_address } = link;
 
   const handleChange = (event) => {
