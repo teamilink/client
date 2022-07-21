@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { deleteLink } from "../services/linksServices";
-import LinkForm from "./LinkForm";
+import LinkEditForm from "./LinkEditForm";
 
+// Thia is 버리는 카드!!!
 const LinkPreview = ({ onUpdate, onDelete, ...link }) => {
   const [isEditMode, setIseEditMode] = useState(false);
 
@@ -24,7 +25,7 @@ const LinkPreview = ({ onUpdate, onDelete, ...link }) => {
   return (
     <div>
       {isEditMode ? (
-        <LinkForm link={link} onSave={onUpdate} onCancel={toggleEdit} />
+        <LinkEditForm link={link} onSave={onUpdate} onCancel={toggleEdit} />
       ) : (
         <>
           <div className="edit-button">

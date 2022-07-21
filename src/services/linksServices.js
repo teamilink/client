@@ -1,9 +1,12 @@
-export const getLinks = async (user) => {
+export const getLinks = async (token) => {
   console.log("getLinks -service triggered");
-  console.log(user);
+  console.log(token);
   const response = await fetch("http://localhost:4000/dashboard", {
     method: "GET",
-    headers: { Authorization: `Bearer ${user.jwt}` },
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   });
   const data = await response.json();
   return data;
@@ -11,6 +14,7 @@ export const getLinks = async (user) => {
 
 export const saveLink = (link) => {
   console.log("saveLink -service triggered");
+  console.log("saveLink - service - link.id? ", link);
   return link.id ? updateLink(link) : createLink(link);
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Card.module.css";
 
-const Card = () => {
+const Card = ({ links }) => {
   // user.id -> links = [] << link_ids
   // user.id -> appearance = {profile_title, bio, img_url, bg_color, bg_img_url}
   const testLinks = [
@@ -31,7 +31,7 @@ const Card = () => {
     bg_img_url: null,
   };
 
-  const [links, setLinks] = useState(testLinks || []);
+  // const [links, setLinks] = useState(testLinks || []);
   const [bio, setBio] = useState(testBio || {});
 
   // useEffect(() => {
@@ -49,7 +49,12 @@ const Card = () => {
       <div className={styles.linkButtons}>
         {links &&
           links.map((link) => (
-            <a href={link.link_address} target="_blank" rel="noreferrer">
+            <a
+              key={link.id}
+              href={link.link_address}
+              target="_blank"
+              rel="noreferrer"
+            >
               <button className={styles.btn} key={link.id}>
                 {link.title}
               </button>
