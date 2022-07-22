@@ -25,6 +25,11 @@ const SignUp = () => {
         type: "setLoggedInUser",
         data: user.username,
       });
+
+      dispatch({
+        type: "setCurrentUserId",
+        data: user.id,
+      });
       sessionStorage.setItem("id", user.id);
       sessionStorage.setItem("username", user.username);
       sessionStorage.setItem("token", user.jwt);

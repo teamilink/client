@@ -26,7 +26,7 @@ const Login = () => {
         data: user.username,
       });
       dispatch({
-        type: "setCurrentUser",
+        type: "setCurrentUserId",
         data: user.id,
       });
       sessionStorage.setItem("id", user.id);
