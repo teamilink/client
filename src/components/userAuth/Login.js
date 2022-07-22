@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInUser } from "../services/authServices";
-import { useGlobalState } from "../utils/stateContext";
+import { signInUser } from "../../services/authServices";
+import { useGlobalState } from "../../utils/stateContext";
+import { TextField, Button } from "@mui/material";
 
 const Login = () => {
   console.log("Login");
@@ -31,7 +32,7 @@ const Login = () => {
       });
       sessionStorage.setItem("id", user.id);
       sessionStorage.setItem("username", user.username);
-      sessionStorage.setItem("email", user.email);
+      // sessionStorage.setItem("email", user.email);
       sessionStorage.setItem("token", user.jwt);
       navigate("/dashboard", { state: { id: user.id } });
     });
@@ -50,9 +51,11 @@ const Login = () => {
     <>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
-          <input
-            type="text"
+          <TextField
+            sx={{ width: "50%" }}
+            required
+            label="Email"
+            variant="standard"
             name="email"
             id="email"
             value={formData.email}
@@ -60,16 +63,22 @@ const Login = () => {
           />
         </div>
         <div>
-          <label>Password:</label>
-          <input
-            type="password"
+          <TextField
+            sx={{ width: "50%" }}
+            required
+            label="Password"
+            variant="standard"
             name="password"
             id="password"
+            type="password"
             value={formData.password}
             onChange={handleUserData}
           />
         </div>
-        <input type="submit" value="Login" />
+
+        <Button variant="outlined" type="submit" color="primary">
+          Login
+        </Button>
       </form>
     </>
   );

@@ -5,8 +5,8 @@ const LinkAddForm = ({ onSave }) => {
   console.log("LinkAddForm");
 
   const initialLinkState = {
-    title: null,
-    link_address: null,
+    title: "",
+    link_address: "",
   };
 
   const [newLink, setNewLink] = useState(initialLinkState);
@@ -45,8 +45,9 @@ const LinkAddForm = ({ onSave }) => {
           variant="standard"
           id="title"
           name="title"
-          value={newLink.title || null}
+          value={newLink.title || ""}
           onChange={handleChange}
+          inputProps={{ maxLength: 100 }}
         />
 
         <TextField
@@ -56,7 +57,7 @@ const LinkAddForm = ({ onSave }) => {
           variant="standard"
           id="link_address"
           name="link_address"
-          value={newLink.link_address || null}
+          value={newLink.link_address || ""}
           onChange={handleChange}
         />
 
