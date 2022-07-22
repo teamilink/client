@@ -10,10 +10,10 @@ export const reducer = (state, action) => {
         ...state,
         token: action.data,
       };
-    case "setCurrentUser":
+    case "setCurrentUserId":
       return {
         ...state,
-        currentUser: action.data,
+        currentUserId: action.data,
       };
     default:
       throw new Error(`unknown action.type: ${action.type}`);

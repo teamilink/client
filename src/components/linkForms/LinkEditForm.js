@@ -41,6 +41,7 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
             name="title"
             value={title}
             onChange={handleChange}
+            inputProps={{ maxLength: 100 }}
           />
         </div>
         <div id="link-form-address">

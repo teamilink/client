@@ -9,7 +9,7 @@ const DashboardPage = () => {
   console.log("Dashboard");
 
   const { store } = useGlobalState();
-  const { token, currentUserId } = store;
+  const { token, currentUserId, loggedInUser } = store;
 
   // links state accumulates each link created by each user
   // and it will controll the preview
@@ -25,8 +25,11 @@ const DashboardPage = () => {
 
   const handleAdd = (link) => {
     console.log("submit triggered - DashboardPage");
-    link.user_id = currentUserId;
+    console.log("currentUserId", currentUserId);
+    console.log("loggedInUser", loggedInUser);
 
+    link.user_id = currentUserId;
+    console.log("assign the currentUserId", link.user_id);
     console.log("link data", link);
 
     // saveLink in services will post this data to the DB
