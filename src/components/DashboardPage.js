@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LinkEditor from "./LinkEditor";
-import Preview from "./Preview";
+import Preview from "./preview/Preview";
 import { Container } from "@mui/material";
 import { deleteLink, getLinks, saveLink } from "../services/linksServices";
 import { useGlobalState } from "../utils/stateContext";
@@ -81,9 +81,9 @@ const DashboardPage = () => {
         />
       )}
       {location.pathname === "/dashboard/appearance" && <AppearanceEditor />}
-      <div className={styles.preview}>
-        <Preview links={links} />
-      </div>
+
+      <Preview links={links} />
+
       {/* </Container> */}
     </section>
   );

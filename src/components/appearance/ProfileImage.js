@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import {
   createAppearance,
   // imageUploader,
-} from "../services/appearanceServices";
+} from "../../services/appearanceServices";
 
 const ProfileImage = (props) => {
   const profile_titleRef = useRef();
