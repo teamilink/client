@@ -4,10 +4,15 @@ import Preview from "./Preview";
 import { Container } from "@mui/material";
 import { deleteLink, getLinks, saveLink } from "../services/linksServices";
 import { useGlobalState } from "../utils/stateContext";
+import { useLocation } from "react-router-dom";
+import AppearanceEditor from "./AppearanceEditor";
+import styles from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
   console.log("Dashboard");
+  let location = useLocation();
 
+  console.log(location);
   const { store } = useGlobalState();
   const { token, currentUserId, loggedInUser } = store;
 
@@ -58,22 +63,29 @@ const DashboardPage = () => {
   };
 
   return (
-    <Container
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginTop: "2rem",
-      }}
-    >
-      <LinkEditor
-        links={links}
-        onSave={handleAdd}
-        onUpdate={handleUpdate}
-        onDelete={handleDelete}
-      />
-      <Preview links={links} />
-    </Container>
+    // <Container
+    //   style={{
+    //     display: "flex",
+    //     flexDirection: "row",
+    //     justifyContent: "space-around",
+    //     marginTop: "2rem",
+    //   }}
+    // >
+    <section className={styles.dashboard}>
+      {location.pathname === "/dashboard" && (
+        <LinkEditor
+          links={links}
+          onSave={handleAdd}
+          onUpdate={handleUpdate}
+          onDelete={handleDelete}
+        />
+      )}
+      {location.pathname === "/dashboard/appearance" && <AppearanceEditor />}
+      <div className={styles.preview}>
+        <Preview links={links} />
+      </div>
+      {/* </Container> */}
+    </section>
   );
 };
 

@@ -32,7 +32,7 @@ const Navbar = () => {
             label="Appearance"
             value="/dashboard/appearance"
             component={NavLink}
-            to="dashbaord/appearance"
+            to="dashboard/appearance"
           />
           <Tab
             label="Upgrade"

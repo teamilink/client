@@ -5,7 +5,14 @@ import LinkEditForm from "./linkForms/LinkEditForm";
 
 const LinkEditor = ({ links, onSave, onUpdate, onDelete }) => {
   return (
-    <Container sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "50%",
+      }}
+    >
       {links ? (
         links.map((link) => (
           <LinkEditForm
