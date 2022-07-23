@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LinkEditor from "./LinkEditor";
 import Preview from "./preview/Preview";
-import { Container } from "@mui/material";
 import { deleteLink, getLinks, saveLink } from "../services/linksServices";
 import { useGlobalState } from "../utils/stateContext";
 import { useLocation } from "react-router-dom";
@@ -19,6 +18,28 @@ const DashboardPage = () => {
   // links state accumulates each link created by each user
   // and it will controll the preview
   const [links, setLinks] = useState([]);
+  const initialAppearanceState = {
+    profile_title: "",
+    bio: "",
+    bg_color: "light",
+    bg_image_url: "",
+  };
+
+  const [appearance, setAppearance] = useState(initialAppearanceState);
+
+  const handleChange = (event) => {
+    if (event.currentTarget.name) {
+      setAppearance({
+        ...appearance,
+        [event.currentTarget.name]: event.currentTarget.value,
+      });
+    } else if (event.currentTarget.id === "bg_image_url") {
+      setAppearance({
+        ...appearance,
+        [event.currentTarget.id]: Date.now(),
+      });
+    }
+  };
 
   useEffect(() => {
     getLinks(token) //
@@ -63,14 +84,6 @@ const DashboardPage = () => {
   };
 
   return (
-    // <Container
-    //   style={{
-    //     display: "flex",
-    //     flexDirection: "row",
-    //     justifyContent: "space-around",
-    //     marginTop: "2rem",
-    //   }}
-    // >
     <section className={styles.dashboard}>
       {location.pathname === "/dashboard" && (
         <LinkEditor
@@ -80,11 +93,11 @@ const DashboardPage = () => {
           onDelete={handleDelete}
         />
       )}
-      {location.pathname === "/dashboard/appearance" && <AppearanceEditor />}
+      {location.pathname === "/dashboard/appearance" && (
+        <AppearanceEditor appearance={appearance} handleText={handleChange} />
+      )}
 
-      <Preview links={links} />
-
-      {/* </Container> */}
+      <Preview links={links} appearance={appearance} />
     </section>
   );
 };

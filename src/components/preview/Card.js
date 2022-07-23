@@ -1,45 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Card.module.css";
 
-const Card = ({ links }) => {
-  const testLinks = [
-    {
-      id: 1,
-      title: "First Link",
-      link_address: "https://google.com",
-    },
-    {
-      id: 2,
-      title: "Second Link",
-      link_address: "https://google.com",
-    },
-    {
-      id: 3,
-      title: "Third Link",
-      link_address: "https://google.com",
-    },
-  ];
-
-  const testBio = {
-    username: "coderAcademy",
-    profile_title: "Coder Academy",
-    bio: "Accelerated-learning bootcamps to help people transform careers at pace",
-    img_url: null,
-    bg_color: null,
-    bg_img_url: null,
+const Card = ({ links, appearance }) => {
+  const setTheme = (theme) => {
+    switch (theme) {
+      case "light":
+        return `${styles.light}`;
+      case "dark":
+        return `${styles.dark}`;
+      case "colourful":
+        return `${styles.colourful}`;
+      default:
+        throw Error(`unknow theme ${theme}`);
+    }
   };
 
-  const [bio, setBio] = useState(testBio || {});
-
   return (
-    <div className={styles.cardContainer}>
+    <div className={`${styles.cardContainer} ${setTheme(appearance.bg_color)}`}>
       <img
         alt="profile"
         src="/images/profile_default.jpeg"
         className={styles.profile}
       />
-      <h1 className={styles.title}>{bio.profile_title}</h1>
-      <p className={styles.bio}>{bio.bio}</p>
+      <h1 className={styles.title}>{appearance.profile_title}</h1>
+      <p className={styles.bio}>{appearance.bio}</p>
+      <p className={styles.bg_color}>{appearance.bg_color}</p>
+      <p className={styles.bg_image_url}>{appearance.bg_image_url}</p>
       <div className={styles.linkButtons}>
         {links &&
           links.map((link) => (

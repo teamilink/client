@@ -1,6 +1,5 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Container } from "@mui/material";
 import DashboardPage from "./components/DashboardPage";
 import Login from "./components/userAuth/Login";
 import Navbar from "./components/Navbar";
@@ -9,7 +8,6 @@ import Home from "./components/Home";
 
 import { reducer } from "./utils/reducer";
 import { StateContext } from "./utils/stateContext";
-import AppearanceEditor from "./components/AppearanceEditor";
 import styles from "./App.module.css";
 
 const App = () => {
