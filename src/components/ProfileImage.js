@@ -5,7 +5,7 @@ import {
   // imageUploader,
 } from "../services/appearanceServices";
 
-const Attachment = (props) => {
+const ProfileImage = (props) => {
   const profile_titleRef = useRef();
   const bioRef = useRef();
   const bg_colorRef = useRef();
@@ -22,7 +22,7 @@ const Attachment = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Attachment component submit clicked!");
+    console.log("ProfileImage component submit clicked!");
 
     const data = new FormData();
     data.append("appearance[profile_title]", profile_titleRef.current.value);
@@ -80,7 +80,7 @@ const Attachment = (props) => {
   );
 };
 
-export default Attachment;
+export default ProfileImage;
 
 // const updated = {
 //   profile_title: profile_titleRef.current.value,

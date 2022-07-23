@@ -8,11 +8,3 @@ export const createAppearance = async (data) => {
 
   return response.data;
 };
-
-// export const imageUploader = async (data, id) => {
-//   const response = await iLinkAPI.put(`/dashboard/appearance/${id}`, data);
-//   console.log("**** imageUploader - response.data ***** ");
-//   console.log(response);
-
-//   // return response.data;
-// };

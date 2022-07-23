@@ -3,7 +3,7 @@ import React from "react";
 import LinkAddForm from "./linkForms/LinkAddForm";
 import LinkEditForm from "./linkForms/LinkEditForm";
 
-const Editor = ({ links, onSave, onUpdate, onDelete }) => {
+const LinkEditor = ({ links, onSave, onUpdate, onDelete }) => {
   return (
     <Container sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
       {links ? (
@@ -24,4 +24,4 @@ const Editor = ({ links, onSave, onUpdate, onDelete }) => {
   );
 };
 
-export default Editor;
+export default LinkEditor;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Editor from "./Editor";
+import LinkEditor from "./LinkEditor";
 import Preview from "./Preview";
 import { Container } from "@mui/material";
 import { deleteLink, getLinks, saveLink } from "../services/linksServices";
@@ -66,7 +66,7 @@ const DashboardPage = () => {
         marginTop: "2rem",
       }}
     >
-      <Editor
+      <LinkEditor
         links={links}
         onSave={handleAdd}
         onUpdate={handleUpdate}
