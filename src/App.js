@@ -1,14 +1,14 @@
 import React, { useReducer } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Container } from "@mui/material";
 import DashboardPage from "./components/DashboardPage";
 import Login from "./components/userAuth/Login";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/userAuth/Signup";
 import Home from "./components/Home";
-import Appearance from "./components/Appearance";
+
 import { reducer } from "./utils/reducer";
 import { StateContext } from "./utils/stateContext";
+import styles from "./App.module.css";
 
 const App = () => {
   const initialState = {
@@ -21,22 +21,23 @@ const App = () => {
   // To store more states and set functions by creating reducer and context
   const [store, dispatch] = useReducer(reducer, initialState);
   const { loggedInUser } = store;
+  // const [isAppearnace, setIsAppearance] = useState(false)
 
   return (
     <StateContext.Provider value={{ store, dispatch }}>
       <Router>
-        <Container maxWidth="lg">
+        <section className={styles.container}>
           <Navbar loggedInUser={loggedInUser} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="dashboard">
               <Route index element={<DashboardPage />} />
-              <Route path="appearance" element={<Appearance />} />
+              <Route path="appearance" element={<DashboardPage />} />
             </Route>
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
           </Routes>
-        </Container>
+        </section>
       </Router>
     </StateContext.Provider>
   );

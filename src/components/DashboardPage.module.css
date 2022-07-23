@@ -1,0 +1,17 @@
+.dashboard {
+  display: flex;
+  flex: 1 1 0%; 
+  margin-top: 2rem;
+
+}
+
+/* Preview component is shared with /dashboard & /dashboard/appearance
+ * so it is controlled in the parents component
+ */
+.preview {
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100vh;
+}

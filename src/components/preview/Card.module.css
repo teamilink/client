@@ -10,15 +10,50 @@
   height: 70%;
   min-width: 20rem;
   min-height: 35rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem auto;
-  background-color: lightgray;
+  justify-content: space-around;
+  
   border-radius: 2rem;
   border: 3px solid black;
-  justify-content: space-around;
+
+  margin: 2rem auto;
   padding: 1rem;
+
+
+  /* flex-direction: column;
+    position: relative;
+    padding-bottom: 0px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 12px;
+  height: 100%;
+  width: 100%;
+  background-color: lightgray;
+  border-radius: 2rem;
+  border: 3px solid black; */
+
+}
+
+.cardContainer.light {
+  background-color: yellow;
+}
+
+.cardContainer.dark {
+  background-color: lightslategrey;
+}
+
+.cardContainer.colourful {
+  background-color: lightpink;
 }
 
 .profile {
