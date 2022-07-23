@@ -1,9 +1,8 @@
 import React, { useRef, useState } from "react";
-// import { DirectUpload } from "@rails/activestorage";
 
 import {
   createAppearance,
-  imageUploader,
+  // imageUploader,
 } from "../services/appearanceServices";
 
 const Attachment = (props) => {
