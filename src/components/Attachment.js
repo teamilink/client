@@ -13,23 +13,12 @@ const Attachment = (props) => {
   const bg_image_urlRef = useRef();
   const pictureRef = useRef();
 
+  // picture state - may be not needed
   const [picture, setPicture] = useState(null);
 
   const handleChange = () => {
     console.log(pictureRef.current.files);
     setPicture(pictureRef.current.files[0]);
-  };
-
-  const submitToAPI = (data) => {
-    fetch("http://localhost:4000/dashboard/appearances", {
-      method: "POST",
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
   };
 
   const handleSubmit = (event) => {
@@ -43,9 +32,8 @@ const Attachment = (props) => {
     data.append("appearance[bg_image_url]", bg_image_urlRef.current.value);
     data.append("appearance[picture]", pictureRef.current.files[0]);
     data.append("appearance[user_id]", 1);
-    submitToAPI(data);
 
-    // createAppearance(formData);
+    createAppearance(data);
   };
   return (
     <>
