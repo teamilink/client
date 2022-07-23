@@ -1,12 +1,15 @@
 import { Container } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { createAppearance } from "../services/appearanceServices";
+import { useGlobalState } from "../utils/stateContext";
 
 const AppearanceEditor = ({ appearance, handleText }) => {
   const pictureRef = useRef();
 
   // picture state - may be not needed
   const [picture, setPicture] = useState(null);
+  const { store } = useGlobalState();
+  const { currentUserId } = store;
 
   const handleImage = () => {
     console.log(pictureRef.current.files);
@@ -26,8 +29,8 @@ const AppearanceEditor = ({ appearance, handleText }) => {
     data.append("appearance[bio]", appearance.bio);
     data.append("appearance[bg_color]", appearance.bg_color);
     data.append("appearance[bg_image_url]", appearance.bg_image_url);
-    data.append("appearance[picture]", pictureRef.current.files[0]);
-    data.append("appearance[user_id]", 1);
+    data.append("appearance[picture]", picture);
+    data.append("appearance[user_id]", currentUserId);
 
     createAppearance(data);
   };
