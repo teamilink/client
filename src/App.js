@@ -26,17 +26,19 @@ const App = () => {
   return (
     <StateContext.Provider value={{ store, dispatch }}>
       <Router>
-        <section className={styles.container}>
+        <section className={styles.app}>
           <Navbar loggedInUser={loggedInUser} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="dashboard">
-              <Route index element={<DashboardPage />} />
-              <Route path="appearance" element={<DashboardPage />} />
-            </Route>
-            <Route path="signup" element={<SignUp />} />
-            <Route path="login" element={<Login />} />
-          </Routes>
+          <section className={styles.container}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="dashboard">
+                <Route index element={<DashboardPage />} />
+                <Route path="appearance" element={<DashboardPage />} />
+              </Route>
+              <Route path="signup" element={<SignUp />} />
+              <Route path="login" element={<Login />} />
+            </Routes>
+          </section>
         </section>
       </Router>
     </StateContext.Provider>

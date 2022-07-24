@@ -1,0 +1,15 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  
+  width: 40%;
+  height: 100%;
+}
+
+@media screen and (max-width: 60rem) {
+  .form{
+    width: 80%;
+  }
+}
