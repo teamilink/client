@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Toolbar, Tabs, Tab, AppBar, Container } from "@mui/material";
+import { Toolbar, Tabs, Tab, AppBar } from "@mui/material";
 import { useGlobalState } from "../utils/stateContext";
 import styles from "./Navbar.module.css";
 
