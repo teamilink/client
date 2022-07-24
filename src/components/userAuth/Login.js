@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button } from "@mui/material";
+import styles from "./Form.module.css";
 
 const Login = () => {
   console.log("Login");
@@ -48,39 +49,31 @@ const Login = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <TextField
-            sx={{ width: "50%" }}
-            required
-            label="Email"
-            variant="standard"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleUserData}
-          />
-        </div>
-        <div>
-          <TextField
-            sx={{ width: "50%" }}
-            required
-            label="Password"
-            variant="standard"
-            name="password"
-            id="password"
-            type="password"
-            value={formData.password}
-            onChange={handleUserData}
-          />
-        </div>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <TextField
+        required
+        label="Email"
+        variant="standard"
+        name="email"
+        id="email"
+        value={formData.email}
+        onChange={handleUserData}
+      />
+      <TextField
+        required
+        label="Password"
+        variant="standard"
+        name="password"
+        id="password"
+        type="password"
+        value={formData.password}
+        onChange={handleUserData}
+      />
 
-        <Button variant="outlined" type="submit" color="primary">
-          Login
-        </Button>
-      </form>
-    </>
+      <Button variant="outlined" type="submit" color="primary">
+        Login
+      </Button>
+    </form>
   );
 };
 

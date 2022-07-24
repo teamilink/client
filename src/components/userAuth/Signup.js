@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signUpUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button } from "@mui/material";
+import styles from "./Form.module.css";
 
 const SignUp = () => {
   const { dispatch } = useGlobalState();
@@ -49,45 +50,37 @@ const SignUp = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <TextField
-          sx={{ width: "30%" }}
-          required
-          label="Username"
-          variant="standard"
-          name="username"
-          id="username"
-          onChange={handleUserData}
-          value={formData.username}
-        />
-      </div>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <TextField
+        required
+        label="Username"
+        variant="standard"
+        name="username"
+        id="username"
+        onChange={handleUserData}
+        value={formData.username}
+      />
+      <TextField
+        required
+        label="Email"
+        variant="standard"
+        name="email"
+        id="email"
+        value={formData.email}
+        onChange={handleUserData}
+      />
 
-      <div>
-        <TextField
-          sx={{ width: "30%" }}
-          required
-          label="Email"
-          variant="standard"
-          name="email"
-          id="email"
-          value={formData.email}
-          onChange={handleUserData}
-        />
-      </div>
-      <div>
-        <TextField
-          sx={{ width: "30%" }}
-          required
-          label="Password"
-          variant="standard"
-          type="password"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={handleUserData}
-        />
-      </div>
+      <TextField
+        required
+        label="Password"
+        variant="standard"
+        type="password"
+        name="password"
+        id="password"
+        value={formData.password}
+        onChange={handleUserData}
+      />
+
       <Button variant="outlined" type="submit" color="primary">
         Sign Up
       </Button>

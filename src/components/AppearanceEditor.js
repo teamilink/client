@@ -2,6 +2,8 @@ import { Container } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { createAppearance } from "../services/appearanceServices";
 import { useGlobalState } from "../utils/stateContext";
+import { TextField, Button } from "@mui/material";
+import styles from "./AppearanceEditor.module.css";
 
 const AppearanceEditor = ({ appearance, handleText }) => {
   const pictureRef = useRef();
@@ -37,50 +39,62 @@ const AppearanceEditor = ({ appearance, handleText }) => {
 
   return (
     <Container sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
-      <h1>Appearance Editor</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            // ref={profile_titleRef}
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h1 className={styles.subtitle}>Profile</h1>
+        <div className={styles.box}>
+          <TextField
+            variant="standard"
+            type="file"
+            id="picture"
+            ref={pictureRef}
+            name="picture"
+            accept="image/*"
+            helperText="Upload your profile image"
+            onChange={handleImage}
+          />
+          <TextField
+            variant="standard"
             name="profile_title"
             id="profile_title"
-            placeholder="Profile Title"
+            label="Profile Title"
             value={appearance.profile_title}
             onChange={handleChange}
           />
-        </div>
-        <div>
-          <textarea
+          <TextField
+            multiline
+            variant="standard"
+            rows={4}
             type="string"
-            // ref={bioRef}
             name="bio"
             id="bio"
-            placeholder="Bio"
+            label="Bio"
             value={appearance.bio}
             onChange={handleChange}
-          ></textarea>
+          />
         </div>
-        <div>
-          <select
+        <h1 className={styles.subtitle}>Custom Appearance</h1>
+        <div className={styles.box}>
+          <TextField
+            select
+            variant="standard"
             type="text"
-            // ref={bg_colorRef}
             name="bg_color"
             id="bg_color"
-            placeholder="bg_color"
+            label="Theme"
+            helperText="Please select your background colour theme"
             value={appearance.bg_color}
             onChange={handleChange}
+            SelectProps={{
+              native: true,
+            }}
           >
             <option value="light">light</option>
             <option value="dark">dark</option>
             <option value="colourful">colourful</option>
-          </select>
-        </div>
-        <div>
+          </TextField>
           <div
             style={{ cursor: "pointer" }}
             type="click"
-            // ref={bg_image_urlRef}
             name="bg_image_url"
             id="bg_image_url"
             value={appearance.bg_image_url}
@@ -89,19 +103,9 @@ const AppearanceEditor = ({ appearance, handleText }) => {
             Get a background image
           </div>
         </div>
-        <div>
-          <input
-            type="file"
-            id="picture"
-            ref={pictureRef}
-            name="picture"
-            accept="image/*"
-            onChange={handleImage}
-          />
-        </div>
-        <div>
-          <input type="submit" id="submit" value="Save" />
-        </div>
+        <Button type="submit" variant="outlined" id="submit" value="Save">
+          Save
+        </Button>
       </form>
     </Container>
   );
