@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
-import styles from "./Form.module.css";
+import styles from "./LinkForm.module.css";
 
 // !important!
 // To change the preview in real time,
@@ -33,7 +33,6 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
     <>
       <form id="link-form" className={styles.form}>
         <TextField
-          // sx={{ width: "100%" }}
           required
           label="Link Title"
           variant="standard"
@@ -44,7 +43,6 @@ const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
           inputProps={{ maxLength: 100 }}
         />
         <TextField
-          // sx={{ width: "100%" }}
           required
           label="Link Address"
           variant="standard"
