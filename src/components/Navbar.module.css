@@ -1,9 +1,11 @@
+@value ilinkBrightBlue from '../common/colours.css';
+
 .navbar {
   display: flex;
   margin-left: 2rem;
 }
 
 .title {
-  color: rgb(30, 216, 229)
+  color: ilinkBrightBlue;
   
 }
