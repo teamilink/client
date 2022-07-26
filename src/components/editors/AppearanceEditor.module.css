@@ -1,5 +1,10 @@
 @value ilinkLightBlue from '../../common/colours.css';
 
+.editor {
+  flex-basis: 50%;
+  overflow-y: auto;
+}
+
 .form{
   display: flex;
   flex-direction: column;

@@ -27,7 +27,7 @@ const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
   };
 
   return (
-    <Container sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
+    <section className={styles.editor}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.subtitle}>Profile</h1>
         <div className={styles.box}>
@@ -117,7 +117,7 @@ const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
           Save
         </Button>
       </form>
-    </Container>
+    </section>
   );
 };
 
