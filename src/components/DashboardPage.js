@@ -1,51 +1,46 @@
 import React, { useEffect, useState } from "react";
 import LinkEditor from "./LinkEditor";
 import Preview from "./preview/Preview";
-import { deleteLink, getLinks, saveLink } from "../services/linksServices";
+import { deleteLink, getDashbaord, saveLink } from "../services/linksServices";
 import { useGlobalState } from "../utils/stateContext";
 import { useLocation } from "react-router-dom";
 import AppearanceEditor from "./AppearanceEditor";
 import styles from "./DashboardPage.module.css";
-import { createAppearance } from "../services/appearanceServices";
+import { saveAppearance } from "../services/appearanceServices";
 
 const DashboardPage = () => {
   console.log("Dashboard");
   let location = useLocation();
 
-  console.log(location);
   const { store } = useGlobalState();
   const { token, currentUserId, loggedInUser } = store;
 
   // links state accumulates each link created by each user
   // and it will controll the preview
   const [links, setLinks] = useState([]);
-  const initialAppearanceState = {
-    profile_title: "",
-    bio: "",
-    bg_color: "light",
-    bg_image_url: "",
-    picture_url: "",
-  };
-
-  const [appearance, setAppearance] = useState(initialAppearanceState);
+  const [appearance, setAppearance] = useState({});
 
   const handleAppearSubmit = (picture) => {
     console.log("handleAppearSubmit clicked!", picture);
 
-    const data = new FormData();
+    if (appearance.id) {
+      saveAppearance(appearance, appearance.id).then((result) =>
+        setAppearance(result)
+      );
+    } else {
+      const data = new FormData();
 
-    data.append("appearance[profile_title]", appearance.profile_title);
-    data.append("appearance[bio]", appearance.bio);
-    data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[bg_image_url]", appearance.bg_image_url);
-    data.append("appearance[picture]", picture);
-    data.append("appearance[user_id]", currentUserId);
+      data.append("appearance[profile_title]", appearance.profile_title);
+      data.append("appearance[bio]", appearance.bio);
+      data.append("appearance[bg_color]", appearance.bg_color);
+      data.append("appearance[bg_image_url]", appearance.bg_image_url);
+      data.append("appearance[picture]", picture);
+      data.append("appearance[user_id]", currentUserId);
 
-    createAppearance(data).then((result) =>
-      setAppearance({
-        ...result,
-      })
-    );
+      saveAppearance(data, appearance.id).then((result) =>
+        setAppearance(result)
+      );
+    }
   };
 
   const handleAppearChange = (event) => {
@@ -67,9 +62,10 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
-    getLinks(token) //
+    getDashbaord(token) //
       .then((data) => {
-        setLinks(data);
+        setLinks(data.links);
+        setAppearance(data.appearance);
         console.log(data);
       });
   }, [token]);

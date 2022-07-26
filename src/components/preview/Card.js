@@ -10,8 +10,10 @@ const Card = ({ links, appearance }) => {
         return `${styles.dark}`;
       case "colourful":
         return `${styles.colourful}`;
+      case undefined:
+        return `${styles.light}`;
       default:
-        throw Error(`unknow theme ${theme}`);
+        throw Error(`unknown theme ${theme}`);
     }
   };
 

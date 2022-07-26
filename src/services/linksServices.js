@@ -1,9 +1,10 @@
 import iLinkAPI from "../config/api";
 
-export const getLinks = async (token) => {
-  console.log("getLinks -service triggered");
+export const getDashbaord = async (token) => {
+  console.log("getDashbaord -service triggered");
 
   const response = await iLinkAPI.get("/dashboard");
+  console.log(response.data);
   return response.data;
 };
 
