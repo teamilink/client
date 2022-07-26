@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import React from "react";
-import LinkAddForm from "./linkForms/LinkAddForm";
-import LinkEditForm from "./linkForms/LinkEditForm";
+import LinkAddForm from "../linkForms/LinkAddForm";
+import LinkEditForm from "../linkForms/LinkEditForm";
 
 const LinkEditor = ({ links, onSave, onUpdate, onDelete }) => {
   return (
