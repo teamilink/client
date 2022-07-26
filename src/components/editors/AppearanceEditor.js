@@ -1,21 +1,18 @@
-import { Container } from "@mui/material";
+// import { Container } from "@mui/material";
 import React, { useRef, useState } from "react";
-import { createAppearance } from "../services/appearanceServices";
-import { useGlobalState } from "../utils/stateContext";
 import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
 
-const AppearanceEditor = ({ appearance, handleText }) => {
+const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
   const pictureRef = useRef();
 
   // picture state - may be not needed
   const [picture, setPicture] = useState(null);
-  const { store } = useGlobalState();
-  const { currentUserId } = store;
 
-  const handleImage = () => {
+  const handleImage = (event) => {
+    console.log(event.target.files[0]);
     console.log(pictureRef.current.files);
-    setPicture(pictureRef.current.files[0]);
+    setPicture(event.target.files[0]);
   };
 
   const handleChange = (event) => {
@@ -26,32 +23,45 @@ const AppearanceEditor = ({ appearance, handleText }) => {
     event.preventDefault();
     console.log("AppearanceEditor component submit clicked!");
 
-    const data = new FormData();
-    data.append("appearance[profile_title]", appearance.profile_title);
-    data.append("appearance[bio]", appearance.bio);
-    data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[bg_image_url]", appearance.bg_image_url);
-    data.append("appearance[picture]", picture);
-    data.append("appearance[user_id]", currentUserId);
-
-    createAppearance(data);
+    onSubmit(picture);
   };
 
   return (
-    <Container sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
+    <section className={styles.editor}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.subtitle}>Profile</h1>
         <div className={styles.box}>
-          <TextField
+          <Button
+            variant="standard"
+            component="label"
+            onChange={handleImage}
+            id="picture"
+            name="picture"
+            accept="image/*"
+          >
+            {pictureRef.current
+              ? // ? pictureRef.current.files[0].name
+                "file uploaded"
+              : `Upload Profile Pictrue`}
+            <input
+              type="file"
+              ref={pictureRef}
+              hidden
+              id="picture"
+              name="picture"
+              accept="image/*"
+            />
+          </Button>
+          {/* <TextField
             variant="standard"
             type="file"
-            id="picture"
             ref={pictureRef}
+            id="picture"
             name="picture"
             accept="image/*"
             helperText="Upload your profile image"
             onChange={handleImage}
-          />
+          /> */}
           <TextField
             variant="standard"
             name="profile_title"
@@ -107,32 +117,8 @@ const AppearanceEditor = ({ appearance, handleText }) => {
           Save
         </Button>
       </form>
-    </Container>
+    </section>
   );
 };
 
 export default AppearanceEditor;
-
-// const updated = {
-//   profile_title: profile_titleRef.current.value,
-//   bio: bioRef.current.value,
-//   bg_color: bg_colorRef.current.value,
-//   bg_image_url: bg_image_urlRef.current.value,
-//   user_id: 1,
-//   picture: pictureRef.current.files[0],
-// };
-// console.log(updated);
-
-// createAppearance(updated);
-
-// const formData = new FormData();
-// formData.append("profile_title", profile_titleRef.current.value);
-// formData.append("bio", bioRef.current.value);
-// formData.append("bg_color", bg_colorRef.current.value);
-// formData.append("bg_image_url", bg_image_urlRef.current.value);
-// formData.append("user_id", 1);
-// formData.append("picture", picture);
-
-// for (let p of formData) {
-//   console.log(p);
-// }

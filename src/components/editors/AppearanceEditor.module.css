@@ -1,3 +1,10 @@
+@value ilinkLightBlue from '../../common/colours.css';
+
+.editor {
+  flex-basis: 50%;
+  overflow-y: auto;
+}
+
 .form{
   display: flex;
   flex-direction: column;
@@ -11,7 +18,7 @@
 .box {
   display: flex;
   flex-direction: column;
-  background-color: rgb(232, 247, 246);
+  background-color: ilinkLightBlue;
   /* opacity: 0.8; */
   padding: 2rem;
   border-radius: 1rem;

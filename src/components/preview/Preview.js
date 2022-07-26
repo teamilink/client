@@ -1,16 +1,17 @@
-import { Container } from "@mui/material";
+// import { Container } from "@mui/material";
 import React from "react";
 import Card from "./Card";
 // import PreviewTest from "./PreviewTest";
+import styles from "./Preview.module.css";
 
 const Preview = ({ links, appearance }) => {
   console.log("Preview");
 
   return (
-    <Container sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
+    <section className={styles.preview}>
       <Card links={links} appearance={appearance} />
       {/* <PreviewTest /> */}
-    </Container>
+    </section>
   );
 };
 

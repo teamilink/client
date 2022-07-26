@@ -1,18 +1,12 @@
-import { Container } from "@mui/material";
+// import { Container } from "@mui/material";
 import React from "react";
-import LinkAddForm from "./linkForms/LinkAddForm";
-import LinkEditForm from "./linkForms/LinkEditForm";
+import LinkAddForm from "../linkForms/LinkAddForm";
+import LinkEditForm from "../linkForms/LinkEditForm";
+import styles from "./LinkEditor.module.css";
 
 const LinkEditor = ({ links, onSave, onUpdate, onDelete }) => {
   return (
-    <Container
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "50%",
-      }}
-    >
+    <section className={styles.editor}>
       {links ? (
         links.map((link) => (
           <LinkEditForm
@@ -27,7 +21,7 @@ const LinkEditor = ({ links, onSave, onUpdate, onDelete }) => {
         <h1>no links available</h1>
       )}
       <LinkAddForm onSave={onSave} />
-    </Container>
+    </section>
   );
 };
 

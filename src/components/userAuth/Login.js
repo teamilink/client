@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
 
 const Login = () => {
@@ -16,32 +16,49 @@ const Login = () => {
   };
 
   const [formData, setUser] = useState(initialFormData);
+  const [err, setErr] = useState(null);
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state === "Unauthorised") {
+      console.log(location.state);
+      setErr("Login to your dashboard");
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked");
-    console.log(formData);
-    signInUser(formData).then((user) => {
-      console.log("signin user", user);
-      dispatch({
-        type: "setLoggedInUser",
-        data: user.username,
+    console.log("auth login button clicked");
+    signInUser(formData)
+      .then((user) => {
+        if (user.error) {
+          setErr(user.error);
+        } else {
+          console.log("signin user", user);
+          dispatch({
+            type: "setLoggedInUser",
+            data: user.username,
+          });
+          dispatch({
+            type: "setCurrentUserId",
+            data: user.id,
+          });
+
+          sessionStorage.setItem("id", user.id);
+          sessionStorage.setItem("username", user.username);
+          sessionStorage.setItem("token", user.jwt);
+          navigate("/dashboard", { state: { id: user.id } });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      dispatch({
-        type: "setCurrentUserId",
-        data: user.id,
-      });
-      sessionStorage.setItem("id", user.id);
-      sessionStorage.setItem("username", user.username);
-      // sessionStorage.setItem("email", user.email);
-      sessionStorage.setItem("token", user.jwt);
-      navigate("/dashboard", { state: { id: user.id } });
-    });
 
     setUser(initialFormData);
   };
 
   const handleUserData = (e) => {
+    setErr(null);
     setUser({
       ...formData,
       [e.target.id]: e.target.value,
@@ -50,6 +67,13 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
+      <div
+        className={`${styles.error} ${err ? styles.display : styles.hidden}`}
+      >
+        <Alert severity="error" variant="outlined">
+          {err && err}
+        </Alert>
+      </div>
       <TextField
         required
         label="Email"

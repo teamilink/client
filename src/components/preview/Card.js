@@ -10,16 +10,20 @@ const Card = ({ links, appearance }) => {
         return `${styles.dark}`;
       case "colourful":
         return `${styles.colourful}`;
+      case undefined:
+        return `${styles.light}`;
       default:
-        throw Error(`unknow theme ${theme}`);
+        throw Error(`unknown theme ${theme}`);
     }
   };
+
+  console.log("Card", appearance);
 
   return (
     <div className={`${styles.cardContainer} ${setTheme(appearance.bg_color)}`}>
       <img
         alt="profile"
-        src="/images/profile_default.jpeg"
+        src={appearance.picture_url}
         className={styles.profile}
       />
       <h1 className={styles.title}>{appearance.profile_title}</h1>

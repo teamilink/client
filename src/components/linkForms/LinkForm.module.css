@@ -1,0 +1,11 @@
+@value ilinkLightBlue from '../../common/colours.css';
+
+.form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: ilinkLightBlue;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
+}
