@@ -24,7 +24,7 @@ const Login = () => {
       console.log(location.state);
       setErr("Login to your dashboard");
     }
-  }, []);
+  }, [location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
