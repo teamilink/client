@@ -6,6 +6,7 @@ import { useGlobalState } from "../utils/stateContext";
 import { useLocation } from "react-router-dom";
 import AppearanceEditor from "./AppearanceEditor";
 import styles from "./DashboardPage.module.css";
+import { createAppearance } from "../services/appearanceServices";
 
 const DashboardPage = () => {
   console.log("Dashboard");
@@ -23,22 +24,46 @@ const DashboardPage = () => {
     bio: "",
     bg_color: "light",
     bg_image_url: "",
+    picture_url: "",
   };
 
   const [appearance, setAppearance] = useState(initialAppearanceState);
 
-  const handleChange = (event) => {
-    if (event.currentTarget.name) {
+  const handleAppearSubmit = (picture) => {
+    console.log("handleAppearSubmit clicked!", picture);
+
+    const data = new FormData();
+
+    data.append("appearance[profile_title]", appearance.profile_title);
+    data.append("appearance[bio]", appearance.bio);
+    data.append("appearance[bg_color]", appearance.bg_color);
+    data.append("appearance[bg_image_url]", appearance.bg_image_url);
+    data.append("appearance[picture]", picture);
+    data.append("appearance[user_id]", currentUserId);
+
+    createAppearance(data).then((result) =>
       setAppearance({
-        ...appearance,
-        [event.currentTarget.name]: event.currentTarget.value,
-      });
-    } else if (event.currentTarget.id === "bg_image_url") {
-      setAppearance({
-        ...appearance,
-        [event.currentTarget.id]: Date.now(),
-      });
-    }
+        ...result,
+      })
+    );
+  };
+
+  const handleAppearChange = (event) => {
+    setAppearance({
+      ...appearance,
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
+    // if (event.currentTarget.name) {
+    //   setAppearance({
+    //     ...appearance,
+    //     [event.currentTarget.name]: event.currentTarget.value,
+    //   });
+    // } else if (event.currentTarget.id === "bg_image_url") {
+    //   setAppearance({
+    //     ...appearance,
+    //     [event.currentTarget.id]: Date.now(),
+    //   });
+    // }
   };
 
   useEffect(() => {
@@ -49,7 +74,7 @@ const DashboardPage = () => {
       });
   }, [token]);
 
-  const handleAdd = (link) => {
+  const handleLinkAdd = (link) => {
     console.log("submit triggered - DashboardPage");
     console.log("currentUserId", currentUserId);
     console.log("loggedInUser", loggedInUser);
@@ -66,7 +91,7 @@ const DashboardPage = () => {
     });
   };
 
-  const handleUpdate = (link) => {
+  const handleLinkUpdate = (link) => {
     console.log("eidt triggered - DashboardPage");
     setLinks((links) =>
       links.map((item) => (item.id === link.id ? link : item))
@@ -76,7 +101,7 @@ const DashboardPage = () => {
     });
   };
 
-  const handleDelete = (id) => {
+  const handleLinkDelete = (id) => {
     console.log("delete triggered - DashboardPage");
     console.log("id", id);
     setLinks((links) => links.filter((link) => link.id !== id));
@@ -88,13 +113,17 @@ const DashboardPage = () => {
       {location.pathname === "/dashboard" && (
         <LinkEditor
           links={links}
-          onSave={handleAdd}
-          onUpdate={handleUpdate}
-          onDelete={handleDelete}
+          onSave={handleLinkAdd}
+          onUpdate={handleLinkUpdate}
+          onDelete={handleLinkDelete}
         />
       )}
       {location.pathname === "/dashboard/appearance" && (
-        <AppearanceEditor appearance={appearance} handleText={handleChange} />
+        <AppearanceEditor
+          appearance={appearance}
+          handleText={handleAppearChange}
+          onSubmit={handleAppearSubmit}
+        />
       )}
 
       <Preview links={links} appearance={appearance} />

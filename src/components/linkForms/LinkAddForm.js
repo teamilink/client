@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import styles from "./Form.module.css";
 
 const LinkAddForm = ({ onSave }) => {
   console.log("LinkAddForm");
@@ -37,9 +38,9 @@ const LinkAddForm = ({ onSave }) => {
 
   return (
     <>
-      <form id="link-form" onSubmit={onSubmit}>
+      <form id="link-form" onSubmit={onSubmit} className={styles.form}>
         <TextField
-          sx={{ width: "100%" }}
+          // sx={{ width: "100%" }}
           required
           label="Link Title"
           variant="standard"
@@ -51,7 +52,7 @@ const LinkAddForm = ({ onSave }) => {
         />
 
         <TextField
-          sx={{ width: "100%" }}
+          // sx={{ width: "100%" }}
           required
           label="Link Address"
           variant="standard"
@@ -60,18 +61,19 @@ const LinkAddForm = ({ onSave }) => {
           value={newLink.link_address || ""}
           onChange={handleChange}
         />
-
-        <Button variant="text" type="submit" color="secondary">
-          Save
-        </Button>
-        <Button
-          variant="text"
-          type="reset"
-          onClick={clearForm}
-          color="secondary"
-        >
-          Clear
-        </Button>
+        <div className={styles.buttons}>
+          <Button variant="text" type="submit" color="secondary">
+            Save
+          </Button>
+          <Button
+            variant="text"
+            type="reset"
+            onClick={clearForm}
+            color="secondary"
+          >
+            Clear
+          </Button>
+        </div>
       </form>
     </>
   );

@@ -15,11 +15,13 @@ const Card = ({ links, appearance }) => {
     }
   };
 
+  console.log("Card", appearance);
+
   return (
     <div className={`${styles.cardContainer} ${setTheme(appearance.bg_color)}`}>
       <img
         alt="profile"
-        src="/images/profile_default.jpeg"
+        src={appearance.picture_url}
         className={styles.profile}
       />
       <h1 className={styles.title}>{appearance.profile_title}</h1>

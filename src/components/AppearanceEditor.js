@@ -5,17 +5,16 @@ import { useGlobalState } from "../utils/stateContext";
 import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
 
-const AppearanceEditor = ({ appearance, handleText }) => {
+const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
   const pictureRef = useRef();
 
   // picture state - may be not needed
   const [picture, setPicture] = useState(null);
-  const { store } = useGlobalState();
-  const { currentUserId } = store;
+  // const { store } = useGlobalState();
+  // const { currentUserId } = store;
 
-  const handleImage = () => {
-    console.log(pictureRef.current.files);
-    setPicture(pictureRef.current.files[0]);
+  const handleImage = (event) => {
+    setPicture(event.target.files[0]);
   };
 
   const handleChange = (event) => {
@@ -26,15 +25,18 @@ const AppearanceEditor = ({ appearance, handleText }) => {
     event.preventDefault();
     console.log("AppearanceEditor component submit clicked!");
 
-    const data = new FormData();
-    data.append("appearance[profile_title]", appearance.profile_title);
-    data.append("appearance[bio]", appearance.bio);
-    data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[bg_image_url]", appearance.bg_image_url);
-    data.append("appearance[picture]", picture);
-    data.append("appearance[user_id]", currentUserId);
+    onSubmit(picture);
+    // const data = new FormData();
+    // data.append("appearance[profile_title]", appearance.profile_title);
+    // data.append("appearance[bio]", appearance.bio);
+    // data.append("appearance[bg_color]", appearance.bg_color);
+    // data.append("appearance[bg_image_url]", appearance.bg_image_url);
+    // data.append("appearance[picture]", picture);
+    // data.append("appearance[user_id]", currentUserId);
 
-    createAppearance(data);
+    // createAppearance(data).then(result => {
+
+    // })
   };
 
   return (
@@ -42,6 +44,15 @@ const AppearanceEditor = ({ appearance, handleText }) => {
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.subtitle}>Profile</h1>
         <div className={styles.box}>
+          {/* <Button
+            variant="standard"
+            component="label"
+            // ref={pictureRef}
+            onChange={handleImage}
+          >
+            Upload File
+            <input type="file" hidden />
+          </Button> */}
           <TextField
             variant="standard"
             type="file"
