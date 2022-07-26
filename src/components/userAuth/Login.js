@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button, Alert } from "@mui/material";
@@ -17,6 +17,14 @@ const Login = () => {
 
   const [formData, setUser] = useState(initialFormData);
   const [err, setErr] = useState(null);
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state === "Unauthorised") {
+      console.log(location.state);
+      setErr("Login to your dashboard");
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +58,7 @@ const Login = () => {
   };
 
   const handleUserData = (e) => {
+    setErr(null);
     setUser({
       ...formData,
       [e.target.id]: e.target.value,

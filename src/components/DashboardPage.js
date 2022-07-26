@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import LinkEditor from "./LinkEditor";
-import Preview from "./preview/Preview";
-import { deleteLink, getDashbaord, saveLink } from "../services/linksServices";
-import { useGlobalState } from "../utils/stateContext";
 import { useLocation } from "react-router-dom";
-import AppearanceEditor from "./AppearanceEditor";
-import styles from "./DashboardPage.module.css";
+import { deleteLink, getDashbaord, saveLink } from "../services/linksServices";
 import { saveAppearance } from "../services/appearanceServices";
+import { useGlobalState } from "../utils/stateContext";
+import LinkEditor from "./editors/LinkEditor";
+import AppearanceEditor from "./editors/AppearanceEditor";
+import Preview from "./preview/Preview";
+import styles from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
   console.log("Dashboard");

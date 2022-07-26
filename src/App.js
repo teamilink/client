@@ -1,10 +1,16 @@
 import React, { useReducer } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import DashboardPage from "./components/DashboardPage";
 import Login from "./components/userAuth/Login";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/userAuth/Signup";
 import Home from "./components/Home";
+import NotFound from "./components/notFound/NotFound";
 
 import { reducer } from "./utils/reducer";
 import { StateContext } from "./utils/stateContext";
@@ -21,7 +27,6 @@ const App = () => {
   // To store more states and set functions by creating reducer and context
   const [store, dispatch] = useReducer(reducer, initialState);
   const { loggedInUser } = store;
-  // const [isAppearnace, setIsAppearance] = useState(false)
 
   return (
     <StateContext.Provider value={{ store, dispatch }}>
@@ -32,11 +37,30 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="dashboard">
-                <Route index element={<DashboardPage />} />
-                <Route path="appearance" element={<DashboardPage />} />
+                <Route
+                  index
+                  element={
+                    loggedInUser ? (
+                      <DashboardPage />
+                    ) : (
+                      <Navigate to="/login" state={"Unauthorised"} />
+                    )
+                  }
+                />
+                <Route
+                  path="appearance"
+                  element={
+                    loggedInUser ? (
+                      <DashboardPage />
+                    ) : (
+                      <Navigate to="/login" state={"Unauthorised"} />
+                    )
+                  }
+                />
               </Route>
               <Route path="signup" element={<SignUp />} />
               <Route path="login" element={<Login />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </section>
         </section>
