@@ -15,6 +15,8 @@ import NotFound from "./components/notFound/NotFound";
 import { reducer } from "./utils/reducer";
 import { StateContext } from "./utils/stateContext";
 import styles from "./App.module.css";
+import Preview from "./components/preview/Preview";
+import YouriLink from "./components/preview/YouriLink";
 
 const App = () => {
   const initialState = {
@@ -32,10 +34,11 @@ const App = () => {
     <StateContext.Provider value={{ store, dispatch }}>
       <Router>
         <section className={styles.app}>
-          <Navbar loggedInUser={loggedInUser} />
           <section className={styles.container}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/:username" element={<YouriLink />} />
+              {/* <Route path="/:username" element={<Preview />} /> */}
               <Route path="dashboard">
                 <Route
                   index

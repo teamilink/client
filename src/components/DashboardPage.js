@@ -6,6 +6,7 @@ import { useGlobalState } from "../utils/stateContext";
 import LinkEditor from "./editors/LinkEditor";
 import AppearanceEditor from "./editors/AppearanceEditor";
 import Preview from "./preview/Preview";
+import Navbar from "./Navbar";
 import styles from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
@@ -105,24 +106,27 @@ const DashboardPage = () => {
   };
 
   return (
-    <section className={styles.dashboard}>
-      {location.pathname === "/dashboard" && (
-        <LinkEditor
-          links={links}
-          onSave={handleLinkAdd}
-          onUpdate={handleLinkUpdate}
-          onDelete={handleLinkDelete}
-        />
-      )}
-      {location.pathname === "/dashboard/appearance" && (
-        <AppearanceEditor
-          appearance={appearance}
-          handleText={handleAppearChange}
-          onSubmit={handleAppearSubmit}
-        />
-      )}
+    <section className={styles.container}>
+      <Navbar loggedInUser={loggedInUser} />
+      <section className={styles.dashboard}>
+        {location.pathname === "/dashboard" && (
+          <LinkEditor
+            links={links}
+            onSave={handleLinkAdd}
+            onUpdate={handleLinkUpdate}
+            onDelete={handleLinkDelete}
+          />
+        )}
+        {location.pathname === "/dashboard/appearance" && (
+          <AppearanceEditor
+            appearance={appearance}
+            handleText={handleAppearChange}
+            onSubmit={handleAppearSubmit}
+          />
+        )}
 
-      <Preview links={links} appearance={appearance} />
+        <Preview links={links} appearance={appearance} />
+      </section>
     </section>
   );
 };
