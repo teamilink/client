@@ -3,3 +3,9 @@
   /* overflow-y: hidden; */
   position: relative;
 }
+
+.frame {
+  border: 3px solid black;
+  width: 390px;
+  height: 770px;
+}

@@ -1,0 +1,19 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 !important;
+  padding: 0;
+}
+
+
+.container.light {
+  background-color: yellow;
+}
+
+.container.dark {
+  background-color: lightslategrey;
+}
+
+.container.colourful {
+  background-color: lightpink;
+}

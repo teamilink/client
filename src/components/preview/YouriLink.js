@@ -1,33 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getAniLink } from "../../services/linksServices";
-import Card from "./Card";
+import { useLocation, useParams } from "react-router-dom";
+import { getData } from "../../services/linksServices";
+// import Card from "./Card";
+import CardCopy from "./CardCopy";
+import styles from "./YouriLink.module.css";
 
 const YouriLink = () => {
   const { username } = useParams();
   console.log(username);
+  const location = useLocation();
+  console.log(typeof location.pathname);
 
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState(null);
 
   useEffect(() => {
-    getAniLink(username)
-      .then((data) => {
-        console.log(data);
-        setApiData(data);
-        setLoading(false);
-      })
-      .catch((e) => console.log(e));
+    location.pathname !== "/dashboard" &&
+      getData(username)
+        .then((data) => {
+          console.log(data);
+          setApiData(data);
+          setLoading(false);
+        })
+        .catch((e) => console.log(e));
   }, [username]);
 
+  const setTheme = (theme) => {
+    switch (theme) {
+      case "light":
+        return `${styles.light}`;
+      case "dark":
+        return `${styles.dark}`;
+      case "colourful":
+        return `${styles.colourful}`;
+      case undefined:
+        return `${styles.light}`;
+      default:
+        throw Error(`unknown theme ${theme}`);
+    }
+  };
+
   return (
-    <section className="">
+    <>
       {loading ? (
-        <h1>Your iLink Page</h1>
+        <h1> this is loading </h1>
       ) : (
-        <Card links={apiData.links} appearance={apiData.appearance} />
+        <section
+          className={`${styles.container} ${setTheme(
+            apiData.appearance.bg_color
+          )}`}
+        >
+          <CardCopy links={apiData.links} appearance={apiData.appearance} />
+        </section>
       )}
-    </section>
+    </>
   );
 };
 

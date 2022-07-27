@@ -12,6 +12,7 @@ import styles from "./DashboardPage.module.css";
 const DashboardPage = () => {
   console.log("Dashboard");
   let location = useLocation();
+  console.log(location);
 
   const { store } = useGlobalState();
   const { token, currentUserId, loggedInUser } = store;
