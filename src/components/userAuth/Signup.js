@@ -4,6 +4,7 @@ import { signUpUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
+import Navbar from "../Navbar";
 
 const SignUp = () => {
   const { dispatch } = useGlobalState();
@@ -58,48 +59,53 @@ const SignUp = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <div
-        className={`${styles.error} ${err ? styles.display : styles.hidden}`}
-      >
-        <Alert severity="error" variant="outlined">
-          {err && err}
-        </Alert>
-      </div>
-      <TextField
-        required
-        label="Username"
-        variant="standard"
-        name="username"
-        id="username"
-        onChange={handleUserData}
-        value={formData.username}
-      />
-      <TextField
-        required
-        label="Email"
-        variant="standard"
-        name="email"
-        id="email"
-        value={formData.email}
-        onChange={handleUserData}
-      />
+    <section className={styles.container}>
+      <Navbar />
 
-      <TextField
-        required
-        label="Password"
-        variant="standard"
-        type="password"
-        name="password"
-        id="password"
-        value={formData.password}
-        onChange={handleUserData}
-      />
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div
+          className={`${styles.error} ${err ? styles.display : styles.hidden}`}
+        >
+          <Alert severity="error" variant="outlined">
+            {err && err}
+          </Alert>
+        </div>
+        <TextField
+          required
+          label="Username"
+          variant="standard"
+          name="username"
+          id="username"
+          helperText="Username must not contain any space. Choose a username 4–30 characters long."
+          onChange={handleUserData}
+          value={formData.username}
+        />
+        <TextField
+          required
+          label="Email"
+          variant="standard"
+          name="email"
+          id="email"
+          value={formData.email}
+          onChange={handleUserData}
+        />
 
-      <Button variant="outlined" type="submit" color="primary">
-        Sign Up
-      </Button>
-    </form>
+        <TextField
+          required
+          label="Password"
+          variant="standard"
+          type="password"
+          name="password"
+          id="password"
+          value={formData.password}
+          onChange={handleUserData}
+        />
+
+        <Button variant="outlined" type="submit" color="primary">
+          Sign Up
+        </Button>
+      </form>
+    </section>
   );
 };
 

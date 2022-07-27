@@ -4,7 +4,13 @@ export const getDashbaord = async (token) => {
   console.log("getDashbaord -service triggered");
 
   const response = await iLinkAPI.get("/dashboard");
-  console.log(response.data);
+  // console.log(response.data);
+  return response.data;
+};
+
+export const getAniLink = async (username) => {
+  console.log("getAniLink - service triggered");
+  const response = await iLinkAPI.get(`/dashboard?username=${username}`);
   return response.data;
 };
 

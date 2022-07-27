@@ -21,7 +21,9 @@ const Navbar = () => {
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "white", opacity: "0.8" }}>
       <div className={styles.navbar}>
-        <h1 className={styles.title}>iLink</h1>
+        <NavLink to="/" style={{ textDecoration: "none" }}>
+          <h1 className={styles.title}>iLink</h1>
+        </NavLink>
 
         <Toolbar>
           {loggedInUser ? (
@@ -31,25 +33,25 @@ const Navbar = () => {
                 label="Links"
                 value="/dashboard"
                 component={NavLink}
-                to="dashboard"
+                to="/dashboard"
               />
               <Tab
                 label="Appearance"
                 value="/dashboard/appearance"
                 component={NavLink}
-                to="dashboard/appearance"
+                to="/dashboard/appearance"
               />
               <Tab
                 label="Upgrade"
                 value="/upgrade"
                 component={NavLink}
-                to="upgrade"
+                to="/upgrade"
               />
               <Tab
                 label="Logout"
                 value="/logout"
                 component={NavLink}
-                to="logout"
+                to="/logout"
                 onClick={logout}
               />
             </Tabs>
@@ -60,13 +62,13 @@ const Navbar = () => {
                 label="Login"
                 value="/login"
                 component={NavLink}
-                to="login"
+                to="/login"
               />
               <Tab
                 label="SignUp"
                 value="/signup"
                 component={NavLink}
-                to="signup"
+                to="/signup"
               />
             </Tabs>
           )}

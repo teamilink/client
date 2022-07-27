@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button, Alert } from "@mui/material";
+import Navbar from "../Navbar";
 import styles from "./Form.module.css";
 
 const Login = () => {
@@ -66,38 +67,42 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <div
-        className={`${styles.error} ${err ? styles.display : styles.hidden}`}
-      >
-        <Alert severity="error" variant="outlined">
-          {err && err}
-        </Alert>
-      </div>
-      <TextField
-        required
-        label="Email"
-        variant="standard"
-        name="email"
-        id="email"
-        value={formData.email}
-        onChange={handleUserData}
-      />
-      <TextField
-        required
-        label="Password"
-        variant="standard"
-        name="password"
-        id="password"
-        type="password"
-        value={formData.password}
-        onChange={handleUserData}
-      />
+    <section className={styles.container}>
+      <Navbar />
 
-      <Button variant="outlined" type="submit" color="primary">
-        Login
-      </Button>
-    </form>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div
+          className={`${styles.error} ${err ? styles.display : styles.hidden}`}
+        >
+          <Alert severity="error" variant="outlined">
+            {err && err}
+          </Alert>
+        </div>
+        <TextField
+          required
+          label="Email"
+          variant="standard"
+          name="email"
+          id="email"
+          value={formData.email}
+          onChange={handleUserData}
+        />
+        <TextField
+          required
+          label="Password"
+          variant="standard"
+          name="password"
+          id="password"
+          type="password"
+          value={formData.password}
+          onChange={handleUserData}
+        />
+
+        <Button variant="outlined" type="submit" color="primary">
+          Login
+        </Button>
+      </form>
+    </section>
   );
 };
 
