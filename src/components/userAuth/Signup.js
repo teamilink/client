@@ -72,6 +72,7 @@ const SignUp = () => {
         variant="standard"
         name="username"
         id="username"
+        helperText="Username must not contain any space. Choose a username 4–30 characters long."
         onChange={handleUserData}
         value={formData.username}
       />
