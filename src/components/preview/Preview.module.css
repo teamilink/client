@@ -1,7 +1,10 @@
+@value ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
+
 .preview {
   flex-basis: 50%;
   /* overflow-y: hidden; */
   position: relative;
+  border-left: 1px solid ilinkDarkWhite;
 }
 
 .frame {

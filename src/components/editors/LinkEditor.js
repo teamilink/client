@@ -6,21 +6,23 @@ import styles from "./LinkEditor.module.css";
 
 const LinkEditor = ({ links, onSave, onUpdate, onDelete }) => {
   return (
-    <section className={styles.editor}>
-      {links ? (
-        links.map((link) => (
-          <LinkEditForm
-            link={link}
-            key={link.id}
-            onSave={onSave}
-            onUpdate={onUpdate}
-            onDelete={onDelete}
-          />
-        ))
-      ) : (
-        <h1>no links available</h1>
-      )}
-      <LinkAddForm onSave={onSave} />
+    <section className={styles.container}>
+      <div className={styles.editor}>
+        {links ? (
+          links.map((link) => (
+            <LinkEditForm
+              link={link}
+              key={link.id}
+              onSave={onSave}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
+            />
+          ))
+        ) : (
+          <h1>no links available</h1>
+        )}
+        <LinkAddForm onSave={onSave} />
+      </div>
     </section>
   );
 };

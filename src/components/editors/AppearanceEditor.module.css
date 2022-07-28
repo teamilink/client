@@ -1,8 +1,18 @@
-@value ilinkLightBlue from '../../common/colours.css';
+@value ilinkLightBlue, ilinkNavy from '../../common/colours.css';
 
-.editor {
+
+.container {
   flex-basis: 50%;
   overflow-y: auto;
+}
+
+.editor {
+  max-width: 50rem;
+  padding: 0 2rem 50px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form{
@@ -11,7 +21,7 @@
   justify-content: flex-start;
   gap: 1.5rem;
   
-  width: 100%;
+  width: 80%;
   height: 100%;
 }
 
@@ -28,4 +38,5 @@
   font-size: 1.2rem;
   padding: 0;
   margin: 0;
+  color: ilinkNavy;
 }

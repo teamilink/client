@@ -17,7 +17,6 @@ import { StateContext } from "./utils/stateContext";
 import styles from "./App.module.css";
 // import Preview from "./components/preview/Preview";
 import YouriLink from "./components/preview/YouriLink";
-import Footer from "./components/Footer";
 
 const App = () => {
   const initialState = {
@@ -69,7 +68,6 @@ const App = () => {
           </section>
         </section>
       </Router>
-      <Footer />
     </StateContext.Provider>
   );
 };
