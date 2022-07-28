@@ -7,16 +7,18 @@ import styles from "./Form.module.css";
 import Navbar from "../Navbar";
 
 const SignUp = () => {
-  const { dispatch } = useGlobalState();
+  const { dispatch, store } = useGlobalState();
+  // use the email value entered by user on home page
+const { newEmail } = store;
   console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
     username: "",
-    email: "",
+    email: newEmail, // set to the signup form
     password: "",
   };
 
-  const [formData, setUser] = useState(initialFormData);
+const [formData, setUser] = useState(initialFormData);
   const [err, setErr] = useState(null);
 
   const handleSubmit = (e) => {

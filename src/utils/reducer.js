@@ -15,6 +15,13 @@ export const reducer = (state, action) => {
         ...state,
         currentUserId: action.data,
       };
+      
+  // task to set new email
+    case "setNewEmail":
+      return {
+        ...state,
+        newEmail: action.data
+      };
     default:
       throw new Error(`unknown action.type: ${action.type}`);
   }

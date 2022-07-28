@@ -44,7 +44,7 @@ const App = () => {
                 <Route
                   index
                   element={
-                    loggedInUser ? (
+                    !loggedInUser ? (
                       <DashboardPage />
                     ) : (
                       <Navigate to="/login" state={"Unauthorised"} />
