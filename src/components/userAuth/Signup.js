@@ -51,6 +51,19 @@ const SignUp = () => {
   };
 
   const handleUserData = (e) => {
+    if (e.target.id === "username") {
+      if (e.target.value.match(/^[a-z0-9_-]{4,30}$/)) {
+        setUser({
+          ...formData,
+          username: e.target.value,
+        });
+      } else {
+        setErr(
+          "Username only can contain lowercase letters, numbers, underscores and hyphens"
+        );
+      }
+    }
+
     setErr(null);
     setUser({
       ...formData,
@@ -70,6 +83,7 @@ const SignUp = () => {
             {err && err}
           </Alert>
         </div>
+        <h1 className={styles.title}>Welcome!</h1>
         <TextField
           required
           label="Username"

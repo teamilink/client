@@ -3,6 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { getData } from "../../services/linksServices";
 import Card from "./Card";
 import styles from "./YouriLink.module.css";
+import Footer from "../Footer";
 
 const YouriLink = () => {
   const { username } = useParams();
@@ -69,6 +70,7 @@ const YouriLink = () => {
           />
         </section>
       )}
+      <Footer />
     </>
   );
 };

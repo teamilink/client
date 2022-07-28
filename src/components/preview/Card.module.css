@@ -1,20 +1,19 @@
 
-.cardContainer {
+.container {
   width: 100%;
   height: 100%;
+}
 
+.card {
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
     
-  margin: 0;
+  margin: 1.5rem auto;
   padding: 24px 12px;
 }
-/* 
-.container.organiser {
-  justify-content: flex-start;
-} */
 
 
 .profile {
@@ -24,13 +23,20 @@
   border-radius: 50%;
 }
 
+.text {
+  margin: 2rem auto 3rem;
+  text-align: center;
+  max-width: 30rem;
+}
+
 .title {
   font-size: 1.5rem;
+  margin: 0;
 }
 
 .bio {
   width: 100%;
-  text-align: center;
+  margin: 0;
 }
 
 .linkButtons {

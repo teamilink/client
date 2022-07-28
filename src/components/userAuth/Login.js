@@ -78,6 +78,7 @@ const Login = () => {
             {err && err}
           </Alert>
         </div>
+        <h1 className={styles.title}>Nice to see you again!</h1>
         <TextField
           required
           label="Email"

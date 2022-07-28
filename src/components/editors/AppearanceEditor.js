@@ -70,6 +70,7 @@ const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
               label="Profile Title"
               value={appearance.profile_title}
               onChange={handleChange}
+              helperText="Maximum 30 characters"
             />
             <TextField
               multiline
@@ -81,6 +82,7 @@ const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
               label="Bio"
               value={appearance.bio}
               onChange={handleChange}
+              helperText="Maximum 80 characters"
             />
           </div>
           <h1 className={styles.subtitle}>Custom Appearance</h1>
