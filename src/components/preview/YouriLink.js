@@ -1,36 +1,64 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getData } from "../../services/linksServices";
 import Card from "./Card";
 import styles from "./YouriLink.module.css";
 import Footer from "../Footer";
+import { useGlobalState } from "../../utils/stateContext";
 
 const YouriLink = () => {
   const { username } = useParams();
   console.log(username);
-  const location = useLocation();
-  console.log(typeof location.pathname);
+
+  const { store, dispatch } = useGlobalState();
+  const { token, links, appearance } = store;
+
+  console.log("******* check state ************");
+  console.log("links", links);
+  console.log("appearance", appearance);
 
   const [loading, setLoading] = useState(true);
-  const [apiData, setApiData] = useState(null);
-  // if location.pathname === /dashboard => false
-  // if location.pathname === /:username => true
-  const [visitor, setVisitor] = useState(true);
+  const [visitor, setVisitor] = useState(username ? true : false);
 
   useEffect(() => {
-    location.pathname === "/dashboard" ? setVisitor(false) : setVisitor(true);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    visitor &&
+    console.log("visitor ? ", username ? true : false);
+    if (visitor) {
       getData(username)
         .then((data) => {
+          console.log("YouriLink - username useEffect - triggered");
           console.log(data);
-          setApiData(data);
+          dispatch({
+            type: "setLinks",
+            data: data.links,
+          });
+          dispatch({
+            type: "setAppearance",
+            data: data.appearance,
+          });
+
           setLoading(false);
         })
         .catch((e) => console.log(e));
-  }, [visitor, username]);
+    } else {
+      console.log("useEffect- token", token);
+      getData(token) //
+        .then((data) => {
+          console.log("YouriLink - token useEffect - triggered");
+          console.log(data);
+          dispatch({
+            type: "setLinks",
+            data: data.links,
+          });
+          dispatch({
+            type: "setAppearance",
+            data: data.appearance,
+          });
+
+          setLoading(false);
+          setVisitor(false);
+        });
+    } // eslint-disable-next-line
+  }, [visitor, username, token]);
 
   const setTheme = (theme) => {
     switch (theme) {
@@ -60,14 +88,10 @@ const YouriLink = () => {
       ) : (
         <section
           className={`${styles.container} ${setTheme(
-            apiData.appearance.bg_color
+            appearance.bg_color ? appearance.bg_color : undefined
           )}`}
         >
-          <Card
-            links={apiData.links}
-            appearance={apiData.appearance}
-            visitor={visitor}
-          />
+          <Card visitor={visitor} />
         </section>
       )}
       <Footer />
