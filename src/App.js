@@ -24,6 +24,8 @@ const App = ({ inputVlidator }) => {
     loggedInUser: sessionStorage.getItem("username") || null,
     currentUserId: sessionStorage.getItem("id") || null,
     token: sessionStorage.getItem("token") || null,
+    links: [],
+    appearance: {},
   };
 
   // loggedInUser state needs to be accessed in different heirachy of this app

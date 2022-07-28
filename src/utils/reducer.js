@@ -15,6 +15,39 @@ export const reducer = (state, action) => {
         ...state,
         currentUserId: action.data,
       };
+    case "setLinks":
+      return {
+        ...state,
+        links: action.data,
+      };
+    case "updateLinks":
+      let updatedItem = state.links.map((item) =>
+        item.id === action.data.id ? action.data : item
+      );
+      return {
+        ...state,
+        links: updatedItem,
+      };
+    case "removeLink":
+      let deletedItem = state.links.filter((item) => item.id !== action.data);
+      return {
+        ...state,
+        links: deletedItem,
+      };
+    case "setAppearance":
+      return {
+        ...state,
+        appearance: action.data,
+      };
+    case "updateAppearance":
+      let updatedAppearance = {
+        ...state.appearance,
+        [action.data.name]: action.data.value,
+      };
+      return {
+        ...state,
+        appearance: updatedAppearance,
+      };
     default:
       throw new Error(`unknown action.type: ${action.type}`);
   }

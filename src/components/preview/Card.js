@@ -1,13 +1,17 @@
 import React from "react";
+import { useGlobalState } from "../../utils/stateContext";
 import styles from "./Card.module.css";
 
-const Card = ({ links, appearance, visitor }) => {
+const Card = ({ visitor }) => {
+  const { store } = useGlobalState();
+  const { links, appearance } = store;
+
   return (
     <section className={styles.container}>
       <div className={`${styles.card} ${visitor && styles.organiser}`}>
         <img
           alt="profile"
-          src={appearance.picture_url}
+          src={appearance.picture_url ? appearance.picture_url : ""}
           className={styles.profile}
         />
         <div className={styles.text}>

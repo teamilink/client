@@ -2,12 +2,15 @@
 import React, { useRef, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
+import { useGlobalState } from "../../utils/stateContext";
 
-const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
+const AppearanceEditor = ({ onSubmit, handleText }) => {
   const pictureRef = useRef();
 
   // picture state - may be not needed
   const [picture, setPicture] = useState(null);
+  const { store } = useGlobalState();
+  const appearance = store;
 
   const handleImage = (event) => {
     console.log(event.target.files[0]);

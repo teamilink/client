@@ -9,7 +9,7 @@ import styles from "./LinkForm.module.css";
 // the preview won't be updated at the same time
 
 const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
-  console.log("LinkEditForm");
+  // console.log("LinkEditForm");
 
   const { id, title, link_address } = link;
 

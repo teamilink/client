@@ -25,4 +25,5 @@
 
   border: 1.1rem solid black;
   border-radius: 3rem;
+  overflow-y: auto;
 }
