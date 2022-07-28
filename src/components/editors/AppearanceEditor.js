@@ -75,7 +75,7 @@ const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
             <TextField
               multiline
               variant="standard"
-              rows={4}
+              rows={2}
               type="string"
               name="bio"
               id="bio"

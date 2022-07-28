@@ -6,7 +6,7 @@ import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
 import Navbar from "../Navbar";
 
-const SignUp = () => {
+const SignUp = ({ inputVlidator }) => {
   const { dispatch } = useGlobalState();
   console.log("Signup");
   const navigate = useNavigate();
@@ -51,24 +51,24 @@ const SignUp = () => {
   };
 
   const handleUserData = (e) => {
+    // validate username
     if (e.target.id === "username") {
-      if (e.target.value.match(/^[a-z0-9_-]{4,30}$/)) {
+      if (inputVlidator.validateUsername(e.target.value)) {
+        setErr(null);
         setUser({
           ...formData,
           username: e.target.value,
         });
       } else {
-        setErr(
-          "Username only can contain lowercase letters, numbers, underscores and hyphens"
-        );
+        setErr("Please check your username format");
       }
+    } else {
+      setErr(null);
+      setUser({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
     }
-
-    setErr(null);
-    setUser({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
   };
 
   return (
@@ -96,6 +96,7 @@ const SignUp = () => {
         />
         <TextField
           required
+          type="email"
           label="Email"
           variant="standard"
           name="email"

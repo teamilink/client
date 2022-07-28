@@ -46,6 +46,7 @@ const DashboardPage = () => {
   };
 
   const handleAppearChange = (event) => {
+    console.log("appearance is chaning...");
     setAppearance({
       ...appearance,
       [event.currentTarget.name]: event.currentTarget.value,
@@ -64,11 +65,16 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
+    console.log("dashbaord - useEffect / appearance - triggered");
+    console.log(appearance);
+  }, [appearance]);
+
+  useEffect(() => {
     getDashbaord(token) //
       .then((data) => {
+        console.log("dashbaord - useEffect - triggered");
         setLinks(data.links);
         setAppearance(data.appearance);
-        console.log(data);
       });
   }, [token]);
 

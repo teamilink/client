@@ -19,7 +19,7 @@ import styles from "./App.module.css";
 import YouriLink from "./components/preview/YouriLink";
 // import Footer from "./components/Footer";
 
-const App = () => {
+const App = ({ inputVlidator }) => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("username") || null,
     currentUserId: sessionStorage.getItem("id") || null,
@@ -62,8 +62,14 @@ const App = () => {
                   }
                 />
               </Route>
-              <Route path="signup" element={<SignUp />} />
-              <Route path="login" element={<Login />} />
+              <Route
+                path="signup"
+                element={<SignUp inputVlidator={inputVlidator} />}
+              />
+              <Route
+                path="login"
+                element={<Login inputVlidator={inputVlidator} />}
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </section>
