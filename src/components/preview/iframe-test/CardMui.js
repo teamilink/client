@@ -1,14 +1,12 @@
+import { Box, Button, Container } from "@mui/material";
 import React from "react";
-import { useGlobalState } from "../../utils/stateContext";
 import styles from "./Card.module.css";
 
-const Card = ({ visitor }) => {
-  const { store } = useGlobalState();
-  const { links, appearance } = store;
-
+const CardMui = ({ links, appearance, visitor }) => {
+  console.log(appearance);
   return (
-    <section className={styles.container}>
-      <div className={`${styles.card} ${visitor && styles.organiser}`}>
+    <Container>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         <img
           alt="profile"
           src={appearance.picture_url ? appearance.picture_url : ""}
@@ -18,7 +16,7 @@ const Card = ({ visitor }) => {
           <h1 className={styles.title}>{appearance.profile_title}</h1>
           <p className={styles.bio}>{appearance.bio}</p>
         </div>
-        <div className={styles.linkButtons}>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
           {links &&
             links.map((link) => (
               <a
@@ -27,15 +25,15 @@ const Card = ({ visitor }) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <button className={styles.btn} key={link.id}>
+                <Button className={styles.btn} key={link.id}>
                   {link.title}
-                </button>
+                </Button>
               </a>
             ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
-export default Card;
+export default CardMui;

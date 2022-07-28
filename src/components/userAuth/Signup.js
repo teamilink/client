@@ -6,7 +6,7 @@ import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
 import Navbar from "../Navbar";
 
-const SignUp = () => {
+const SignUp = ({ inputVlidator }) => {
   const { dispatch } = useGlobalState();
   console.log("Signup");
   const navigate = useNavigate();
@@ -51,11 +51,24 @@ const SignUp = () => {
   };
 
   const handleUserData = (e) => {
-    setErr(null);
-    setUser({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+    // validate username
+    if (e.target.id === "username") {
+      if (inputVlidator.validateUsername(e.target.value)) {
+        setErr(null);
+        setUser({
+          ...formData,
+          username: e.target.value,
+        });
+      } else {
+        setErr("Please check your username format");
+      }
+    } else {
+      setErr(null);
+      setUser({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
+    }
   };
 
   return (
@@ -70,6 +83,7 @@ const SignUp = () => {
             {err && err}
           </Alert>
         </div>
+        <h1 className={styles.title}>Welcome!</h1>
         <TextField
           required
           label="Username"
@@ -82,6 +96,7 @@ const SignUp = () => {
         />
         <TextField
           required
+          type="email"
           label="Email"
           variant="standard"
           name="email"

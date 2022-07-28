@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Toolbar, Tabs, Tab, AppBar } from "@mui/material";
+import { Toolbar, Tabs, Tab } from "@mui/material";
 import { useGlobalState } from "../utils/stateContext";
 import styles from "./Navbar.module.css";
 
@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: "white", opacity: "0.8" }}>
+    <header className={styles.header}>
       <div className={styles.navbar}>
         <NavLink to="/" style={{ textDecoration: "none" }}>
           <h1 className={styles.title}>iLink</h1>
@@ -74,7 +74,7 @@ const Navbar = () => {
           )}
         </Toolbar>
       </div>
-    </AppBar>
+    </header>
   );
 };
 

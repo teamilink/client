@@ -17,13 +17,15 @@ import { StateContext } from "./utils/stateContext";
 import styles from "./App.module.css";
 // import Preview from "./components/preview/Preview";
 import YouriLink from "./components/preview/YouriLink";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 
-const App = () => {
+const App = ({ inputVlidator }) => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("username") || null,
     currentUserId: sessionStorage.getItem("id") || null,
     token: sessionStorage.getItem("token") || null,
+    links: [],
+    appearance: {},
   };
 
   // loggedInUser state needs to be accessed in different heirachy of this app
@@ -62,14 +64,19 @@ const App = () => {
                   }
                 />
               </Route>
-              <Route path="signup" element={<SignUp />} />
-              <Route path="login" element={<Login />} />
+              <Route
+                path="signup"
+                element={<SignUp inputVlidator={inputVlidator} />}
+              />
+              <Route
+                path="login"
+                element={<Login inputVlidator={inputVlidator} />}
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </section>
         </section>
       </Router>
-      <Footer />
     </StateContext.Provider>
   );
 };

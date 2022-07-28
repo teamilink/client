@@ -1,4 +1,14 @@
-.editor {
+.container {
   flex-basis: 50%;
   overflow-y: auto;
+}
+
+.editor {
+  /* width: 700px; */
+  max-width: 50rem;
+  padding: 0 2rem 50px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
