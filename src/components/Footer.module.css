@@ -1,7 +1,12 @@
+@value iLinkNavy, ilinkBrightBlue from '../common/colours.css';
+
 .footer {
   width: 100vw;
-  height: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  position: absolute;
+  bottom: 0;
+  color: iLinkNavy;
 }

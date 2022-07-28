@@ -1,3 +1,5 @@
+@value ilinkThemeLight, ilinkThemeDark, ilinkThemeBlue, ilinkThemePink, ilinkThemeGreen, ilinkThemePinkGreen from '../../common/colours.css';
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -5,15 +7,24 @@
   padding: 0;
 }
 
-
 .container.light {
-  background-color: yellow;
+  background: ilinkThemeLight;
 }
 
 .container.dark {
-  background-color: lightslategrey;
+  background: ilinkThemeDark;
 }
 
 .container.colourful {
-  background-color: lightpink;
+  background: ilinkThemePinkGreen;
+}
+
+.container.pink {
+  background: ilinkThemePink;
+}
+.container.blue {
+  background: ilinkThemeBlue;
+}
+.container.green {
+  background: ilinkThemeGreen;
 }

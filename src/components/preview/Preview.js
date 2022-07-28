@@ -1,9 +1,7 @@
-// import { Container } from "@mui/material";
 import React from "react";
 import { useGlobalState } from "../../utils/stateContext";
-// import Card from "./Card";
-import CardCopy from "./CardCopy";
 import styles from "./Preview.module.css";
+// import Card from "./Card";
 
 const Preview = ({ links, appearance }) => {
   console.log("Preview");

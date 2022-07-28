@@ -1,26 +1,9 @@
 import React from "react";
 import styles from "./Card.module.css";
 
-const Card = ({ links, appearance }) => {
-  const setTheme = (theme) => {
-    switch (theme) {
-      case "light":
-        return `${styles.light}`;
-      case "dark":
-        return `${styles.dark}`;
-      case "colourful":
-        return `${styles.colourful}`;
-      case undefined:
-        return `${styles.light}`;
-      default:
-        throw Error(`unknown theme ${theme}`);
-    }
-  };
-
-  console.log("Card", appearance);
-
+const Card = ({ links, appearance, visitor }) => {
   return (
-    <div className={`${styles.cardContainer} ${setTheme(appearance.bg_color)}`}>
+    <div className={`${styles.cardContainer} ${visitor && styles.organiser}`}>
       <img
         alt="profile"
         src={appearance.picture_url}
@@ -28,8 +11,6 @@ const Card = ({ links, appearance }) => {
       />
       <h1 className={styles.title}>{appearance.profile_title}</h1>
       <p className={styles.bio}>{appearance.bio}</p>
-      <p className={styles.bg_color}>{appearance.bg_color}</p>
-      <p className={styles.bg_image_url}>{appearance.bg_image_url}</p>
       <div className={styles.linkButtons}>
         {links &&
           links.map((link) => (

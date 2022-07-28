@@ -102,6 +102,9 @@ const AppearanceEditor = ({ appearance, onSubmit, handleText }) => {
               <option value="light">light</option>
               <option value="dark">dark</option>
               <option value="colourful">colourful</option>
+              <option value="pink">pink</option>
+              <option value="blue">blue</option>
+              <option value="green">green</option>
             </TextField>
             <div
               style={{ cursor: "pointer" }}

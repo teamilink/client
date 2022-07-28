@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { getData } from "../../services/linksServices";
-// import Card from "./Card";
-import CardCopy from "./CardCopy";
+import Card from "./Card";
 import styles from "./YouriLink.module.css";
 
 const YouriLink = () => {
@@ -13,9 +12,16 @@ const YouriLink = () => {
 
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState(null);
+  // if location.pathname === /dashboard => false
+  // if location.pathname === /:username => true
+  const [visitor, setVisitor] = useState(true);
 
   useEffect(() => {
-    location.pathname !== "/dashboard" &&
+    location.pathname === "/dashboard" ? setVisitor(false) : setVisitor(true);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    visitor &&
       getData(username)
         .then((data) => {
           console.log(data);
@@ -23,7 +29,7 @@ const YouriLink = () => {
           setLoading(false);
         })
         .catch((e) => console.log(e));
-  }, [username]);
+  }, [visitor, username]);
 
   const setTheme = (theme) => {
     switch (theme) {
@@ -33,6 +39,12 @@ const YouriLink = () => {
         return `${styles.dark}`;
       case "colourful":
         return `${styles.colourful}`;
+      case "pink":
+        return `${styles.pink}`;
+      case "blue":
+        return `${styles.blue}`;
+      case "green":
+        return `${styles.green}`;
       case undefined:
         return `${styles.light}`;
       default:
@@ -50,7 +62,11 @@ const YouriLink = () => {
             apiData.appearance.bg_color
           )}`}
         >
-          <CardCopy links={apiData.links} appearance={apiData.appearance} />
+          <Card
+            links={apiData.links}
+            appearance={apiData.appearance}
+            visitor={visitor}
+          />
         </section>
       )}
     </>
