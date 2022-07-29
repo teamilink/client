@@ -26,7 +26,7 @@ const Home = () => {
       <div className={styles.form}>
         <h1>Everything in one link</h1>
       
-        <TextField id="username" name="username" onChange={handleChange} className={styles.paddedRight} />
+        <TextField id="username" name="username" label="/yourname" onChange={handleChange} className={styles.paddedRight} />
         <Button variant="outlined" type="button" onClick={handleSubmit} color="primary">
             Claim your iLink
         </Button>

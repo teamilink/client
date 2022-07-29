@@ -11,13 +11,13 @@ const SignUp = () => {
   const { dispatch, store } = useGlobalState();
   const location = useLocation();
 
-  // use the email value entered by user on home page
+  // use the username value entered by user on home page
 const { newEmail } = store;
   console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
-    username: location.state.username,
-    email: "", // set to the signup form
+    username: location.state.username, // set to the signup form
+    email: "",
     password: "",
   };
 
