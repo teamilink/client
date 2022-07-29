@@ -11,7 +11,7 @@ const YouriLink = () => {
   console.log(username);
 
   const { store, dispatch } = useGlobalState();
-  const { token, links, appearance } = store;
+  const { token, links, appearance, loggedInUser } = store;
 
   console.log("******* check state ************");
   console.log("links", links);
@@ -19,10 +19,6 @@ const YouriLink = () => {
 
   const [loading, setLoading] = useState(true);
   const [visitor, setVisitor] = useState(username ? true : false);
-
-  useEffect(() => {
-    console.log(links.message);
-  }, [links]);
 
   useEffect(() => {
     console.log("visitor ? ", username ? true : false);
@@ -39,9 +35,8 @@ const YouriLink = () => {
             type: "setAppearance",
             data: data.appearance,
           });
-
-          setLoading(false);
         })
+        .then(setLoading(false))
         .catch((e) => console.log(e));
     } else {
       console.log("useEffect- token", token);
@@ -49,30 +44,20 @@ const YouriLink = () => {
         .then((data) => {
           console.log("YouriLink - token useEffect - triggered");
           console.log(data);
-          if (!data.links || !data.appearance) {
-            console.log("data.links & data.appearance are null");
-            // dispatch({
-            //   type: "setLinks",
-            //   data: null,
-            // });
-            // dispatch({
-            //   type: "setAppearance",
-            //   data: null,
-            // });
-          } else {
-            dispatch({
-              type: "setLinks",
-              data: data.links,
-            });
-            dispatch({
-              type: "setAppearance",
-              data: data.appearance,
-            });
 
-            setLoading(false);
-            setVisitor(false);
-          }
+          console.log("YouriLink - request dashboard data");
+          dispatch({
+            type: "setLinks",
+            data: data.links,
+          });
+          dispatch({
+            type: "setAppearance",
+            data: data.appearance,
+          });
+
+          setVisitor(false);
         })
+        .then(setLoading(false))
         .catch((e) => console.log(e));
     } // eslint-disable-next-line
   }, [visitor, username, token]);
@@ -105,7 +90,7 @@ const YouriLink = () => {
       ) : (
         <section
           className={`${styles.container} ${setTheme(
-            appearance.bg_color ? appearance.bg_color : undefined
+            (appearance && appearance.bg_color) ?? "light"
           )}`}
         >
           <Card visitor={visitor} />
