@@ -35,9 +35,8 @@ const YouriLink = () => {
             type: "setAppearance",
             data: data.appearance,
           });
-
-          setLoading(false);
         })
+        .then(setLoading(false))
         .catch((e) => console.log(e));
     } else {
       console.log("useEffect- token", token);
@@ -45,6 +44,8 @@ const YouriLink = () => {
         .then((data) => {
           console.log("YouriLink - token useEffect - triggered");
           console.log(data);
+
+          console.log("YouriLink - request dashboard data");
           dispatch({
             type: "setLinks",
             data: data.links,
@@ -54,9 +55,10 @@ const YouriLink = () => {
             data: data.appearance,
           });
 
-          setLoading(false);
           setVisitor(false);
-        });
+        })
+        .then(setLoading(false))
+        .catch((e) => console.log(e));
     } // eslint-disable-next-line
   }, [visitor, username, token]);
 
@@ -88,7 +90,7 @@ const YouriLink = () => {
       ) : (
         <section
           className={`${styles.container} ${setTheme(
-            appearance.bg_color ? appearance.bg_color : undefined
+            (appearance && appearance.bg_color) ?? "light"
           )}`}
         >
           <Card visitor={visitor} />

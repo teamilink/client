@@ -9,13 +9,14 @@ import Preview from "./preview/Preview";
 import Navbar from "./Navbar";
 import styles from "./DashboardPage.module.css";
 
-const DashboardPage = () => {
+const DashboardPage = (props) => {
   console.log("Dashboard");
   let location = useLocation();
   console.log(location);
 
   const { store, dispatch } = useGlobalState();
   const { currentUserId, loggedInUser, appearance } = store;
+  // const [loading, setLoading] = useState(false);
 
   // links state accumulates each link created by each user
   // and it will controll the preview
@@ -78,7 +79,7 @@ const DashboardPage = () => {
     saveLink(link).then((response) => {
       console.log(response);
       dispatch({
-        type: "setLinks",
+        type: "addLink",
         data: response,
       });
       // setLinks([...links, response]);
@@ -102,12 +103,14 @@ const DashboardPage = () => {
   const handleLinkDelete = (id) => {
     console.log("delete triggered - DashboardPage");
     console.log("id", id);
-    dispatch({
-      type: "removeLink",
-      data: id,
-    });
     // setLinks((links) => links.filter((link) => link.id !== id));
-    deleteLink(id).then(() => window.location.reload());
+    deleteLink(id).then(() => {
+      dispatch({
+        type: "removeLink",
+        data: id,
+      });
+      window.location.reload();
+    });
   };
 
   return (

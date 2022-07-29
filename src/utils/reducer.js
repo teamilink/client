@@ -20,6 +20,11 @@ export const reducer = (state, action) => {
         ...state,
         links: action.data,
       };
+    case "addLink":
+      return {
+        ...state,
+        links: [action.data, ...state.links],
+      };
     case "updateLinks":
       let updatedItem = state.links.map((item) =>
         item.id === action.data.id ? action.data : item
