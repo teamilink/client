@@ -11,7 +11,7 @@ const YouriLink = () => {
   console.log(username);
 
   const { store, dispatch } = useGlobalState();
-  const { token, links, appearance, loggedInUser } = store;
+  const { token, links, appearance } = store;
 
   console.log("******* check state ************");
   console.log("links", links);
