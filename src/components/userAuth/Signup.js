@@ -7,15 +7,9 @@ import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
 import Navbar from "../Navbar";
 
-
 const SignUp = () => {
-  const { dispatch, store } = useGlobalState();
-  const location = useLocation();
-
-const { newEmail } = store;
-
-const SignUp = ({ inputVlidator }) => {
   const { dispatch } = useGlobalState();
+  const location = useLocation();
 
   console.log("Signup");
   const navigate = useNavigate();
@@ -25,7 +19,7 @@ const SignUp = ({ inputVlidator }) => {
     password: "",
   };
 
-const [formData, setUser] = useState(initialFormData);
+  const [formData, setUser] = useState(initialFormData);
   const [err, setErr] = useState(null);
 
   const handleSubmit = (e) => {
