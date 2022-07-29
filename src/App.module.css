@@ -1,5 +1,3 @@
-
-
 * {
   box-sizing: border-box;
 }
@@ -7,17 +5,11 @@
 .app {
   width: 100vw;
   height: 100vh;
-  /* background-color: aquamarine; */
 }
 
 .container {
   width: 100%;
-  max-width: 80rem;
   height: 100%;
   display: flex;
-  /* background-color: aqua; */
-  margin: 0 auto;
-  /* justify-content: center;
-  align-items: center; */
-  
+  margin: 0 auto; 
 }

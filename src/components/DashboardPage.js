@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import { deleteLink, getDashbaord, saveLink } from "../services/linksServices";
+import { deleteLink, saveLink } from "../services/linksServices";
 import { saveAppearance } from "../services/appearanceServices";
 import { useGlobalState } from "../utils/stateContext";
 import LinkEditor from "./editors/LinkEditor";
@@ -9,25 +9,28 @@ import Preview from "./preview/Preview";
 import Navbar from "./Navbar";
 import styles from "./DashboardPage.module.css";
 
-const DashboardPage = () => {
+const DashboardPage = (props) => {
   console.log("Dashboard");
   let location = useLocation();
+  console.log(location);
 
-  const { store } = useGlobalState();
-  const { token, currentUserId, loggedInUser } = store;
+  const { store, dispatch } = useGlobalState();
+  const { currentUserId, loggedInUser, appearance } = store;
+  // const [loading, setLoading] = useState(false);
 
   // links state accumulates each link created by each user
   // and it will controll the preview
-  const [links, setLinks] = useState([]);
-  const [appearance, setAppearance] = useState({});
 
   const handleAppearSubmit = (picture) => {
     console.log("handleAppearSubmit clicked!", picture);
 
     if (appearance.id) {
-      saveAppearance(appearance, appearance.id).then((result) =>
-        setAppearance(result)
-      );
+      saveAppearance(appearance, appearance.id).then((result) => {
+        dispatch({
+          type: "setAppearance",
+          data: result,
+        });
+      });
     } else {
       const data = new FormData();
 
@@ -38,38 +41,29 @@ const DashboardPage = () => {
       data.append("appearance[picture]", picture);
       data.append("appearance[user_id]", currentUserId);
 
-      saveAppearance(data, appearance.id).then((result) =>
-        setAppearance(result)
-      );
+      saveAppearance(data, appearance.id).then((result) => {
+        dispatch({
+          type: "setAppearance",
+          data: result,
+        });
+      });
     }
   };
 
   const handleAppearChange = (event) => {
-    setAppearance({
-      ...appearance,
-      [event.currentTarget.name]: event.currentTarget.value,
+    console.log("appearance is chaning...");
+    const eventTarget = event.currentTarget;
+    dispatch({
+      type: "updateAppearance",
+      data: eventTarget,
     });
-    // if (event.currentTarget.name) {
-    //   setAppearance({
-    //     ...appearance,
-    //     [event.currentTarget.name]: event.currentTarget.value,
-    //   });
-    // } else if (event.currentTarget.id === "bg_image_url") {
-    //   setAppearance({
-    //     ...appearance,
-    //     [event.currentTarget.id]: Date.now(),
-    //   });
-    // }
-  };
 
-  useEffect(() => {
-    getDashbaord(token) //
-      .then((data) => {
-        setLinks(data.links);
-        setAppearance(data.appearance);
-        console.log(data);
-      });
-  }, [token]);
+    console.log("check updated appearance", appearance);
+    // setAppearance({
+    //   ...appearance,
+    //   [event.currentTarget.name]: event.currentTarget.value,
+    // });
+  };
 
   const handleLinkAdd = (link) => {
     console.log("submit triggered - DashboardPage");
@@ -84,16 +78,24 @@ const DashboardPage = () => {
     // then store them in links state in DashboardPage
     saveLink(link).then((response) => {
       console.log(response);
-      setLinks([...links, response]);
+      dispatch({
+        type: "addLink",
+        data: response,
+      });
+      // setLinks([...links, response]);
     });
   };
 
 
   const handleLinkUpdate = (link) => {
     console.log("eidt triggered - DashboardPage");
-    setLinks((links) =>
-      links.map((item) => (item.id === link.id ? link : item))
-    );
+    dispatch({
+      type: "updateLinks",
+      data: link,
+    });
+    // setLinks((links) =>
+    //   links.map((item) => (item.id === link.id ? link : item))
+    // );
     saveLink(link).then((response) => {
       console.log(response);
     });
@@ -102,8 +104,14 @@ const DashboardPage = () => {
   const handleLinkDelete = (id) => {
     console.log("delete triggered - DashboardPage");
     console.log("id", id);
-    setLinks((links) => links.filter((link) => link.id !== id));
-    deleteLink(id).then(() => window.location.reload());
+    // setLinks((links) => links.filter((link) => link.id !== id));
+    deleteLink(id).then(() => {
+      dispatch({
+        type: "removeLink",
+        data: id,
+      });
+      window.location.reload();
+    });
   };
 
   return (
@@ -112,7 +120,6 @@ const DashboardPage = () => {
       <section className={styles.dashboard}>
         {location.pathname === "/dashboard" && (
           <LinkEditor
-            links={links}
             onSave={handleLinkAdd}
             onUpdate={handleLinkUpdate}
             onDelete={handleLinkDelete}
@@ -120,13 +127,12 @@ const DashboardPage = () => {
         )}
         {location.pathname === "/dashboard/appearance" && (
           <AppearanceEditor
-            appearance={appearance}
             handleText={handleAppearChange}
             onSubmit={handleAppearSubmit}
           />
         )}
 
-        <Preview links={links} appearance={appearance} />
+        <Preview />
       </section>
     </section>
   );

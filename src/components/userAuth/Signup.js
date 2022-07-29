@@ -7,12 +7,16 @@ import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
 import Navbar from "../Navbar";
 
+
 const SignUp = () => {
   const { dispatch, store } = useGlobalState();
   const location = useLocation();
 
-  // use the username value entered by user on home page
 const { newEmail } = store;
+
+const SignUp = ({ inputVlidator }) => {
+  const { dispatch } = useGlobalState();
+
   console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
@@ -38,7 +42,10 @@ const [formData, setUser] = useState(initialFormData);
             type: "setLoggedInUser",
             data: user.username,
           });
-
+          dispatch({
+            type: "setToken",
+            data: user.jwt,
+          });
           dispatch({
             type: "setCurrentUserId",
             data: user.id,
@@ -56,11 +63,29 @@ const [formData, setUser] = useState(initialFormData);
   };
 
   const handleUserData = (e) => {
-    setErr(null);
-    setUser({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+    // validate username
+    if (e.target.id === "username") {
+      console.log(e.target.id);
+      console.log("validate username", e.target.value);
+      const result = /^[a-z0-9_-]{0,30}$/.test(e.target.value);
+      console.log(result);
+
+      if (result) {
+        setErr(null);
+        setUser({
+          ...formData,
+          [e.target.id]: e.target.value,
+        });
+      } else {
+        setErr("Please check your username format");
+      }
+    } else {
+      setErr(null);
+      setUser({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
+    }
   };
 
   return (
@@ -75,6 +100,7 @@ const [formData, setUser] = useState(initialFormData);
             {err && err}
           </Alert>
         </div>
+        <h1 className={styles.title}>Welcome!</h1>
         <TextField
           required
           label="Username"
@@ -87,6 +113,7 @@ const [formData, setUser] = useState(initialFormData);
         />
         <TextField
           required
+          type="email"
           label="Email"
           variant="standard"
           name="email"

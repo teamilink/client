@@ -3,7 +3,7 @@ import styles from "./Footer.module.css";
 
 const Footer = (props) => (
   <section className={styles.footer}>
-    <h1>Footer</h1>
+    <h1>iLink</h1>
   </section>
 );
 
