@@ -1,22 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { signUpUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
 import Navbar from "../Navbar";
 
+
+const SignUp = () => {
+  const { dispatch, store } = useGlobalState();
+  const location = useLocation();
+
+const { newEmail } = store;
+
 const SignUp = ({ inputVlidator }) => {
   const { dispatch } = useGlobalState();
+
   console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
-    username: "",
+    username: location.state.username, // set to the signup form
     email: "",
     password: "",
   };
 
-  const [formData, setUser] = useState(initialFormData);
+const [formData, setUser] = useState(initialFormData);
   const [err, setErr] = useState(null);
 
   const handleSubmit = (e) => {
