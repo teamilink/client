@@ -21,6 +21,10 @@ const YouriLink = () => {
   const [visitor, setVisitor] = useState(username ? true : false);
 
   useEffect(() => {
+    console.log(links.message);
+  }, [links]);
+
+  useEffect(() => {
     console.log("visitor ? ", username ? true : false);
     if (visitor) {
       getData(username)
@@ -45,18 +49,31 @@ const YouriLink = () => {
         .then((data) => {
           console.log("YouriLink - token useEffect - triggered");
           console.log(data);
-          dispatch({
-            type: "setLinks",
-            data: data.links,
-          });
-          dispatch({
-            type: "setAppearance",
-            data: data.appearance,
-          });
+          if (!data.links || !data.appearance) {
+            console.log("data.links & data.appearance are null");
+            // dispatch({
+            //   type: "setLinks",
+            //   data: null,
+            // });
+            // dispatch({
+            //   type: "setAppearance",
+            //   data: null,
+            // });
+          } else {
+            dispatch({
+              type: "setLinks",
+              data: data.links,
+            });
+            dispatch({
+              type: "setAppearance",
+              data: data.appearance,
+            });
 
-          setLoading(false);
-          setVisitor(false);
-        });
+            setLoading(false);
+            setVisitor(false);
+          }
+        })
+        .catch((e) => console.log(e));
     } // eslint-disable-next-line
   }, [visitor, username, token]);
 

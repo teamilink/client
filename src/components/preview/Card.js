@@ -5,6 +5,8 @@ import styles from "./Card.module.css";
 const Card = ({ visitor }) => {
   const { store } = useGlobalState();
   const { links, appearance } = store;
+  console.log("card links", links);
+  console.log("card appearance", appearance);
 
   return (
     <section className={styles.container}>

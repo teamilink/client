@@ -33,7 +33,10 @@ const SignUp = ({ inputVlidator }) => {
             type: "setLoggedInUser",
             data: user.username,
           });
-
+          dispatch({
+            type: "setToken",
+            data: user.jwt,
+          });
           dispatch({
             type: "setCurrentUserId",
             data: user.id,
@@ -53,11 +56,16 @@ const SignUp = ({ inputVlidator }) => {
   const handleUserData = (e) => {
     // validate username
     if (e.target.id === "username") {
-      if (inputVlidator.validateUsername(e.target.value)) {
+      console.log(e.target.id);
+      console.log("validate username", e.target.value);
+      const result = /^[a-z0-9_-]{0,30}$/.test(e.target.value);
+      console.log(result);
+
+      if (result) {
         setErr(null);
         setUser({
           ...formData,
-          username: e.target.value,
+          [e.target.id]: e.target.value,
         });
       } else {
         setErr("Please check your username format");

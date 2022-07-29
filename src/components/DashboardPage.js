@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { deleteLink, saveLink } from "../services/linksServices";
 import { saveAppearance } from "../services/appearanceServices";
@@ -9,13 +9,15 @@ import Preview from "./preview/Preview";
 import Navbar from "./Navbar";
 import styles from "./DashboardPage.module.css";
 
-const DashboardPage = () => {
+const DashboardPage = (props) => {
   console.log("Dashboard");
   let location = useLocation();
   console.log(location);
+  console.log("props", props);
 
   const { store, dispatch } = useGlobalState();
   const { currentUserId, loggedInUser, appearance } = store;
+  const [loading, setLoading] = useState(true);
 
   // links state accumulates each link created by each user
   // and it will controll the preview

@@ -8,6 +8,7 @@ import styles from "./LinkEditor.module.css";
 const LinkEditor = ({ onSave, onUpdate, onDelete }) => {
   const { store } = useGlobalState();
   const { links } = store;
+  console.log("LinkEditor - links state", links);
   return (
     <section className={styles.container}>
       <div className={styles.editor}>
