@@ -1,35 +1,22 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { useGlobalState } from "../utils/stateContext";
 import { Button, TextField } from "@mui/material";
-
 
 import Navbar from "./Navbar";
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const { dispatch } = useGlobalState();
-  const {email, setEmail} = useState("");
-  console.log(setEmail)
- 
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    // store the email value
-    dispatch({
-      type: "setNewEmail",
-      data: email,
-    })
+  const [username, setUsername] = useState("");
 
+  const handleSubmit = (e) => {
     // go to signup
-    navigate("/signup");
+    // navigate("/signup");
+    navigate("/signup", { state: { username: username } });
   }
 
-  //receive the email from the user entered
   const handleChange = (e) => {
-    setEmail({
-      ...email,
-      [email]: e.target.value,
-    })
+    setUsername(e.target.value)
   }
 
   return (
@@ -38,11 +25,12 @@ const Home = () => {
      
       <div className={styles.form}>
         <h1>Everything in one link</h1>
-        <TextField id="email" name="email" className={styles.paddedRight} onChange={handleChange} />
+      
+        <TextField id="username" name="username" onChange={handleChange} className={styles.paddedRight} />
         <Button variant="outlined" type="button" onClick={handleSubmit} color="primary">
             Claim your iLink
         </Button>
-      </div>
+        </div>
     </section>
   );
 };

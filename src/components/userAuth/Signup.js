@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { signUpUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button, Alert } from "@mui/material";
@@ -8,13 +9,15 @@ import Navbar from "../Navbar";
 
 const SignUp = () => {
   const { dispatch, store } = useGlobalState();
+  const location = useLocation();
+
   // use the email value entered by user on home page
 const { newEmail } = store;
   console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
-    username: "",
-    email: newEmail, // set to the signup form
+    username: location.state.username,
+    email: "", // set to the signup form
     password: "",
   };
 
