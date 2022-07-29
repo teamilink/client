@@ -12,7 +12,7 @@ const LinkEditor = ({ onSave, onUpdate, onDelete }) => {
   return (
     <section className={styles.container}>
       <div className={styles.editor}>
-        {links ? (
+        {links &&
           links.map((link) => (
             <LinkEditForm
               link={link}
@@ -21,10 +21,7 @@ const LinkEditor = ({ onSave, onUpdate, onDelete }) => {
               onUpdate={onUpdate}
               onDelete={onDelete}
             />
-          ))
-        ) : (
-          <h1>no links available</h1>
-        )}
+          ))}
         <LinkAddForm onSave={onSave} />
       </div>
     </section>

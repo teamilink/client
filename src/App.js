@@ -46,7 +46,7 @@ const App = ({ inputVlidator }) => {
                 <Route
                   index
                   element={
-                    !loggedInUser ? (
+                    loggedInUser ? (
                       <DashboardPage />
                     ) : (
                       <Navigate to="/login" state={"Unauthorised"} />
