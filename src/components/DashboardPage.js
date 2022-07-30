@@ -1,76 +1,21 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { deleteLink, saveLink } from "../services/linksServices";
-import { saveAppearance } from "../services/appearanceServices";
-import { useGlobalState } from "../utils/stateContext";
 import LinkEditor from "./editors/LinkEditor";
 import AppearanceEditor from "./editors/AppearanceEditor";
 import Preview from "./preview/Preview";
 import Navbar from "./Navbar";
 import styles from "./DashboardPage.module.css";
 
-const DashboardPage = (props) => {
+const DashboardPage = () => {
   console.log("Dashboard");
   let location = useLocation();
-  console.log(location);
-
-  const { store, dispatch } = useGlobalState();
-  const { currentUserId, loggedInUser, appearance } = store;
-
-  // links state accumulates each link created by each user
-  // and it will controll the preview
-
-  const handleAppearSubmit = (picture) => {
-    console.log("handleAppearSubmit clicked!", picture);
-
-    if (appearance.id) {
-      saveAppearance(appearance, appearance.id).then((result) => {
-        dispatch({
-          type: "setAppearance",
-          data: result,
-        });
-      });
-    } else {
-      const data = new FormData();
-
-      data.append("appearance[profile_title]", appearance.profile_title);
-      data.append("appearance[bio]", appearance.bio);
-      data.append("appearance[bg_color]", appearance.bg_color);
-      data.append("appearance[bg_image_url]", appearance.bg_image_url);
-      data.append("appearance[picture]", picture);
-      data.append("appearance[user_id]", currentUserId);
-
-      saveAppearance(data, appearance.id).then((result) => {
-        dispatch({
-          type: "setAppearance",
-          data: result,
-        });
-      });
-    }
-  };
-
-  const handleAppearChange = (event) => {
-    console.log("appearance is chaning...");
-    const eventTarget = event.currentTarget;
-    dispatch({
-      type: "updateAppearance",
-      data: eventTarget,
-    });
-
-    console.log("check updated appearance", appearance);
-  };
 
   return (
     <section className={styles.container}>
-      <Navbar loggedInUser={loggedInUser} />
+      <Navbar />
       <section className={styles.dashboard}>
         {location.pathname === "/dashboard" && <LinkEditor />}
-        {location.pathname === "/dashboard/appearance" && (
-          <AppearanceEditor
-            handleText={handleAppearChange}
-            onSubmit={handleAppearSubmit}
-          />
-        )}
+        {location.pathname === "/dashboard/appearance" && <AppearanceEditor />}
 
         <Preview />
       </section>

@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import DashboardPage from "../DashboardPage";
 import Login from "../userAuth/Login";
-// import Navbar from "./components/Navbar";
 import SignUp from "../userAuth/Signup";
 import Home from "../Home";
 import NotFound from "../notFound/NotFound";
@@ -15,7 +14,6 @@ import NotFound from "../notFound/NotFound";
 import { reducer } from "../../utils/reducer";
 import { StateContext } from "../../utils/stateContext";
 import styles from "./App.module.css";
-// import Preview from "./components/preview/Preview";
 import YouriLink from "../preview/YouriLink";
 // import Footer from "./components/Footer";
 
@@ -25,7 +23,11 @@ const App = ({ inputVlidator }) => {
     currentUserId: sessionStorage.getItem("id") || null,
     token: sessionStorage.getItem("token") || null,
     links: [],
-    appearance: {},
+    appearance: {
+      profile_title: "",
+      bio: "Hi there",
+      bg_color: "light",
+    },
   };
 
   // loggedInUser state needs to be accessed in different heirachy of this app
@@ -41,7 +43,6 @@ const App = ({ inputVlidator }) => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/:username" element={<YouriLink />} />
-              {/* <Route path="/:username" element={<Preview />} /> */}
               <Route path="dashboard">
                 <Route
                   index

@@ -3,14 +3,18 @@ import React, { useRef, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
 import { useGlobalState } from "../../utils/stateContext";
+import {
+  destroyAppearance,
+  saveAppearance,
+} from "../../services/appearanceServices";
 
-const AppearanceEditor = ({ onSubmit, handleText }) => {
+const AppearanceEditor = ({ onSubmit }) => {
   const pictureRef = useRef();
 
   // picture state - may be not needed
   const [picture, setPicture] = useState(null);
-  const { store } = useGlobalState();
-  const { appearance } = store;
+  const { store, dispatch } = useGlobalState();
+  const { appearance, currentUserId, loggedInUser } = store;
 
   const handleImage = (event) => {
     console.log(event.target.files[0]);
@@ -19,20 +23,57 @@ const AppearanceEditor = ({ onSubmit, handleText }) => {
   };
 
   const handleChange = (event) => {
-    handleText(event);
+    const eventTarget = event.currentTarget;
+    dispatch({
+      type: "editAppearance",
+      data: eventTarget,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("AppearanceEditor component submit clicked!");
 
-    onSubmit(picture);
+    if (appearance.id) {
+      saveAppearance(appearance, appearance.id).then((result) => {
+        dispatch({
+          type: "setAppearance",
+          data: result,
+        });
+      });
+    } else {
+      const data = new FormData();
+
+      data.append("appearance[profile_title]", appearance.profile_title);
+      data.append("appearance[bio]", appearance.bio);
+      data.append("appearance[bg_color]", appearance.bg_color);
+      data.append("appearance[bg_image_url]", appearance.bg_image_url);
+      data.append("appearance[picture]", picture);
+      data.append("appearance[user_id]", currentUserId);
+
+      saveAppearance(data, appearance.id).then((result) => {
+        dispatch({
+          type: "setAppearance",
+          data: result,
+        });
+      });
+    }
+  };
+
+  const handleReset = (event) => {
+    event.preventDefault();
+    console.log("delete clicked!", event);
+
+    dispatch({
+      type: "resetAppearance",
+    });
+    window.location.reload();
   };
 
   return (
     <section className={styles.container}>
       <div className={styles.editor}>
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form className={styles.form}>
           <h1 className={styles.subtitle}>Profile</h1>
           <div className={styles.box}>
             <Button
@@ -71,7 +112,7 @@ const AppearanceEditor = ({ onSubmit, handleText }) => {
               name="profile_title"
               id="profile_title"
               label="Profile Title"
-              value={appearance.profile_title}
+              value={appearance.profile_title ?? loggedInUser}
               onChange={handleChange}
               helperText="Maximum 30 characters"
             />
@@ -122,9 +163,28 @@ const AppearanceEditor = ({ onSubmit, handleText }) => {
               Get a background image
             </div>
           </div>
-          <Button type="submit" variant="outlined" id="submit" value="Save">
-            Save
-          </Button>
+          <div className={styles.buttons}>
+            <Button
+              type="submit"
+              variant="outlined"
+              id="submit"
+              value="Save"
+              onSubmit={handleSubmit}
+              className={styles.button}
+            >
+              Save
+            </Button>
+            <Button
+              type="reset"
+              variant="outlined"
+              id="submit"
+              value="Reset"
+              onClick={handleReset}
+              className={styles.button}
+            >
+              Reset
+            </Button>
+          </div>
         </form>
       </div>
     </section>

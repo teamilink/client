@@ -4,18 +4,7 @@ import { getData } from "../../services/linksServices";
 // import Footer from "../Footer";
 import { useGlobalState } from "../../utils/stateContext";
 import Card from "./Card";
-import { styled } from "@mui/system";
-
-const YouriLinkContainer = styled("div")({
-  width: "100vw",
-  height: "100%",
-  margin: "0",
-  padding: "0",
-  overflowY: "auto",
-  position: "absolute",
-  top: "0",
-  left: "0",
-});
+import { YouriLinkContainer } from "./YouriLinkStyling";
 
 const YouriLink = () => {
   const { username } = useParams();
@@ -33,10 +22,28 @@ const YouriLink = () => {
 
   useEffect(() => {
     console.log("useEffect - thisBgColor");
-    const thisBgColor = setTheme(appearance.bg_color ?? undefined);
-    console.log(thisBgColor);
-    setBgColor(thisBgColor);
-  }, [appearance.bg_color]);
+    console.log(appearance);
+    if (appearance.bg_color) {
+      let thisBgColor = setTheme(appearance.bg_color ?? "light");
+      setBgColor(thisBgColor);
+    }
+  }, [appearance]);
+
+  const setInitialState = (data) => {
+    dispatch({
+      type: "setLinks",
+      data: data.links,
+    });
+
+    if (data.appearance) {
+      dispatch({
+        type: "setAppearance",
+        data: data.appearance,
+      });
+    } else {
+      console.log("data.appearnace is null!!!");
+    }
+  };
 
   useEffect(() => {
     console.log("visitor ? ", username ? true : false);
@@ -45,14 +52,7 @@ const YouriLink = () => {
         .then((data) => {
           console.log("YouriLink - username useEffect - triggered");
           console.log(data);
-          dispatch({
-            type: "setLinks",
-            data: data.links,
-          });
-          dispatch({
-            type: "setAppearance",
-            data: data.appearance,
-          });
+          setInitialState(data);
         })
         .then(setLoading(false))
         .catch((e) => console.log(e));
@@ -61,18 +61,7 @@ const YouriLink = () => {
       getData(token) //
         .then((data) => {
           console.log("YouriLink - token useEffect - triggered");
-          console.log(data);
-
-          console.log("YouriLink - request dashboard data");
-          dispatch({
-            type: "setLinks",
-            data: data.links,
-          });
-          dispatch({
-            type: "setAppearance",
-            data: data.appearance,
-          });
-
+          setInitialState(data);
           setVisitor(false);
         })
         .then(setLoading(false))
@@ -95,9 +84,6 @@ const YouriLink = () => {
         return `linear-gradient(150deg, #d5fefd 70%, #fffcff 99%)`;
       case "green":
         return `linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%)`;
-      case undefined:
-        // return `#fff`;
-        return `linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%)`;
       default:
         throw Error(`unknown theme ${theme}`);
     }

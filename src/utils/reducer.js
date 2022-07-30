@@ -53,7 +53,7 @@ export const reducer = (state, action) => {
         ...state,
         appearance: action.data,
       };
-    case "updateAppearance":
+    case "editAppearance":
       let updatedAppearance = {
         ...state.appearance,
         [action.data.name]: action.data.value,
@@ -61,6 +61,15 @@ export const reducer = (state, action) => {
       return {
         ...state,
         appearance: updatedAppearance,
+      };
+    case "resetAppearance":
+      let initialData = {
+        profile_title: state.loggedInUser,
+        bg_color: "light",
+      };
+      return {
+        ...state,
+        appearance: initialData,
       };
     default:
       throw new Error(`unknown action.type: ${action.type}`);
