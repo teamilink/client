@@ -5,18 +5,18 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import DashboardPage from "./components/DashboardPage";
-import Login from "./components/userAuth/Login";
+import DashboardPage from "../DashboardPage";
+import Login from "../userAuth/Login";
 // import Navbar from "./components/Navbar";
-import SignUp from "./components/userAuth/Signup";
-import Home from "./components/Home";
-import NotFound from "./components/notFound/NotFound";
+import SignUp from "../userAuth/Signup";
+import Home from "../Home";
+import NotFound from "../notFound/NotFound";
 
-import { reducer } from "./utils/reducer";
-import { StateContext } from "./utils/stateContext";
+import { reducer } from "../../utils/reducer";
+import { StateContext } from "../../utils/stateContext";
 import styles from "./App.module.css";
 // import Preview from "./components/preview/Preview";
-import YouriLink from "./components/preview/YouriLink";
+import YouriLink from "../preview/YouriLink";
 // import Footer from "./components/Footer";
 
 const App = ({ inputVlidator }) => {
@@ -25,7 +25,6 @@ const App = ({ inputVlidator }) => {
     currentUserId: sessionStorage.getItem("id") || null,
     token: sessionStorage.getItem("token") || null,
     links: [],
-    aLink: {},
     appearance: {},
   };
 

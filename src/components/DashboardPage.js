@@ -16,7 +16,6 @@ const DashboardPage = (props) => {
 
   const { store, dispatch } = useGlobalState();
   const { currentUserId, loggedInUser, appearance } = store;
-  // const [loading, setLoading] = useState(false);
 
   // links state accumulates each link created by each user
   // and it will controll the preview
@@ -59,71 +58,13 @@ const DashboardPage = (props) => {
     });
 
     console.log("check updated appearance", appearance);
-    // setAppearance({
-    //   ...appearance,
-    //   [event.currentTarget.name]: event.currentTarget.value,
-    // });
-  };
-
-  const handleLinkAdd = (link) => {
-    console.log("submit triggered - DashboardPage");
-    console.log("currentUserId", currentUserId);
-    console.log("loggedInUser", loggedInUser);
-
-    link.user_id = currentUserId;
-    console.log("assign the currentUserId", link.user_id);
-    console.log("link data", link);
-
-    // saveLink in services will post this data to the DB
-    // then store them in links state in DashboardPage
-    saveLink(link).then((response) => {
-      console.log(response);
-      dispatch({
-        type: "addLink",
-        data: response,
-      });
-      // setLinks([...links, response]);
-    });
-  };
-
-  const handleLinkUpdate = (link) => {
-    console.log("eidt triggered - DashboardPage");
-    dispatch({
-      type: "updateLinks",
-      data: link,
-    });
-    // setLinks((links) =>
-    //   links.map((item) => (item.id === link.id ? link : item))
-    // );
-    saveLink(link).then((response) => {
-      console.log(response);
-    });
-  };
-
-  const handleLinkDelete = (id) => {
-    console.log("delete triggered - DashboardPage");
-    console.log("id", id);
-    // setLinks((links) => links.filter((link) => link.id !== id));
-    deleteLink(id).then(() => {
-      dispatch({
-        type: "removeLink",
-        data: id,
-      });
-      window.location.reload();
-    });
   };
 
   return (
     <section className={styles.container}>
       <Navbar loggedInUser={loggedInUser} />
       <section className={styles.dashboard}>
-        {location.pathname === "/dashboard" && (
-          <LinkEditor
-            onSave={handleLinkAdd}
-            onUpdate={handleLinkUpdate}
-            onDelete={handleLinkDelete}
-          />
-        )}
+        {location.pathname === "/dashboard" && <LinkEditor />}
         {location.pathname === "/dashboard/appearance" && (
           <AppearanceEditor
             handleText={handleAppearChange}
