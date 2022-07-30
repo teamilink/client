@@ -5,8 +5,7 @@ import { saveAppearance } from "../services/appearanceServices";
 import { useGlobalState } from "../utils/stateContext";
 import LinkEditor from "./editors/LinkEditor";
 import AppearanceEditor from "./editors/AppearanceEditor";
-// import Preview from "./preview/Preview";
-import PreviewIframe from "./preview/iframe-test/PreviewIframe";
+import Preview from "./preview/Preview";
 import Navbar from "./Navbar";
 import styles from "./DashboardPage.module.css";
 
@@ -132,8 +131,7 @@ const DashboardPage = (props) => {
           />
         )}
 
-        {/* <Preview /> */}
-        <PreviewIframe />
+        <Preview />
       </section>
     </section>
   );
