@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { signUpUser } from "../../services/authServices";
@@ -14,13 +14,28 @@ const SignUp = () => {
   console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
-    username: location.state.username ?? "",
+    username: "",
     email: "",
     password: "",
   };
 
   const [formData, setUser] = useState(initialFormData);
   const [err, setErr] = useState(null);
+
+  useEffect(() => {
+    console.log(location);
+
+    if (!location.state) {
+      setUser(initialFormData);
+    } else if (location.state.username === false) {
+      setErr("You can't use the username. Please check the format");
+    } else {
+      setUser({
+        ...formData,
+        username: location.state.username,
+      });
+    }
+  }, [location]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +66,7 @@ const SignUp = () => {
       })
       .catch((error) => console.log(error));
 
-    setUser(initialFormData);
+    // setUser(userAuth.getUser());
   };
 
   const handleUserData = (e) => {
@@ -99,6 +114,7 @@ const SignUp = () => {
           variant="standard"
           name="username"
           id="username"
+          data-testid="username"
           helperText="Username must not contain any space. Choose a username 4–30 characters long."
           onChange={handleUserData}
           value={formData.username}
@@ -110,6 +126,7 @@ const SignUp = () => {
           variant="standard"
           name="email"
           id="email"
+          data-testid="email"
           value={formData.email}
           onChange={handleUserData}
         />
@@ -121,6 +138,7 @@ const SignUp = () => {
           type="password"
           name="password"
           id="password"
+          data-testid="password"
           value={formData.password}
           onChange={handleUserData}
         />

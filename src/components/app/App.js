@@ -17,7 +17,7 @@ import styles from "./App.module.css";
 import YouriLink from "../preview/YouriLink";
 // import Footer from "./components/Footer";
 
-const App = ({ inputVlidator }) => {
+const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("username") || null,
     currentUserId: sessionStorage.getItem("id") || null,
@@ -38,7 +38,7 @@ const App = ({ inputVlidator }) => {
   return (
     <StateContext.Provider value={{ store, dispatch }}>
       <Router>
-        <section className={styles.app}>
+        <section data-testid="app" className={styles.app}>
           <section className={styles.container}>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -65,14 +65,8 @@ const App = ({ inputVlidator }) => {
                   }
                 />
               </Route>
-              <Route
-                path="signup"
-                element={<SignUp inputVlidator={inputVlidator} />}
-              />
-              <Route
-                path="login"
-                element={<Login inputVlidator={inputVlidator} />}
-              />
+              <Route path="signup" element={<SignUp />} />
+              <Route path="login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </section>

@@ -28,7 +28,6 @@ const Navbar = () => {
         <Toolbar>
           {loggedInUser ? (
             <Tabs value={false} aria-label="nav tabs">
-              Hi {loggedInUser}
               <Tab
                 label="Links"
                 value="/dashboard"
@@ -57,12 +56,12 @@ const Navbar = () => {
             </Tabs>
           ) : (
             <Tabs value={false} aria-label="nav tabs">
-              guest
               <Tab
                 label="Login"
                 value="/login"
                 component={NavLink}
                 to="/login"
+                data-testid="login"
               />
               <Tab
                 label="SignUp"

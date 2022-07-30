@@ -5,7 +5,7 @@ import styles from "./AppearanceEditor.module.css";
 import { useGlobalState } from "../../utils/stateContext";
 import { saveAppearance } from "../../services/appearanceServices";
 
-const AppearanceEditor = ({ onSubmit }) => {
+const AppearanceEditor = () => {
   const pictureRef = useRef();
 
   // picture state - may be not needed
