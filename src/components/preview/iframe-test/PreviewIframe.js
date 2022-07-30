@@ -1,12 +1,14 @@
 import React, { useContext, useRef } from "react";
 // import ReactDOMServer from "react-dom/server";
-import { useGlobalState } from "../../utils/stateContext";
-import Card from "./Card";
-import styles from "./Preview.module.css";
+import { useGlobalState } from "../../../utils/stateContext";
+// import Card from "./Card";
+import styles from "../Preview.module.css";
 import Frame, { FrameContextConsumer } from "react-frame-component";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import CardMui from "./CardMui";
+import YouriLinkMui from "../YouriLinkMui";
+// import CardMui from "./CardMui";
+// import YouriLink from "../YouriLink";
 // import { StyleSheetManager } from "styled-components";
 
 const Preview = ({ links, appearance }) => {
@@ -33,7 +35,9 @@ const Preview = ({ links, appearance }) => {
             });
             return (
               <CacheProvider value={cache}>
-                <CardMui links={links} appearance={appearance} />
+                {/* <YouriLink /> */}
+                <YouriLinkMui />
+                {/* <CardMui /> */}
               </CacheProvider>
             );
           }}

@@ -1,38 +1,129 @@
-import { Box, Button, Container } from "@mui/material";
+import { Typography } from "@mui/material";
 import React from "react";
-import styles from "./Card.module.css";
+import { useGlobalState } from "../../../utils/stateContext";
+import styles from "../Card.module.css";
+import { styled } from "@mui/system";
 
-const CardMui = ({ links, appearance, visitor }) => {
-  console.log(appearance);
+const CardContainer = styled("div")({
+  width: "100%",
+  height: "100%",
+});
+
+const Card = styled("div")({
+  width: "80%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-start",
+
+  margin: "1.5rem auto",
+  padding: "24px 12px",
+});
+
+const Profile = styled("img")({
+  width: "120px",
+  height: "120px",
+  border: "3px solid #000",
+  borderRadius: "50%",
+});
+
+const LetterProfile = styled("div")({
+  width: "120px",
+  height: "120px",
+  backgroundColor: "rgb(24, 37, 73)",
+  borderRadius: "50%",
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  fontSize: "3rem",
+  fontWeight: "500",
+  color: "#fff",
+});
+
+const Text = styled("div")({
+  margin: "2rem auto 3rem",
+  textAlign: "center",
+  maxWidth: "30rem",
+});
+
+const Title = styled(Typography)({
+  fontSize: "1.5rem",
+  margin: 0,
+});
+
+const Bio = styled(Typography)({
+  width: "100%",
+  margin: "0",
+});
+
+const LinkButtons = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "100%",
+  height: "50%",
+});
+
+const Alink = styled("a")({
+  marginBottom: "1rem",
+});
+
+const Btn = styled("button")({
+  width: "300px",
+  height: "100%",
+  padding: "0.8rem",
+  fontSize: "1.2rem",
+  fontWeight: "bold",
+
+  backgroundColor: "#fff",
+  border: "2.5px solid #000",
+  borderRadius: "0.5rem",
+  boxShadow: "6px 6px 0px 0px rgba(0,0,0,1)",
+  cursor: "pointer",
+});
+
+const CardMui = ({ visitor }) => {
+  const { store } = useGlobalState();
+  const { links, appearance, loggedInUser } = store;
+  console.log("card links", links);
+  console.log("card appearance", appearance);
+
   return (
-    <Container>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <img
-          alt="profile"
-          src={appearance.picture_url ? appearance.picture_url : ""}
-          className={styles.profile}
-        />
-        <div className={styles.text}>
-          <h1 className={styles.title}>{appearance.profile_title}</h1>
-          <p className={styles.bio}>{appearance.bio}</p>
-        </div>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <CardContainer>
+      <Card>
+        {appearance && appearance.picture_url ? (
+          <Profile
+            alt="profile"
+            src={appearance.picture_url ? appearance.picture_url : ""}
+            className={styles.profile}
+          />
+        ) : (
+          <LetterProfile className={styles.letter_profile}>
+            {loggedInUser ? loggedInUser.charAt(0).toUpperCase() : "A"}
+          </LetterProfile>
+        )}
+        <Text className={styles.text}>
+          <Title className={styles.title}>{appearance.profile_title}</Title>
+          <Bio className={styles.bio}>{appearance.bio}</Bio>
+        </Text>
+        <LinkButtons>
           {links &&
             links.map((link) => (
-              <a
+              <Alink
                 key={link.id}
                 href={link.link_address}
                 target="_blank"
                 rel="noreferrer"
               >
-                <Button className={styles.btn} key={link.id}>
+                <Btn className={styles.btn} key={link.id}>
                   {link.title}
-                </Button>
-              </a>
+                </Btn>
+              </Alink>
             ))}
-        </Box>
-      </Box>
-    </Container>
+        </LinkButtons>
+      </Card>
+    </CardContainer>
   );
 };
 

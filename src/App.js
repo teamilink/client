@@ -25,6 +25,7 @@ const App = ({ inputVlidator }) => {
     currentUserId: sessionStorage.getItem("id") || null,
     token: sessionStorage.getItem("token") || null,
     links: [],
+    aLink: {},
     appearance: {},
   };
 

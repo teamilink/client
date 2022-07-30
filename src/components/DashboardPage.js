@@ -5,7 +5,8 @@ import { saveAppearance } from "../services/appearanceServices";
 import { useGlobalState } from "../utils/stateContext";
 import LinkEditor from "./editors/LinkEditor";
 import AppearanceEditor from "./editors/AppearanceEditor";
-import Preview from "./preview/Preview";
+// import Preview from "./preview/Preview";
+import PreviewIframe from "./preview/iframe-test/PreviewIframe";
 import Navbar from "./Navbar";
 import styles from "./DashboardPage.module.css";
 
@@ -86,7 +87,6 @@ const DashboardPage = (props) => {
     });
   };
 
-
   const handleLinkUpdate = (link) => {
     console.log("eidt triggered - DashboardPage");
     dispatch({
@@ -132,7 +132,8 @@ const DashboardPage = (props) => {
           />
         )}
 
-        <Preview />
+        {/* <Preview /> */}
+        <PreviewIframe />
       </section>
     </section>
   );
