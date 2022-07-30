@@ -23,8 +23,6 @@ const SignUp = () => {
   const [err, setErr] = useState(null);
 
   useEffect(() => {
-    console.log(location);
-
     if (!location.state) {
       setUser(initialFormData);
     } else if (location.state.username === false) {
@@ -34,7 +32,7 @@ const SignUp = () => {
         ...formData,
         username: location.state.username,
       });
-    }
+    } // eslint-disable-next-line
   }, [location]);
 
   const handleSubmit = (e) => {
