@@ -3,10 +3,7 @@ import React, { useRef, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
 import { useGlobalState } from "../../utils/stateContext";
-import {
-  destroyAppearance,
-  saveAppearance,
-} from "../../services/appearanceServices";
+import { saveAppearance } from "../../services/appearanceServices";
 
 const AppearanceEditor = ({ onSubmit }) => {
   const pictureRef = useRef();
