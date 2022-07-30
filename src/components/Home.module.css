@@ -17,6 +17,14 @@
 }
 
 
+.error.hidden{
+  visibility:hidden;
+}
+
+.error.display {
+  visibility: visible;
+}
+
 @media screen and (max-width: 60rem) {
   .form{
     width: 80%;
