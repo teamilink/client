@@ -10,7 +10,7 @@ const AppearanceEditor = ({ onSubmit, handleText }) => {
   // picture state - may be not needed
   const [picture, setPicture] = useState(null);
   const { store } = useGlobalState();
-  const appearance = store;
+  const { appearance } = store;
 
   const handleImage = (event) => {
     console.log(event.target.files[0]);

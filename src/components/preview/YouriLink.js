@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getData } from "../../services/linksServices";
-import Card from "./Card";
-import styles from "./YouriLink.module.css";
-import Footer from "../Footer";
+// import Footer from "../Footer";
 import { useGlobalState } from "../../utils/stateContext";
+import Card from "./Card";
+import { styled } from "@mui/system";
+
+const YouriLinkContainer = styled("div")({
+  width: "100vw",
+  height: "100%",
+  margin: "0",
+  padding: "0",
+  overflowY: "auto",
+  position: "absolute",
+  top: "0",
+  left: "0",
+});
 
 const YouriLink = () => {
   const { username } = useParams();
-  console.log(username);
 
   const { store, dispatch } = useGlobalState();
   const { token, links, appearance } = store;
@@ -19,6 +29,14 @@ const YouriLink = () => {
 
   const [loading, setLoading] = useState(true);
   const [visitor, setVisitor] = useState(username ? true : false);
+  const [bgColor, setBgColor] = useState("");
+
+  useEffect(() => {
+    console.log("useEffect - thisBgColor");
+    const thisBgColor = setTheme(appearance.bg_color ?? undefined);
+    console.log(thisBgColor);
+    setBgColor(thisBgColor);
+  }, [appearance.bg_color]);
 
   useEffect(() => {
     console.log("visitor ? ", username ? true : false);
@@ -63,21 +81,23 @@ const YouriLink = () => {
   }, [visitor, username, token]);
 
   const setTheme = (theme) => {
+    console.log("setTheme function triggered");
     switch (theme) {
       case "light":
-        return `${styles.light}`;
+        return `linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%)`;
       case "dark":
-        return `${styles.dark}`;
+        return `lrinear-gradient(315deg, #485461 0%, #28313b 74%)`;
       case "colourful":
-        return `${styles.colourful}`;
+        return `linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%)`;
       case "pink":
-        return `${styles.pink}`;
+        return `linear-gradient(150deg, #e96196 0%, #ffffff 99%)`;
       case "blue":
-        return `${styles.blue}`;
+        return `linear-gradient(150deg, #d5fefd 70%, #fffcff 99%)`;
       case "green":
-        return `${styles.green}`;
+        return `linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%)`;
       case undefined:
-        return `${styles.light}`;
+        // return `#fff`;
+        return `linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%)`;
       default:
         throw Error(`unknown theme ${theme}`);
     }
@@ -88,15 +108,11 @@ const YouriLink = () => {
       {loading ? (
         <h1> this is loading </h1>
       ) : (
-        <section
-          className={`${styles.container} ${setTheme(
-            (appearance && appearance.bg_color) ?? "light"
-          )}`}
-        >
-          <Card visitor={visitor} />
-        </section>
+        <YouriLinkContainer sx={{ background: bgColor }}>
+          <Card />
+        </YouriLinkContainer>
       )}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

@@ -86,7 +86,6 @@ const DashboardPage = (props) => {
     });
   };
 
-
   const handleLinkUpdate = (link) => {
     console.log("eidt triggered - DashboardPage");
     dispatch({

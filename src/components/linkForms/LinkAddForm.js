@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./LinkForm.module.css";
+// import { useGlobalState } from "../../utils/stateContext";
 
 const LinkAddForm = ({ onSave }) => {
   // console.log("LinkAddForm");
 
+  // const { store, dispatch } = useGlobalState();
+  // const { links } = store;
   const initialLinkState = {
     title: "",
     link_address: "",
@@ -21,14 +24,19 @@ const LinkAddForm = ({ onSave }) => {
   };
 
   const handleChange = (event) => {
-    if (event.currentTarget === null) {
+    const eventTarget = event.currentTarget;
+    if (eventTarget === null) {
       return;
     }
     event.preventDefault();
     setNewLink({
       ...newLink,
-      [event.currentTarget.name]: event.currentTarget.value,
+      [eventTarget.name]: eventTarget.value,
     });
+    // dispatch({
+    //   type: "setALink",
+    //   data: eventTarget,
+    // });
   };
 
   const clearForm = () => {

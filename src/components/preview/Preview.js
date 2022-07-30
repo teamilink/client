@@ -1,6 +1,8 @@
 import React from "react";
-// import Card from "./Card";
 import styles from "./Preview.module.css";
+import Frame, { FrameContextConsumer } from "react-frame-component";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 import YouriLink from "./YouriLink";
 
 const Preview = () => {
@@ -8,10 +10,26 @@ const Preview = () => {
 
   return (
     <section className={styles.preview}>
-      <div className={styles.frame}>
-        {/* <Card links={links} appearance={appearance} /> */}
-        <YouriLink />
-      </div>
+      <Frame
+        head={[
+          <link type="text/css" rel="stylesheet" href="Card.module.css" />,
+        ]}
+        className={styles.frame}
+      >
+        <FrameContextConsumer>
+          {({ document }) => {
+            const cache = createCache({
+              key: "head",
+              container: document.head,
+            });
+            return (
+              <CacheProvider value={cache}>
+                <YouriLink />
+              </CacheProvider>
+            );
+          }}
+        </FrameContextConsumer>
+      </Frame>
     </section>
   );
 };
