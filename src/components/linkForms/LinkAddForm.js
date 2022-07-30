@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./LinkForm.module.css";
-// import { useGlobalState } from "../../utils/stateContext";
+import { useGlobalState } from "../../utils/stateContext";
+import { saveLink } from "../../services/linksServices";
 
-const LinkAddForm = ({ onSave }) => {
+const LinkAddForm = () => {
   // console.log("LinkAddForm");
 
-  // const { store, dispatch } = useGlobalState();
-  // const { links } = store;
+  const { store, dispatch } = useGlobalState();
+  const { currentUserId } = store;
   const initialLinkState = {
     title: "",
     link_address: "",
+    user_id: currentUserId ?? sessionStorage.getItem("id"),
   };
 
   const [newLink, setNewLink] = useState(initialLinkState);
@@ -18,7 +20,14 @@ const LinkAddForm = ({ onSave }) => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("clicked onSubmit");
-    onSave(newLink);
+    saveLink(newLink).then((response) => {
+      console.log(response);
+      dispatch({
+        type: "addLink",
+        data: response,
+      });
+    });
+    // onSave(newLink);
     event.target.reset();
     setNewLink(initialLinkState);
   };

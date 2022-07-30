@@ -14,7 +14,7 @@ const SignUp = () => {
   console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
-    username: location.state.username, // set to the signup form
+    username: location.state.username ?? "",
     email: "",
     password: "",
   };
@@ -24,8 +24,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked");
-    console.log(formData);
+
     signUpUser(formData)
       .then((user) => {
         if (user.error) {
@@ -52,7 +51,6 @@ const SignUp = () => {
       })
       .catch((error) => console.log(error));
 
-    // activeUser(formData.user);
     setUser(initialFormData);
   };
 

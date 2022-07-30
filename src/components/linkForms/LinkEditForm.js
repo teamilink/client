@@ -1,6 +1,8 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./LinkForm.module.css";
+import { useGlobalState } from "../../utils/stateContext";
+import { deleteLink, saveLink } from "../../services/linksServices";
 
 // !important!
 // To change the preview in real time,
@@ -8,25 +10,42 @@ import styles from "./LinkForm.module.css";
 // Otherwise, if you use local state,
 // the preview won't be updated at the same time
 
-const LinkEditForm = ({ link, onSave, onUpdate, onDelete }) => {
+const LinkEditForm = ({ link }) => {
   // console.log("LinkEditForm");
 
   const { id, title, link_address } = link;
+  const { dispatch } = useGlobalState();
 
   const handleChange = (event) => {
     if (event.currentTarget === null) {
       return;
     }
     event.preventDefault();
-    onUpdate({
+    let updatedLink = {
       ...link,
       [event.currentTarget.name]: event.currentTarget.value,
+    };
+
+    dispatch({
+      type: "updateLinks",
+      data: updatedLink,
+    });
+    saveLink(updatedLink).then((response) => {
+      console.log(response);
     });
   };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    onDelete(event.currentTarget.id);
+    const id = event.currentTarget.id;
+
+    deleteLink(id).then(() => {
+      dispatch({
+        type: "removeLink",
+        data: id,
+      });
+      window.location.reload();
+    });
   };
 
   return (

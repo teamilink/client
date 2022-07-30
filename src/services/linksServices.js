@@ -31,6 +31,7 @@ export const saveLink = (link) => {
 
 export const createLink = async (link) => {
   console.log("createLink -service triggered");
+  console.log(link);
   const response = await iLinkAPI.post("/links", link);
 
   return response.data;

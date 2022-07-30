@@ -5,7 +5,7 @@ import LinkAddForm from "../linkForms/LinkAddForm";
 import LinkEditForm from "../linkForms/LinkEditForm";
 import styles from "./LinkEditor.module.css";
 
-const LinkEditor = ({ onSave, onUpdate, onDelete }) => {
+const LinkEditor = () => {
   const { store } = useGlobalState();
   const { links } = store;
   console.log("LinkEditor - links state", links);
@@ -13,16 +13,8 @@ const LinkEditor = ({ onSave, onUpdate, onDelete }) => {
     <section className={styles.container}>
       <div className={styles.editor}>
         {links &&
-          links.map((link) => (
-            <LinkEditForm
-              link={link}
-              key={link.id}
-              onSave={onSave}
-              onUpdate={onUpdate}
-              onDelete={onDelete}
-            />
-          ))}
-        <LinkAddForm onSave={onSave} />
+          links.map((link) => <LinkEditForm link={link} key={link.id} />)}
+        <LinkAddForm />
       </div>
     </section>
   );

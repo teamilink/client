@@ -20,3 +20,9 @@ export const updateAppearance = async (data, id) => {
   const response = await iLinkAPI.put(`/dashboard/appearance/${id}`, data);
   return response.data;
 };
+
+export const destroyAppearance = async (id) => {
+  console.log("deleteAppearance -service triggered");
+  const response = await iLinkAPI.delete(`/dashboard/appearance/${id}`);
+  return response.data;
+};
