@@ -1,0 +1,19 @@
+@value ilinkNavy from '../../common/colours.css';
+
+.container {
+  width: 100%;
+  max-width: 80rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.notFound {
+  width: 100%;
+  height: 50%;
+  font-size: 2rem;
+  color: ilinkNavy;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
