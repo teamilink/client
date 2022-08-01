@@ -15,7 +15,6 @@ import { reducer } from "../../utils/reducer";
 import { StateContext } from "../../utils/stateContext";
 import styles from "./App.module.css";
 import YouriLink from "../preview/YouriLink";
-// import Footer from "./components/Footer";
 
 const App = () => {
   const initialState = {
@@ -42,7 +41,7 @@ const App = () => {
           <section className={styles.container}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/:username" element={<YouriLink />} />
+              <Route path="/ilink/:username" element={<YouriLink />} />
               <Route path="dashboard">
                 <Route
                   index

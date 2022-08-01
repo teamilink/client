@@ -1,4 +1,3 @@
-// import { Container } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
@@ -12,13 +11,13 @@ const AppearanceEditor = () => {
   const pictureRef = useRef();
 
   // picture state - may be not needed
-  const [picture, setPicture] = useState(null);
+  const [picture, setPicture] = useState("");
+  const [loading, setLoading] = useState(false);
   const { store, dispatch } = useGlobalState();
   const { appearance, currentUserId } = store;
 
   const handleImage = (event) => {
-    console.log(event.target.files[0]);
-    console.log(pictureRef.current.files);
+    console.log("image attached!");
     setPicture(event.target.files[0]);
   };
 
@@ -31,45 +30,62 @@ const AppearanceEditor = () => {
     });
   };
 
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log("button clicked!");
+    pictureRef.current.click();
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("AppearanceEditor component submit clicked!");
+    // setLoading(true);
+    // if (appearance.id) {
+    //   saveAppearance(appearance, appearance.id).then((result) => {
+    //     setLoading(false);
+    //     dispatch({
+    //       type: "setAppearance",
+    //       data: result,
+    //     });
+    //   });
+    // } else {
+    setLoading(true);
+    const data = new FormData();
 
-    if (appearance.id) {
-      saveAppearance(appearance, appearance.id).then((result) => {
-        dispatch({
-          type: "setAppearance",
-          data: result,
-        });
+    data.append("appearance[profile_title]", appearance.profile_title);
+    data.append("appearance[bio]", appearance.bio);
+    data.append("appearance[bg_color]", appearance.bg_color);
+    data.append("appearance[bg_image_url]", appearance.bg_image_url);
+    data.append("appearance[picture]", picture);
+    data.append("appearance[user_id]", currentUserId);
+
+    saveAppearance(data, appearance.id).then((result) => {
+      setLoading(false);
+      dispatch({
+        type: "setAppearance",
+        data: result,
       });
-    } else {
-      const data = new FormData();
-
-      data.append("appearance[profile_title]", appearance.profile_title);
-      data.append("appearance[bio]", appearance.bio);
-      data.append("appearance[bg_color]", appearance.bg_color);
-      data.append("appearance[bg_image_url]", appearance.bg_image_url);
-      data.append("appearance[picture]", picture);
-      data.append("appearance[user_id]", currentUserId);
-
-      saveAppearance(data, appearance.id).then((result) => {
-        dispatch({
-          type: "setAppearance",
-          data: result,
-        });
-      });
-    }
+    });
+    // }
   };
 
   const handleReset = (event) => {
     event.preventDefault();
     console.log("delete clicked!", event);
 
-    destroyAppearance(appearance.id).then(
+    if (appearance.id) {
+      destroyAppearance(appearance.id).then(
+        dispatch({
+          type: "resetAppearance",
+        })
+      );
+      setPicture("");
+    } else if (appearance.id === undefined) {
       dispatch({
         type: "resetAppearance",
-      })
-    );
+      });
+      setPicture("");
+    }
     // window.location.reload();
   };
 
@@ -79,40 +95,31 @@ const AppearanceEditor = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
           <h1 className={styles.subtitle}>Profile</h1>
           <div className={styles.box}>
-            <Button
-              variant="standard"
-              component="label"
-              onChange={handleImage}
-              id="picture"
-              name="picture"
-              accept="image/*"
-              encType="multipart/form-data"
-              required
-            >
-              {pictureRef.current
-                ? // ? pictureRef.current.files[0].name
-                  "file uploaded"
-                : `Upload Profile Picture`}
+            <div className={styles.inputContainer}>
               <input
                 type="file"
                 ref={pictureRef}
-                hidden
                 id="picture"
                 name="picture"
                 accept="image/*"
                 encType="multipart/form-data"
+                onChange={handleImage}
+                className={styles.input}
               />
-            </Button>
-            {/* <TextField
-            variant="standard"
-            type="file"
-            ref={pictureRef}
-            id="picture"
-            name="picture"
-            accept="image/*"
-            helperText="Upload your profile image"
-            onChange={handleImage}
-          /> */}
+              {!loading && (
+                <button
+                  className={`${styles.uploadButton} ${
+                    picture && (picture.name ? styles.blue : styles.grey)
+                  }`}
+                  onClick={handleClick}
+                >
+                  {(picture && picture.name) ||
+                    (appearance.uploaded_picture_url && "Picture added") ||
+                    "No file"}
+                </button>
+              )}
+              {loading && <div className={styles.loading}></div>}
+            </div>
             <TextField
               variant="standard"
               name="profile_title"
@@ -151,7 +158,7 @@ const AppearanceEditor = () => {
                 native: true,
               }}
             >
-              <option value="" selected disabled hidden></option>
+              <option defaultValue="" disabled hidden></option>
               <option value="light">light</option>
               <option value="dark">dark</option>
               <option value="colourful">colourful</option>
