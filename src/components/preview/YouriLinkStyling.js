@@ -11,6 +11,17 @@ export const YouriLinkContainer = styled("div")({
   left: "0",
 });
 
+export const ErrorContainer = styled("div")({
+  width: "100vw",
+  height: "100%",
+  margin: "0",
+  padding: "0",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
 export const LoadingSpinner = styled("div")({
   width: "1.2em",
   height: "1.2em",

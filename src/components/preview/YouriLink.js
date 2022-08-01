@@ -1,10 +1,15 @@
+import { Alert, Container, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getData } from "../../services/linksServices";
 // import Footer from "../Footer";
 import { useGlobalState } from "../../utils/stateContext";
 import Card from "./Card";
-import { YouriLinkContainer, LoadingSpinner } from "./YouriLinkStyling";
+import {
+  YouriLinkContainer,
+  LoadingSpinner,
+  ErrorContainer,
+} from "./YouriLinkStyling";
 
 const YouriLink = () => {
   console.log("YouriLink");
@@ -20,6 +25,7 @@ const YouriLink = () => {
   const [loading, setLoading] = useState(true);
   const [visitor, setVisitor] = useState(username ? true : false);
   const [bgColor, setBgColor] = useState("");
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     console.log("useEffect - thisBgColor");
@@ -52,8 +58,7 @@ const YouriLink = () => {
       getData(username)
         .then((data) => {
           console.log("YouriLink - username useEffect - triggered");
-          console.log(data);
-          setInitialState(data);
+          data.error ? setErr(data.error) : setInitialState(data);
         })
         .then(setLoading(false))
         .catch((e) => console.log(e));
@@ -92,7 +97,17 @@ const YouriLink = () => {
 
   return (
     <>
-      {loading ? (
+      {err ? (
+        <ErrorContainer>
+          <Typography variant="h4" gutterBottom component="div" align="center">
+            {err}
+          </Typography>
+          <Typography variant="subtitle2" gutterBottom component="div">
+            Want this to be your username?{" "}
+            <Link to="/signup">Create your iLink now.</Link>
+          </Typography>
+        </ErrorContainer>
+      ) : loading ? (
         <LoadingSpinner></LoadingSpinner>
       ) : (
         <YouriLinkContainer sx={{ background: bgColor }}>
