@@ -1,7 +1,23 @@
-import { reducer } from "../../../utils/reducer";
+import React from "react";
 import App from "../App";
+import { render } from "@testing-library/react";
+import { reducer } from "../../../utils/reducer";
 
-describe("App", () => {
+describe("App - render", () => {
+  it("renders navigation", () => {
+    const { queryByTestId, queryByLabelText } = render(<App />);
+    const navbarTitle = queryByTestId("navbar-title");
+    expect(navbarTitle).toBeInTheDocument();
+  });
+
+  it("renders Home", () => {
+    const { queryByTestId } = render(<App />);
+    const homeTitle = queryByTestId("home-title");
+    expect(homeTitle).toBeInTheDocument();
+  });
+});
+
+describe("App - context", () => {
   let initialState;
   beforeEach(() => {
     initialState = {

@@ -64,8 +64,9 @@ export const reducer = (state, action) => {
       };
     case "resetAppearance":
       let initialData = {
-        profile_title: state.loggedInUser,
+        profile_title: "",
         bg_color: "light",
+        bio: "",
       };
       return {
         ...state,

@@ -5,7 +5,7 @@ import { signUpUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
-import Navbar from "../Navbar";
+import Navbar from "../navbar/Navbar";
 
 const SignUp = () => {
   const { dispatch } = useGlobalState();
@@ -101,7 +101,7 @@ const SignUp = () => {
         <div
           className={`${styles.error} ${err ? styles.display : styles.hidden}`}
         >
-          <Alert severity="error" variant="outlined">
+          <Alert data-testid="error" severity="error" variant="outlined">
             {err && err}
           </Alert>
         </div>
@@ -141,7 +141,12 @@ const SignUp = () => {
           onChange={handleUserData}
         />
 
-        <Button variant="outlined" type="submit" color="primary">
+        <Button
+          data-testid="button"
+          variant="outlined"
+          type="submit"
+          color="primary"
+        >
           Sign Up
         </Button>
       </form>

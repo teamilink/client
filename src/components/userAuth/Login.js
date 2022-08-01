@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { signInUser } from "../../services/authServices";
 import { useGlobalState } from "../../utils/stateContext";
 import { TextField, Button, Alert } from "@mui/material";
-import Navbar from "../Navbar";
+import Navbar from "../navbar/Navbar";
 import styles from "./Form.module.css";
 
 const Login = () => {

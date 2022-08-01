@@ -7,14 +7,15 @@ import Card from "./Card";
 import { YouriLinkContainer } from "./YouriLinkStyling";
 
 const YouriLink = () => {
+  console.log("YouriLink");
   const { username } = useParams();
 
   const { store, dispatch } = useGlobalState();
-  const { token, links, appearance } = store;
+  const { token, appearance } = store;
 
-  console.log("******* check state ************");
-  console.log("links", links);
-  console.log("appearance", appearance);
+  // console.log("******* check state ************");
+  // console.log("links", links);
+  // console.log("appearance", appearance);
 
   const [loading, setLoading] = useState(true);
   const [visitor, setVisitor] = useState(username ? true : false);
@@ -75,7 +76,7 @@ const YouriLink = () => {
       case "light":
         return `linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%)`;
       case "dark":
-        return `lrinear-gradient(315deg, #485461 0%, #28313b 74%)`;
+        return `linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);`;
       case "colourful":
         return `linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%)`;
       case "pink":
@@ -85,7 +86,7 @@ const YouriLink = () => {
       case "green":
         return `linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%)`;
       default:
-        throw Error(`unknown theme ${theme}`);
+        return `white`;
     }
   };
 

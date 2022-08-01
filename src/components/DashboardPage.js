@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import LinkEditor from "./editors/LinkEditor";
 import AppearanceEditor from "./editors/AppearanceEditor";
 import Preview from "./preview/Preview";
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 import styles from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
