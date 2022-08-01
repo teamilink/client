@@ -4,7 +4,7 @@ import { getData } from "../../services/linksServices";
 // import Footer from "../Footer";
 import { useGlobalState } from "../../utils/stateContext";
 import Card from "./Card";
-import { YouriLinkContainer } from "./YouriLinkStyling";
+import { YouriLinkContainer, LoadingSpinner } from "./YouriLinkStyling";
 
 const YouriLink = () => {
   console.log("YouriLink");
@@ -93,7 +93,7 @@ const YouriLink = () => {
   return (
     <>
       {loading ? (
-        <h1> this is loading </h1>
+        <LoadingSpinner></LoadingSpinner>
       ) : (
         <YouriLinkContainer sx={{ background: bgColor }}>
           <Card />

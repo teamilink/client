@@ -16,7 +16,7 @@ const Home = ({ userAuth }) => {
   };
 
   const handleChange = (e) => {
-    const result = userAuth.validateUsername(e.target.value);
+    const result = /^[a-z0-9_-]{0,30}$/.test(e.target.value);
     result ? setUsername(e.target.value) : setUsername(false);
   };
 

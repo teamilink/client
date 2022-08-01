@@ -48,6 +48,16 @@ export const reducer = (state, action) => {
         ...state,
         links: deletedItem,
       };
+    // case "setUploadImage":
+    //   let appearanceWithImage = {
+    //     ...state.appearance,
+    //     picture_name: action.data.original_filename,
+    //     picture_url: action.data.url,
+    //   };
+    //   return {
+    //     ...state,
+    //     appearance: appearanceWithImage,
+    //   };
     case "setAppearance":
       return {
         ...state,
@@ -65,8 +75,10 @@ export const reducer = (state, action) => {
     case "resetAppearance":
       let initialData = {
         profile_title: "",
-        bg_color: "light",
+        bg_color: "",
         bio: "",
+        uploaded_picture_url: "",
+        picture_url: "",
       };
       return {
         ...state,
