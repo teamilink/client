@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { Toolbar, Tabs, Tab } from "@mui/material";
-import { useGlobalState } from "../utils/stateContext";
+import { useGlobalState } from "../../utils/stateContext";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
@@ -22,7 +22,9 @@ const Navbar = () => {
     <header className={styles.header}>
       <div className={styles.navbar}>
         <NavLink to="/" style={{ textDecoration: "none" }}>
-          <h1 className={styles.title}>iLink</h1>
+          <h1 data-testid="navbar-title" className={styles.title}>
+            iLink
+          </h1>
         </NavLink>
 
         <Toolbar>

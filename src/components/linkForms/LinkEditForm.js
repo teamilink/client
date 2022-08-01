@@ -67,6 +67,7 @@ const LinkEditForm = ({ link }) => {
           variant="standard"
           id="link_address"
           name="link_address"
+          type="url"
           value={link_address}
           onChange={handleChange}
         />

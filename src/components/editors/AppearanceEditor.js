@@ -3,7 +3,10 @@ import React, { useRef, useState } from "react";
 import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
 import { useGlobalState } from "../../utils/stateContext";
-import { saveAppearance } from "../../services/appearanceServices";
+import {
+  destroyAppearance,
+  saveAppearance,
+} from "../../services/appearanceServices";
 
 const AppearanceEditor = () => {
   const pictureRef = useRef();
@@ -61,10 +64,12 @@ const AppearanceEditor = () => {
     event.preventDefault();
     console.log("delete clicked!", event);
 
-    dispatch({
-      type: "resetAppearance",
-    });
-    window.location.reload();
+    destroyAppearance(appearance.id).then(
+      dispatch({
+        type: "resetAppearance",
+      })
+    );
+    // window.location.reload();
   };
 
   return (
@@ -80,6 +85,7 @@ const AppearanceEditor = () => {
               id="picture"
               name="picture"
               accept="image/*"
+              encType="multipart/form-data"
             >
               {pictureRef.current
                 ? // ? pictureRef.current.files[0].name
@@ -92,6 +98,7 @@ const AppearanceEditor = () => {
                 id="picture"
                 name="picture"
                 accept="image/*"
+                encType="multipart/form-data"
               />
             </Button>
             {/* <TextField

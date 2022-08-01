@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 import styles from "./Home.module.css";
 
 const Home = ({ userAuth }) => {

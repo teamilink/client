@@ -7,14 +7,15 @@ import Card from "./Card";
 import { YouriLinkContainer } from "./YouriLinkStyling";
 
 const YouriLink = () => {
+  console.log("YouriLink");
   const { username } = useParams();
 
   const { store, dispatch } = useGlobalState();
-  const { token, links, appearance } = store;
+  const { token, appearance } = store;
 
-  console.log("******* check state ************");
-  console.log("links", links);
-  console.log("appearance", appearance);
+  // console.log("******* check state ************");
+  // console.log("links", links);
+  // console.log("appearance", appearance);
 
   const [loading, setLoading] = useState(true);
   const [visitor, setVisitor] = useState(username ? true : false);

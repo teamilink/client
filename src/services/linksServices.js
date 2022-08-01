@@ -1,7 +1,8 @@
 import iLinkAPI from "../config/api";
 
 export const getData = async (data) => {
-  // data가 token이면 getDashboard, username이면 getAniLink
+  // if data is token, it triggers getDashboard
+  // else if data is username, it triggers getAniLink
 
   console.log("getData - service - data ? ", data);
   return data === sessionStorage.getItem("token")
@@ -11,9 +12,7 @@ export const getData = async (data) => {
 
 export const getDashbaord = async (token) => {
   console.log("getDashbaord -service triggered");
-
   const response = await iLinkAPI.get("/dashboard");
-  // console.log(response.data);
   return response.data;
 };
 
@@ -33,20 +32,17 @@ export const createLink = async (link) => {
   console.log("createLink -service triggered");
   console.log(link);
   const response = await iLinkAPI.post("/links", link);
-
   return response.data;
 };
 
 export const updateLink = async (link) => {
   console.log("updateLink -service triggered");
   const response = await iLinkAPI.put(`/links/${link.id}`, link);
-
   return response.data;
 };
 
 export const deleteLink = async (id) => {
   console.log("deleteLink -service triggered");
   const response = await iLinkAPI.delete(`/links/${id}`);
-
   return response.data;
 };

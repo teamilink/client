@@ -1,4 +1,4 @@
-@value ilinkBrightBlue, ilinkDarkWhite from '../common/colours.css';
+@value ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
 
 .header {
   width: 100vw;

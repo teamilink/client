@@ -73,6 +73,7 @@ const LinkAddForm = () => {
           variant="standard"
           id="link_address"
           name="link_address"
+          type="url"
           value={newLink.link_address || ""}
           onChange={handleChange}
         />

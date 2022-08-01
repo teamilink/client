@@ -22,10 +22,15 @@ const Card = () => {
   return (
     <CardContainer>
       <Box>
-        {appearance && appearance.picture_url ? (
+        {appearance &&
+        (appearance.uploaded_picture_url || appearance.picture_url) ? (
           <Profile
             alt="profile"
-            src={appearance.picture_url ? appearance.picture_url : ""}
+            src={
+              (appearance.uploaded_picture_url &&
+                appearance.uploaded_picture_url) ||
+              (appearance.picture_url && appearance.picture_url)
+            }
           />
         ) : (
           <LetterProfile>
