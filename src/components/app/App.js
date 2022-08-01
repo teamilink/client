@@ -25,8 +25,8 @@ const App = () => {
     links: [],
     appearance: {
       profile_title: "",
-      bio: "Hi there",
-      bg_color: "light",
+      bio: "",
+      bg_color: "",
     },
   };
 

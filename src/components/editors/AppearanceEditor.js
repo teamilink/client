@@ -14,7 +14,7 @@ const AppearanceEditor = () => {
   // picture state - may be not needed
   const [picture, setPicture] = useState(null);
   const { store, dispatch } = useGlobalState();
-  const { appearance, currentUserId, loggedInUser } = store;
+  const { appearance, currentUserId } = store;
 
   const handleImage = (event) => {
     console.log(event.target.files[0]);
@@ -24,6 +24,7 @@ const AppearanceEditor = () => {
 
   const handleChange = (event) => {
     const eventTarget = event.currentTarget;
+    console.log("handleChange - appearance");
     dispatch({
       type: "editAppearance",
       data: eventTarget,
@@ -75,7 +76,7 @@ const AppearanceEditor = () => {
   return (
     <section className={styles.container}>
       <div className={styles.editor}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <h1 className={styles.subtitle}>Profile</h1>
           <div className={styles.box}>
             <Button
@@ -86,11 +87,12 @@ const AppearanceEditor = () => {
               name="picture"
               accept="image/*"
               encType="multipart/form-data"
+              required
             >
               {pictureRef.current
                 ? // ? pictureRef.current.files[0].name
                   "file uploaded"
-                : `Upload Profile Pictrue`}
+                : `Upload Profile Picture`}
               <input
                 type="file"
                 ref={pictureRef}
@@ -116,7 +118,7 @@ const AppearanceEditor = () => {
               name="profile_title"
               id="profile_title"
               label="Profile Title"
-              value={appearance.profile_title ?? loggedInUser}
+              value={appearance.profile_title ?? ""}
               onChange={handleChange}
               helperText="Maximum 30 characters"
             />
@@ -128,7 +130,7 @@ const AppearanceEditor = () => {
               name="bio"
               id="bio"
               label="Bio"
-              value={appearance.bio}
+              value={appearance.bio ?? ""}
               onChange={handleChange}
               helperText="Maximum 80 characters"
             />
@@ -149,6 +151,7 @@ const AppearanceEditor = () => {
                 native: true,
               }}
             >
+              <option value="" selected disabled hidden></option>
               <option value="light">light</option>
               <option value="dark">dark</option>
               <option value="colourful">colourful</option>
@@ -173,7 +176,7 @@ const AppearanceEditor = () => {
               variant="outlined"
               id="submit"
               value="Save"
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               className={styles.button}
             >
               Save

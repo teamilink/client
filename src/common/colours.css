@@ -5,7 +5,7 @@
 @value ilinkBrightBlue: rgb(30, 216, 229);
 @value ilinkNavy: rgb(24, 37, 73);
 @value ilinkThemeLight: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
-@value ilinkThemeDark: lrinear-gradient(315deg, #485461 0%, #28313b 74%);
+@value ilinkThemeDark: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
 @value ilinkThemeBlue: linear-gradient(150deg, #d5fefd 70%, #fffcff 99%);
 @value ilinkThemePink: linear-gradient(150deg, #e96196 0%, #ffffff 99%);
 @value ilinkThemeGreen: linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%);
