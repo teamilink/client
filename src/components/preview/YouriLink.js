@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { getData } from "../../services/linksServices";
 // import Footer from "../Footer";
 import { useGlobalState } from "../../utils/stateContext";
@@ -14,16 +14,13 @@ import {
 const YouriLink = () => {
   console.log("YouriLink");
   const { username } = useParams();
-
   const { store, dispatch } = useGlobalState();
   const { token, appearance } = store;
-
-  // console.log("******* check state ************");
-  // console.log("links", links);
-  // console.log("appearance", appearance);
+  const location = useLocation();
+  let locPathname = location.pathname;
 
   const [loading, setLoading] = useState(true);
-  const [visitor, setVisitor] = useState(username ? true : false);
+  // const [visitor, setVisitor] = useState(username ? true : false);
   const [bgColor, setBgColor] = useState("");
   const [err, setErr] = useState(null);
 
@@ -31,7 +28,7 @@ const YouriLink = () => {
     console.log("useEffect - thisBgColor");
     console.log(appearance);
     if (appearance.bg_color) {
-      let thisBgColor = setTheme(appearance.bg_color ?? "light");
+      let thisBgColor = setTheme(appearance.bg_color ?? "");
       setBgColor(thisBgColor);
     }
   }, [appearance]);
@@ -53,27 +50,29 @@ const YouriLink = () => {
   };
 
   useEffect(() => {
-    console.log("visitor ? ", username ? true : false);
-    if (visitor) {
-      getData(username)
+    console.log("your location is", locPathname);
+    console.log("your username is", username);
+    setLoading(true);
+    if (locPathname === ("/dashboard" || "/dashboard/appearance")) {
+      console.log("useEffect- token", token);
+      getData(token) //
         .then((data) => {
-          console.log("YouriLink - username useEffect - triggered");
-          data.error ? setErr(data.error) : setInitialState(data);
+          console.log("YouriLink - token");
+          setInitialState(data);
+          // setVisitor(false);
         })
         .then(setLoading(false))
         .catch((e) => console.log(e));
     } else {
-      console.log("useEffect- token", token);
-      getData(token) //
+      getData(username)
         .then((data) => {
-          console.log("YouriLink - token useEffect - triggered");
-          setInitialState(data);
-          setVisitor(false);
+          console.log("YouriLink - username");
+          data.error ? setErr(data.error) : setInitialState(data);
         })
         .then(setLoading(false))
         .catch((e) => console.log(e));
     } // eslint-disable-next-line
-  }, [visitor, username, token]);
+  }, [locPathname]);
 
   const setTheme = (theme) => {
     console.log("setTheme function triggered");
