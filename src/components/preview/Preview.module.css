@@ -1,4 +1,4 @@
-@value ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
+@value ilinkBlack, ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
 @value mediaQuery from '../../common/size.css';
 
 .preview {
@@ -18,7 +18,7 @@
   transform-origin: top left;
   transform: scale(0.749213) translateX(-50%) translateY(-50%) translate3d(0px, 0px, 0px);
 
-  border: 1.1rem solid black;
+  border: 1.1rem solid ilinkBlack;
   border-radius: 3rem;
   overflow-y: auto;
 }
