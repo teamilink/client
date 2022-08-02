@@ -1,0 +1,31 @@
+@value ilinkDarkWhite, ilinkNavy from '../../common/colours.css';
+@value mediaQuery from '../../common/size.css';
+
+.container {
+  display: flex;
+  flex-basis: 50%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border-left: 1px solid ilinkDarkWhite;
+}
+
+
+.title {
+  font-size: 1rem;
+  margin-right: 1rem;
+  color: ilinkNavy;
+}
+
+.address {
+  display: block;
+  text-decoration: none;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .container {
+    border: none;
+    padding-left: 2rem;
+  }
+}

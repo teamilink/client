@@ -1,20 +1,35 @@
-@value ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
+@value ilinkWhite, ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
+@value mediaQuery from '../../common/size.css';
 
 .header {
   width: 100vw;
-  background-color: white;
+  background-color: ilinkWhite;
   z-index: 1000;
   border-bottom: 1px solid ilinkDarkWhite;
+  display: flex;
+  align-items: center;
+
 }
 
 .navbar {
   display: flex;
-  margin-left: 2rem;
-  background-color: white;
+  flex-basis: 50%;
+  padding-left: 2rem;
+  background-color: ilinkWhite;
   width: 100%;
-
+  overflow: hidden;
 }
 
 .title {
   color: ilinkBrightBlue;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar {
+    border-bottom: 1px solid ilinkDarkWhite;
+  }
 }
