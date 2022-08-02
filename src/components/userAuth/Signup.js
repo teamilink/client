@@ -59,7 +59,7 @@ const SignUp = () => {
           sessionStorage.setItem("id", user.id);
           sessionStorage.setItem("username", user.username);
           sessionStorage.setItem("token", user.jwt);
-          navigate("/dashboard", { state: { isNewUser: true } });
+          navigate("/dashboard");
         }
       })
       .catch((error) => console.log(error));

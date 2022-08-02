@@ -42,7 +42,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/ilink/:username" element={<YouriLink />} />
-              <Route path="dashboard">
+              <Route exact path="dashboard">
                 <Route
                   index
                   element={
@@ -54,6 +54,7 @@ const App = () => {
                   }
                 />
                 <Route
+                  exact
                   path="appearance"
                   element={
                     loggedInUser ? (
@@ -64,8 +65,8 @@ const App = () => {
                   }
                 />
               </Route>
-              <Route path="signup" element={<SignUp />} />
-              <Route path="login" element={<Login />} />
+              <Route exact path="signup" element={<SignUp />} />
+              <Route exact path="login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </section>

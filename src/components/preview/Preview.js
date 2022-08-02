@@ -5,11 +5,12 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import YouriLink from "./YouriLink";
 
-const Preview = () => {
+const Preview = ({ show }) => {
   console.log("Preview");
+  console.log(window.screen.width);
 
   return (
-    <section className={styles.preview}>
+    <div className={`${styles.preview} ${show && styles.show}`}>
       <Frame
         head={[
           <link type="text/css" rel="stylesheet" href="Card.module.css" />,
@@ -30,7 +31,7 @@ const Preview = () => {
           }}
         </FrameContextConsumer>
       </Frame>
-    </section>
+    </div>
   );
 };
 

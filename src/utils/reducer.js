@@ -21,9 +21,15 @@ export const reducer = (state, action) => {
         links: action.data,
       };
     case "addLink":
+      let newLink;
+      if (state.links) {
+        newLink = [action.data, ...state.links];
+      } else {
+        newLink = [action.data];
+      }
       return {
         ...state,
-        links: [action.data, ...state.links],
+        links: newLink,
       };
     case "setALink":
       let currentLink = {
