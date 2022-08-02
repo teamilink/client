@@ -3,11 +3,10 @@ import iLinkAPI from "../config/api";
 export const getData = async (data) => {
   // if data is token, it triggers getDashboard
   // else if data is username, it triggers getAniLink
-
+  const token = sessionStorage.getItem("token");
   console.log("getData - service - data ? ", data);
-  return data === sessionStorage.getItem("token")
-    ? getDashbaord(data)
-    : getAniLink(data);
+  console.log("getData - service - token ? ", token);
+  return data === token ? getDashbaord(data) : getAniLink(data);
 };
 
 export const getDashbaord = async (token) => {

@@ -44,11 +44,15 @@ const Login = () => {
             type: "setCurrentUserId",
             data: user.id,
           });
+          dispatch({
+            type: "setToken",
+            data: user.jwt,
+          });
 
           sessionStorage.setItem("id", user.id);
           sessionStorage.setItem("username", user.username);
           sessionStorage.setItem("token", user.jwt);
-          navigate("/dashboard", { state: { id: user.id } });
+          navigate("/dashboard");
         }
       })
       .catch((error) => {
