@@ -4,6 +4,7 @@ import { Button, TextField } from "@mui/material";
 
 import Navbar from "./navbar/Navbar";
 import styles from "./Home.module.css";
+import UnsplashApi from "./UnsplashApi";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Home = () => {
   return (
     <section className={styles.container}>
       <Navbar />
+      <UnsplashApi />
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.title} data-testid="home-title">
