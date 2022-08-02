@@ -1,4 +1,5 @@
 @value ilinkLightBlue, ilinkBrightBlue, ilinkNavy, ilinkLightGray from '../../common/colours.css';
+@value mediaQuery from '../../common/size.css';
 
 .container {
   flex-basis: 50%;
@@ -103,5 +104,11 @@
   }
   100%{
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: mediaQuery) {
+  .container {
+    flex: 1;
   }
 }

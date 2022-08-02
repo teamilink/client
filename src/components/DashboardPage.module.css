@@ -1,6 +1,7 @@
+@value mediaQuery from '../common/size.css';
+
 .container {
   width: 100%;
-  /* max-width: 80rem; */
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -13,13 +14,21 @@
 
 }
 
-/* Preview component is shared with /dashboard & /dashboard/appearance
- * so it is controlled in the parents component
- */
-/* .preview {
-  position: relative;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100vh;
-} */
+.modal {
+  display: none
+}
+
+@media screen and (max-width: mediaQuery) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .modal {
+    display: block;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    bottom: 50px;
+    z-index: 1002;
+  }
+}

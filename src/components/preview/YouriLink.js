@@ -53,7 +53,10 @@ const YouriLink = () => {
     console.log("your location is", locPathname);
     console.log("your username is", username);
     setLoading(true);
-    if (locPathname === ("/dashboard" || "/dashboard/appearance")) {
+    if (
+      locPathname === "/dashboard" ||
+      locPathname === "/dashboard/appearance"
+    ) {
       console.log("useEffect- token", token);
       getData(token) //
         .then((data) => {
@@ -63,7 +66,10 @@ const YouriLink = () => {
         })
         .then(setLoading(false))
         .catch((e) => console.log(e));
-    } else {
+    } else if (
+      locPathname !== "/dashboard" &&
+      locPathname !== "/dashboard/appearance"
+    ) {
       getData(username)
         .then((data) => {
           console.log("YouriLink - username");
