@@ -42,6 +42,7 @@ const Home = () => {
         <Button variant="outlined" type="button" color="primary">
           Claim your iLink
         </Button>
+        <UnsplashApi />
       </form>
     </section>
   );
