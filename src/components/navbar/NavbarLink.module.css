@@ -1,4 +1,4 @@
-@value ilinkDarkWhite, ilinkNavy from '../../common/colours.css';
+@value ilinkDarkWhite, ilinkLightGray from '../../common/colours.css';
 @value mediaQuery from '../../common/size.css';
 
 .container {
@@ -6,16 +6,16 @@
   flex-basis: 50%;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
   position: relative;
   border-left: 1px solid ilinkDarkWhite;
+  color: ilinkLightGray;
 }
-
 
 .title {
   font-size: 1rem;
   margin-right: 1rem;
-  color: ilinkNavy;
 }
 
 .address {
@@ -25,7 +25,16 @@
 
 @media screen and (max-width: mediaQuery) {
   .container {
-    border: none;
-    padding-left: 2rem;
+    width: 100%;
+    padding: 0 1rem;
+    justify-content: flex-start;
+    align-items: center;
+
+    border-left: none;
+    border-top: 1px solid ilinkDarkWhite;
+  }
+
+  .title {
+    margin-right: 0.5rem;
   }
 }

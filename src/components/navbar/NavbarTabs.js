@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../../utils/stateContext";
 import { Toolbar, Tabs, Tab } from "@mui/material";
-import styles from "./Navbar.module.css";
+import styles from "./NavbarTabs.module.css";
 
 const NavbarTabs = () => {
   const { store, dispatch } = useGlobalState();
-  const loggedInUser = store;
+  const { loggedInUser } = store;
 
   const navigate = useNavigate();
   const logout = (e) => {
