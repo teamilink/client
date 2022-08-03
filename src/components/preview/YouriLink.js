@@ -11,7 +11,7 @@ import {
   ErrorContainer,
 } from "./YouriLinkStyling";
 
-const YouriLink = () => {
+const YouriLink = ({image}) => {
   console.log("YouriLink");
   const { username } = useParams();
   const { store, dispatch } = useGlobalState();
@@ -116,7 +116,7 @@ const YouriLink = () => {
         <LoadingSpinner></LoadingSpinner>
       ) : (
         <YouriLinkContainer sx={{ background: bgColor }}>
-          <Card />
+          <Card image={image} />
         </YouriLinkContainer>
       )}
       {/* <Footer /> */}

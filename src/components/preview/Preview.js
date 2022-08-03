@@ -4,8 +4,8 @@ import Frame, { FrameContextConsumer } from "react-frame-component";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import YouriLink from "./YouriLink";
-
-const Preview = ({ show }) => {
+ 
+const Preview = ({ show, image }) => {
   console.log("Preview");
   console.log(window.screen.width);
 
@@ -25,7 +25,7 @@ const Preview = ({ show }) => {
             });
             return (
               <CacheProvider value={cache}>
-                <YouriLink />
+                <YouriLink image={image} />
               </CacheProvider>
             );
           }}

@@ -42,7 +42,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/ilink/:username" element={<YouriLink />} />
-              <Route exact path="dashboard">
+              <Route exact path="dashboard">appear
                 <Route
                   index
                   element={
@@ -57,7 +57,7 @@ const App = () => {
                   exact
                   path="appearance"
                   element={
-                    loggedInUser ? (
+                    !loggedInUser ? (
                       <DashboardPage />
                     ) : (
                       <Navigate to="/login" state={"Unauthorised"} />

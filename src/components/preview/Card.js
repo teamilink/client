@@ -1,5 +1,6 @@
 import React from "react";
 import { useGlobalState } from "../../utils/stateContext";
+import { Image } from "../Image";
 import {
   CardContainer,
   Box,
@@ -13,7 +14,7 @@ import {
   Btn,
 } from "./CardStyling";
 
-const Card = () => {
+const Card = ({image}) => {
   const { store } = useGlobalState();
   const { links, appearance, loggedInUser } = store;
   console.log("card links", links);
@@ -33,9 +34,11 @@ const Card = () => {
             }
           />
         ) : (
+              //   {loggedInUser ? loggedInUser.charAt(0).toUpperCase() : "A"}
           <LetterProfile>
-            {loggedInUser ? loggedInUser.charAt(0).toUpperCase() : "A"}
+              {image && (<Image image={image}/>)} 
           </LetterProfile>
+
         )}
         <Text>
           <Title>{appearance.profile_title}</Title>

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { TextField, Button } from "@mui/material";
+import axios from 'axios';
 import styles from "./AppearanceEditor.module.css";
 import { useGlobalState } from "../../utils/stateContext";
 import {
@@ -7,7 +8,7 @@ import {
   saveAppearance,
 } from "../../services/appearanceServices";
 
-const AppearanceEditor = () => {
+const AppearanceEditor = ({fetchAPI}) => { // images onCLick
   const pictureRef = useRef();
 
   // picture state - may be not needed
@@ -20,6 +21,9 @@ const AppearanceEditor = () => {
     console.log("image attached!");
     setPicture(event.target.files[0]);
   };
+  const handleChnage(event)=> {
+    dispatch(event.image.url.thumb)
+  } 
 
   const handleChange = (event) => {
     const eventTarget = event.currentTarget;
@@ -175,6 +179,7 @@ const AppearanceEditor = () => {
               onClick={handleChange}
             >
               Get a background image
+            <Images images={images} />
             </div>
           </div>
           <div className={styles.buttons}>
@@ -197,6 +202,9 @@ const AppearanceEditor = () => {
               className={styles.button}
             >
               Reset
+            </Button>
+            <Button variant="outlined" type="button" onClick={fetchAPI} color="primary">
+              UnsplashApi
             </Button>
           </div>
         </form>
