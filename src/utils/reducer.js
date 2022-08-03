@@ -54,16 +54,6 @@ export const reducer = (state, action) => {
         ...state,
         links: deletedItem,
       };
-    // case "setUploadImage":
-    //   let appearanceWithImage = {
-    //     ...state.appearance,
-    //     picture_name: action.data.original_filename,
-    //     picture_url: action.data.url,
-    //   };
-    //   return {
-    //     ...state,
-    //     appearance: appearanceWithImage,
-    //   };
     case "setAppearance":
       return {
         ...state,
