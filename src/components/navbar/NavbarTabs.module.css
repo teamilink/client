@@ -1,18 +1,25 @@
-@value ilinkWhite, ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
+@value ilinkWhite, ilinkBrightBlue from '../../common/colours.css';
 @value mediaQuery from '../../common/size.css';
 
 
 .navbar {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-basis: 50%;
   padding-left: 1rem;
   background-color: ilinkWhite;
   align-items: center;
-  width: 100%;
   overflow-y: hidden;
   overflow-x: auto;
 }
 
 .title {
   color: ilinkBrightBlue;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .navbar {
+    flex-basis: auto;
+  }
 }
