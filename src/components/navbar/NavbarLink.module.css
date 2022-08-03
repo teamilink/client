@@ -28,7 +28,7 @@
 @media screen and (max-width: mediaQuery) {
   .container {
     width: 100%;
-    height: auto;
+    height: 56px;
     padding: 0 1rem;
     justify-content: flex-start;
     align-items: center;
