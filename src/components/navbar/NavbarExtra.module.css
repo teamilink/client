@@ -1,4 +1,4 @@
-@value ilinkWhite, ilinkBrightBlue, ilinkDarkWhite from '../../common/colours.css';
+@value ilinkWhite, ilinkDarkWhite from '../../common/colours.css';
 @value mediaQuery from '../../common/size.css';
 
 .header {
@@ -8,9 +8,7 @@
   border-bottom: 1px solid ilinkDarkWhite;
   display: flex;
   align-items: center;
-
 }
-
 
 @media screen and (max-width: mediaQuery) {
   .header {
