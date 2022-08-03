@@ -21,5 +21,6 @@
 @media screen and (max-width: mediaQuery) {
   .navbar {
     flex-basis: auto;
+
   }
 }

@@ -17,6 +17,6 @@
 
 @media screen and (max-width: mediaQuery) {
   .container {
-    flex: 1;
+    flex-basis: auto;
   }
 }

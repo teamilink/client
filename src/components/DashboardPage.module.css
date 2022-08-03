@@ -1,3 +1,4 @@
+@value ilinkLightGray from '../common/colours.css';
 @value mediaQuery from '../common/size.css';
 
 .container {
@@ -15,20 +16,25 @@
 }
 
 .modal {
-  display: none
+  display: none;
 }
 
 @media screen and (max-width: mediaQuery) {
   .dashboard {
     flex-direction: column;
   }
-
   .modal {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     left: 50%;
     transform: translateX(-50%) translateY(50%);
     bottom: 50px;
     z-index: 1002;
+  }
+  .modal p {
+    font-size: 0.7rem;
+    color: ilinkLightGray;
+    margin: 0;
   }
 }
