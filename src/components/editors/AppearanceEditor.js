@@ -55,8 +55,8 @@ const AppearanceEditor = () => {
         type: "setAppearance",
         data: result,
       });
+      window.location.reload();
     });
-    // }
   };
 
   const handleReset = (event) => {
@@ -76,7 +76,6 @@ const AppearanceEditor = () => {
       });
       setPicture("");
     }
-    // window.location.reload();
   };
 
   return (
