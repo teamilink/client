@@ -24,7 +24,6 @@ const Home = () => {
   return (
     <section className={styles.container}>
       <Navbar />
-
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.title} data-testid="home-title">
           Everything in one link

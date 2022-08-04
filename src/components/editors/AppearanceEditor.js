@@ -6,19 +6,38 @@ import {
   destroyAppearance,
   saveAppearance,
 } from "../../services/appearanceServices";
+import { getRandomImage } from "../../services/imageService";
 
 const AppearanceEditor = () => {
-  const pictureRef = useRef();
-
-  // picture state - may be not needed
-  const [picture, setPicture] = useState("");
-  const [loading, setLoading] = useState(false);
   const { store, dispatch } = useGlobalState();
   const { appearance, currentUserId } = store;
 
-  const handleImage = (event) => {
+  const pictureRef = useRef();
+  const [picture, setPicture] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // limit to get a random image
+  const [clickCount, setClickCount] = useState(0);
+  const [err, setErr] = useState(null);
+
+  const handleFile = (event) => {
     console.log("image attached!");
     setPicture(event.target.files[0]);
+  };
+
+  const handleRandomImage = () => {
+    setClickCount(clickCount + 1);
+    if (clickCount < 2) {
+      getRandomImage().then((url) =>
+        dispatch({
+          type: "addRandomImage",
+          data: url,
+        })
+      );
+    } else {
+      setErr("Sorry, you can only get 3 pictures");
+    }
+    console.log(err);
   };
 
   const handleChange = (event) => {
@@ -45,7 +64,7 @@ const AppearanceEditor = () => {
     data.append("appearance[profile_title]", appearance.profile_title);
     data.append("appearance[bio]", appearance.bio);
     data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[bg_image_url]", appearance.bg_image_url);
+    data.append("appearance[picture_url]", appearance.picture_url);
     data.append("appearance[picture]", picture);
     data.append("appearance[user_id]", currentUserId);
 
@@ -92,7 +111,7 @@ const AppearanceEditor = () => {
                 name="picture"
                 accept="image/*"
                 encType="multipart/form-data"
-                onChange={handleImage}
+                onChange={handleFile}
                 className={styles.input}
               />
               {!loading && (
@@ -109,6 +128,21 @@ const AppearanceEditor = () => {
               )}
               {loading && <div className={styles.loading}></div>}
             </div>
+            <button
+              className={`${styles.random} ${err && styles.inactive}`}
+              type="click"
+              name="picture_url"
+              id="picture_url"
+              onClick={handleRandomImage}
+            >
+              {!err && clickCount === 0 ? `Get a random image` : err}
+              {clickCount > 0 &&
+                clickCount < 3 &&
+                `You have ${3 - clickCount} ${
+                  3 - clickCount === 1 ? "attempt" : "attempts"
+                } left`}
+            </button>
+
             <TextField
               variant="standard"
               name="profile_title"
@@ -131,6 +165,7 @@ const AppearanceEditor = () => {
               helperText="Maximum 80 characters"
             />
           </div>
+
           <h1 className={styles.subtitle}>Custom Appearance</h1>
           <div className={styles.box}>
             <TextField
@@ -155,17 +190,8 @@ const AppearanceEditor = () => {
               <option value="blue">blue</option>
               <option value="green">green</option>
             </TextField>
-            <div
-              style={{ cursor: "pointer" }}
-              type="click"
-              name="bg_image_url"
-              id="bg_image_url"
-              value={appearance.bg_image_url}
-              onClick={handleChange}
-            >
-              Get a background image
-            </div>
           </div>
+
           <div className={styles.buttons}>
             <Button
               type="submit"

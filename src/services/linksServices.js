@@ -1,8 +1,8 @@
 import iLinkAPI from "../config/api";
 
+// if data is token, it triggers getDashboard
+// else if data is username, it triggers getAniLink
 export const getData = async (data) => {
-  // if data is token, it triggers getDashboard
-  // else if data is username, it triggers getAniLink
   const token = sessionStorage.getItem("token");
   return data === token ? getDashbaord(data) : getAniLink(data);
 };

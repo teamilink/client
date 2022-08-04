@@ -1,5 +1,6 @@
 import iLinkAPI from "../config/api";
 
+// Check whether this request should be create or update
 export const saveAppearance = (data, id) => {
   console.log("saveAppearance - service");
   return id !== undefined ? updateAppearance(data, id) : createAppearance(data);
