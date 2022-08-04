@@ -21,6 +21,7 @@ const DashboardPage = () => {
       <section className={styles.dashboard}>
         {location.pathname === "/dashboard" && <LinkEditor />}
         {location.pathname === "/dashboard/appearance" && <AppearanceEditor />}
+
         <div className={styles.modal}>
           <Button sx={{ backgroundColor: "white" }} onClick={handleOpenModal}>
             {!openModal ? "Preview" : null}

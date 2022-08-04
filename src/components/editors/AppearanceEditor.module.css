@@ -54,17 +54,25 @@
   display: none;
 }
 
-
+.random, 
 .uploadButton{
   width: 100%;
   height: 2rem;
-  /* font-weight: bold; */
   cursor: pointer;
-  border-radius: 1rem;
-  /* outline: 0; */
+  border-radius: 0.8rem;
+  outline: 0;
   font-size: 0.8rem;
-  margin-bottom: 1rem;
   background-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.random.inactive{
+  cursor: none;
+  color: ilinkLightGray;
+  border: 1px solid ilinkLightGray;
+  background-color: ilinkDarkWhite;
+  pointer-events: none;
+  cursor: default;
 }
 
 .uploadButton.grey{
@@ -75,6 +83,7 @@
   background-color: ilinkLightBlue;
 }
 
+.random:hover,
 .uploadButton:hover {
   opacity: 0.8;
 }
