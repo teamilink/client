@@ -15,23 +15,6 @@ const DashboardPage = () => {
   const handleOpenModal = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
 
-  const [image, setImage] = useState(null);
-
-  const API_KEY = REACT_APP_API_KEY
-// use unsplash api
-  const fetchAPI = async () => {
-      // access key to unsplash api
-      const response = await axios.get('https://api.unsplash.com/photos/?client_id=API_KEY');
-      const img = response.data[0];
-      setImage(img.urls.thumb);
-      // const data = await response.data;
-  }
-
-  const handleImageHChange = (event) => {
-    dispatch(event.target.src)
-  }
-
-
   return (
     <section className={styles.container}>
       <NavbarExtra />

@@ -1,14 +1,15 @@
 import React, { useRef, useState } from "react";
 import { TextField, Button } from "@mui/material";
-import axios from 'axios';
 import styles from "./AppearanceEditor.module.css";
 import { useGlobalState } from "../../utils/stateContext";
 import {
   destroyAppearance,
   saveAppearance,
 } from "../../services/appearanceServices";
+import { getRandomImage } from "../../services/imageService";
 
-const AppearanceEditor = ({fetchAPI}) => { // images onCLick
+const AppearanceEditor = ({ fetchAPI }) => {
+  // images onCLick
   const pictureRef = useRef();
 
   // picture state - may be not needed
@@ -17,13 +18,20 @@ const AppearanceEditor = ({fetchAPI}) => { // images onCLick
   const { store, dispatch } = useGlobalState();
   const { appearance, currentUserId } = store;
 
-  const handleImage = (event) => {
+  // const [image, setImage] = useState(null);
+
+  // const handleImageHChange = (event) => {
+  //   dispatch(event.target.src)
+  // }
+
+  const handleFile = (event) => {
     console.log("image attached!");
     setPicture(event.target.files[0]);
   };
-  const handleChnage(event)=> {
-    dispatch(event.image.url.thumb)
-  } 
+
+  const handleRandomImage = (event) => {
+    getRandomImage().then((data) => console.log(data));
+  };
 
   const handleChange = (event) => {
     const eventTarget = event.currentTarget;
@@ -97,7 +105,7 @@ const AppearanceEditor = ({fetchAPI}) => { // images onCLick
                 name="picture"
                 accept="image/*"
                 encType="multipart/form-data"
-                onChange={handleImage}
+                onChange={handleFile}
                 className={styles.input}
               />
               {!loading && (
@@ -169,7 +177,6 @@ const AppearanceEditor = ({fetchAPI}) => { // images onCLick
               onClick={handleChange}
             >
               Get a background image
-            <Images images={images} />
             </div>
           </div>
           <div className={styles.buttons}>
@@ -193,7 +200,12 @@ const AppearanceEditor = ({fetchAPI}) => { // images onCLick
             >
               Reset
             </Button>
-            <Button variant="outlined" type="button" onClick={fetchAPI} color="primary">
+            <Button
+              variant="outlined"
+              type="button"
+              onClick={handleRandomImage}
+              color="primary"
+            >
               UnsplashApi
             </Button>
           </div>
