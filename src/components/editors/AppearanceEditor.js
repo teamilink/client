@@ -9,11 +9,12 @@ import {
 import { getRandomImage } from "../../services/imageService";
 
 const AppearanceEditor = () => {
+  const { store, dispatch } = useGlobalState();
+  const { appearance, currentUserId } = store;
+
   const pictureRef = useRef();
   const [picture, setPicture] = useState("");
   const [loading, setLoading] = useState(false);
-  const { store, dispatch } = useGlobalState();
-  const { appearance, currentUserId } = store;
 
   // limit to get a random image
   const [clickCount, setClickCount] = useState(0);

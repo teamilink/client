@@ -43,12 +43,6 @@ const NavbarTabs = () => {
               to="/dashboard/appearance"
             />
             <Tab
-              label="Upgrade"
-              value="/upgrade"
-              component={NavLink}
-              to="/upgrade"
-            />
-            <Tab
               label="Logout"
               value="/logout"
               component={NavLink}
