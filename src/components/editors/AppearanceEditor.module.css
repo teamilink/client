@@ -66,6 +66,10 @@
   margin-bottom: 1rem;
 }
 
+.random {
+  display: none;
+}
+
 .random.inactive{
   cursor: none;
   color: ilinkLightGray;

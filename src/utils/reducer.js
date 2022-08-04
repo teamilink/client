@@ -91,7 +91,7 @@ export const reducer = (state, action) => {
       let initialData = {
         profile_title: "",
         bio: "",
-        bg_color: null,
+        bg_color: "",
         uploaded_picture_url: null,
         picture_url: null,
       };
