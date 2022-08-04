@@ -18,6 +18,7 @@ const YouriLink = () => {
   const { token, appearance } = store;
   const location = useLocation();
   let locPathname = location.pathname;
+  console.log("YouriLink - appearance", appearance);
 
   const [loading, setLoading] = useState(true);
   // const [visitor, setVisitor] = useState(username ? true : false);
