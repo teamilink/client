@@ -8,7 +8,7 @@ export const getData = async (data) => {
 };
 
 export const getDashbaord = async (token) => {
-  console.log("getDashbaord -service");
+  console.log("getDashbaord - service");
   const response = await iLinkAPI.get("/dashboard");
   return response.data;
 };
@@ -20,24 +20,24 @@ export const getAniLink = async (username) => {
 };
 
 export const saveLink = (link) => {
-  console.log("saveLink -service");
+  console.log("saveLink - service");
   return link.id ? updateLink(link) : createLink(link);
 };
 
 export const createLink = async (link) => {
-  console.log("createLink -service");
+  console.log("createLink - service");
   const response = await iLinkAPI.post("/links", link);
   return response.data;
 };
 
 export const updateLink = async (link) => {
-  console.log("updateLink -service");
+  console.log("updateLink - service");
   const response = await iLinkAPI.put(`/links/${link.id}`, link);
   return response.data;
 };
 
 export const deleteLink = async (id) => {
-  console.log("deleteLink -service");
+  console.log("deleteLink - service");
   const response = await iLinkAPI.delete(`/links/${id}`);
   return response.data;
 };

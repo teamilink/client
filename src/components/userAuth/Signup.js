@@ -8,10 +8,10 @@ import styles from "./Form.module.css";
 import Navbar from "../navbar/Navbar";
 
 const SignUp = () => {
+  console.log("Signup");
+
   const { dispatch } = useGlobalState();
   const location = useLocation();
-
-  console.log("Signup");
   const navigate = useNavigate();
   const initialFormData = {
     username: "",
@@ -63,17 +63,12 @@ const SignUp = () => {
         }
       })
       .catch((error) => console.log(error));
-
-    // setUser(userAuth.getUser());
   };
 
   const handleUserData = (e) => {
     // validate username
     if (e.target.id === "username") {
-      console.log(e.target.id);
-      console.log("validate username", e.target.value);
       const result = /^[a-z0-9_-]{0,30}$/.test(e.target.value);
-      console.log(result);
 
       if (result) {
         setErr(null);

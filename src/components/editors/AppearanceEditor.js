@@ -64,9 +64,13 @@ const AppearanceEditor = () => {
     data.append("appearance[profile_title]", appearance.profile_title);
     data.append("appearance[bio]", appearance.bio);
     data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[picture_url]", appearance.picture_url);
     data.append("appearance[picture]", picture);
     data.append("appearance[user_id]", currentUserId);
+
+    // only add picture_url when it has value
+    // otherwise null/undefined become "null"/"undefined"
+    appearance.picture_url &&
+      data.append("appearance[picture_url]", appearance.picture_url);
 
     saveAppearance(data, appearance.id).then((result) => {
       setLoading(false);
@@ -74,8 +78,8 @@ const AppearanceEditor = () => {
         type: "setAppearance",
         data: result,
       });
+      window.location.reload();
     });
-    // }
   };
 
   const handleReset = (event) => {
@@ -95,7 +99,7 @@ const AppearanceEditor = () => {
       });
       setPicture("");
     }
-    // window.location.reload();
+    console.log("appearance after reset", appearance);
   };
 
   return (
@@ -152,6 +156,7 @@ const AppearanceEditor = () => {
               value={appearance.profile_title ?? ""}
               onChange={handleChange}
               helperText="Maximum 30 characters"
+              required
             />
             <TextField
               multiline
@@ -164,6 +169,7 @@ const AppearanceEditor = () => {
               value={appearance.bio ?? ""}
               onChange={handleChange}
               helperText="Maximum 80 characters"
+              required
             />
           </div>
 

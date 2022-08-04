@@ -166,7 +166,7 @@ describe("App - context", () => {
       let resetAppearance = jest.fn();
       const updateAction = { type: "resetAppearance", data: initialState };
       const updatedState = reducer(initialState, updateAction);
-      expect(updatedState.appearance.bg_color).toBe("light");
+      expect(updatedState.appearance.bg_color).toBe("");
     });
   });
 

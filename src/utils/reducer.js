@@ -90,10 +90,10 @@ export const reducer = (state, action) => {
     case "resetAppearance":
       let initialData = {
         profile_title: "",
-        bg_color: "",
         bio: "",
-        uploaded_picture_url: "",
-        picture_url: "",
+        bg_color: null,
+        uploaded_picture_url: null,
+        picture_url: null,
       };
       return {
         ...state,
