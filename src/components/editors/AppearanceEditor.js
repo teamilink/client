@@ -43,16 +43,6 @@ const AppearanceEditor = ({fetchAPI}) => { // images onCLick
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("AppearanceEditor component submit clicked!");
-    // setLoading(true);
-    // if (appearance.id) {
-    //   saveAppearance(appearance, appearance.id).then((result) => {
-    //     setLoading(false);
-    //     dispatch({
-    //       type: "setAppearance",
-    //       data: result,
-    //     });
-    //   });
-    // } else {
     setLoading(true);
     const data = new FormData();
 

@@ -1,10 +1,18 @@
 @value ilinkWhite, ilinkDarkWhite from '../../common/colours.css';
+@value mediaQuery from '../../common/size.css';
 
 .header {
   width: 100vw;
   background-color: ilinkWhite;
   z-index: 1000;
   border-bottom: 1px solid ilinkDarkWhite;
+  display: flex;
   align-items: center;
+}
 
+@media screen and (max-width: mediaQuery) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
