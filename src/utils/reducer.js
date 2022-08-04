@@ -64,6 +64,15 @@ export const reducer = (state, action) => {
     //     ...state,
     //     appearance: appearanceWithImage,
     //   };
+    case "addRandomImage":
+      let appearanceWithRandomImg = {
+        ...state.appearance,
+        picture_url: action.data,
+      };
+      return {
+        ...state,
+        appearance: appearanceWithRandomImg,
+      };
     case "setAppearance":
       return {
         ...state,
