@@ -21,17 +21,14 @@ const YouriLink = () => {
   console.log("YouriLink - appearance", appearance);
 
   const [loading, setLoading] = useState(true);
-  // const [visitor, setVisitor] = useState(username ? true : false);
   const [bgColor, setBgColor] = useState("");
   const [err, setErr] = useState(null);
 
   useEffect(() => {
     console.log("useEffect - thisBgColor");
-    console.log(appearance);
-    if (appearance.bg_color) {
-      let thisBgColor = setTheme(appearance.bg_color ?? "");
-      setBgColor(thisBgColor);
-    }
+    // console.log(appearance);
+    let thisBgColor = setTheme(appearance.bg_color ?? "");
+    setBgColor(thisBgColor);
   }, [appearance]);
 
   const setInitialState = (data) => {
@@ -51,14 +48,14 @@ const YouriLink = () => {
   };
 
   useEffect(() => {
-    console.log("your location is", locPathname);
-    console.log("your username is", username);
+    // console.log("your location is", locPathname);
+    // console.log("your username is", username);
     setLoading(true);
     if (
       locPathname === "/dashboard" ||
       locPathname === "/dashboard/appearance"
     ) {
-      console.log("useEffect- token", token);
+      // console.log("useEffect- token", token);
       getData(token) //
         .then((data) => {
           console.log("YouriLink - token");
@@ -73,7 +70,7 @@ const YouriLink = () => {
     ) {
       getData(username)
         .then((data) => {
-          console.log("YouriLink - username");
+          // console.log("YouriLink - username");
           data.error ? setErr(data.error) : setInitialState(data);
         })
         .then(setLoading(false))
