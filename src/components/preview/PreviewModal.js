@@ -2,11 +2,9 @@ import React from "react";
 import styles from "./Preview.module.css";
 
 import { Modal } from "@mui/material";
-import PreviewFrame from "./PreviewFrame";
+import ILinkFrame from "./ILinkFrame";
 
 const PreviewModal = ({ openModal, handleClose }) => {
-  console.log("Preview");
-
   const closeWindow = () => {
     handleClose();
   };
@@ -15,7 +13,7 @@ const PreviewModal = ({ openModal, handleClose }) => {
     <div className={styles.preview}>
       {openModal && (
         <Modal open={openModal} onClose={closeWindow}>
-          <PreviewFrame openModal={openModal} />
+          <ILinkFrame openModal={openModal} />
         </Modal>
       )}
     </div>

@@ -19,6 +19,18 @@ const Card = () => {
   console.log("card links", links);
   console.log("card appearance", appearance);
 
+  // find newly uploaded or added profile image
+  const findNewer = () => {
+    const bg_img = parseInt(appearance.img_timestamp);
+    const pic = parseInt(appearance.pic_timestamp);
+    const newOne = Math.max(bg_img, pic);
+    if (newOne === pic) {
+      return appearance.picture_url;
+    } else {
+      return appearance.bg_image_url;
+    }
+  };
+
   return (
     <CardContainer>
       <Box>
@@ -26,8 +38,7 @@ const Card = () => {
           <Profile
             alt="profile"
             src={
-              (appearance.picture_url && appearance.picture_url) ||
-              (appearance.bg_image_url && appearance.bg_image_url)
+              (appearance.bg_image_url || appearance.picture_url) && findNewer()
             }
           />
         ) : (

@@ -11,8 +11,6 @@ import { deleteLink, saveLink } from "../../services/linksServices";
 // the preview won't be updated at the same time
 
 const LinkEditForm = ({ link }) => {
-  // console.log("LinkEditForm");
-
   const { id, title, link_address } = link;
   const { dispatch } = useGlobalState();
 
@@ -20,7 +18,9 @@ const LinkEditForm = ({ link }) => {
     if (event.currentTarget === null) {
       return;
     }
+
     event.preventDefault();
+
     let updatedLink = {
       ...link,
       [event.currentTarget.name]: event.currentTarget.value,
@@ -30,9 +30,9 @@ const LinkEditForm = ({ link }) => {
       type: "updateLinks",
       data: updatedLink,
     });
-    saveLink(updatedLink).then((response) => {
-      console.log(response);
-    });
+
+    // send a request to save the data
+    saveLink(updatedLink);
   };
 
   const handleDelete = (event) => {

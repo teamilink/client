@@ -7,19 +7,19 @@ export const saveAppearance = (data, id) => {
 };
 
 export const createAppearance = async (data) => {
-  console.log("createAppearance -service");
+  console.log("createAppearance - service");
   const response = await iLinkAPI.post("/dashboard/appearance", data);
   return response.data;
 };
 
 export const updateAppearance = async (data, id) => {
-  console.log("updateAppearance -service");
+  console.log("updateAppearance - service");
   const response = await iLinkAPI.put(`/dashboard/appearance/${id}`, data);
   return response.data;
 };
 
 export const destroyAppearance = async (id) => {
-  console.log("deleteAppearance -service");
+  console.log("deleteAppearance - service");
   const response = await iLinkAPI.delete(`/dashboard/appearance/${id}`);
   return response.data;
 };

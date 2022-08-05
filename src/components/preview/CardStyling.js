@@ -20,7 +20,6 @@ export const Box = styled("div")({
 export const Profile = styled("img")({
   width: "120px",
   height: "120px",
-  // overflow: "hidden",
   objectFit: "cover",
   border: "3px solid #000",
   borderRadius: "50%",

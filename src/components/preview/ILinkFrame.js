@@ -3,12 +3,12 @@ import Frame, { FrameContextConsumer } from "react-frame-component";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import YouriLink from "./YouriLink";
-import styles from "./Preview.module.css";
+import styles from "./ILinkFrame.module.css";
 
-const PreviewFrame = ({ openModal }) => (
+const ILinkFrame = ({ openModal }) => (
   <Frame
     head={[<link type="text/css" rel="stylesheet" href="Card.module.css" />]}
-    className={`${styles.frame} ${openModal ? styles.close : styles.openModal}`}
+    className={`${styles.frame} ${openModal ? styles.show : styles.hide}`}
   >
     <FrameContextConsumer>
       {({ document }) => {
@@ -26,4 +26,4 @@ const PreviewFrame = ({ openModal }) => (
   </Frame>
 );
 
-export default PreviewFrame;
+export default ILinkFrame;

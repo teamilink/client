@@ -10,9 +10,9 @@ const Home = () => {
   const [username, setUsername] = useState("");
 
   const handleSubmit = (e) => {
-    // go to signup
-    // navigate("/signup");
     e.preventDefault();
+
+    // pass the username to the Signup component
     navigate("/signup", { state: { username: username } });
   };
 
@@ -24,22 +24,24 @@ const Home = () => {
   return (
     <section className={styles.container}>
       <Navbar />
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h1 className={styles.title} data-testid="home-title">
-          Everything in one link
-        </h1>
+      <div className={styles.home}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <h1 className={styles.title} data-testid="home-title">
+            Everything in one link
+          </h1>
 
-        <TextField
-          id="username"
-          name="username"
-          label="/yourname"
-          onChange={handleChange}
-          className={styles.paddedRight}
-        />
-        <Button variant="outlined" type="submit" color="primary">
-          Claim your iLink
-        </Button>
-      </form>
+          <TextField
+            id="username"
+            name="username"
+            label="/yourname"
+            onChange={handleChange}
+            className={styles.paddedRight}
+          />
+          <Button variant="outlined" type="submit" color="primary">
+            Claim your iLink
+          </Button>
+        </form>
+      </div>
     </section>
   );
 };

@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { getData } from "../../services/linksServices";
-// import Footer from "../Footer";
 import { useGlobalState } from "../../utils/stateContext";
 import Card from "./Card";
+
+import { Typography } from "@mui/material";
 import {
   YouriLinkContainer,
   LoadingSpinner,
@@ -12,21 +12,17 @@ import {
 } from "./YouriLinkStyling";
 
 const YouriLink = () => {
-  console.log("YouriLink");
   const { username } = useParams();
   const { store, dispatch } = useGlobalState();
   const { token, appearance } = store;
   const location = useLocation();
   let locPathname = location.pathname;
-  console.log("YouriLink - appearance", appearance);
 
   const [loading, setLoading] = useState(true);
   const [bgColor, setBgColor] = useState("");
   const [err, setErr] = useState(null);
 
   useEffect(() => {
-    console.log("useEffect - thisBgColor");
-    // console.log(appearance);
     let thisBgColor = setTheme(appearance.bg_color ?? "");
     setBgColor(thisBgColor);
   }, [appearance]);
@@ -48,19 +44,14 @@ const YouriLink = () => {
   };
 
   useEffect(() => {
-    // console.log("your location is", locPathname);
-    // console.log("your username is", username);
     setLoading(true);
     if (
       locPathname === "/dashboard" ||
       locPathname === "/dashboard/appearance"
     ) {
-      // console.log("useEffect- token", token);
-      getData(token) //
+      getData(token) // send a request for loggedInUser
         .then((data) => {
-          console.log("YouriLink - token");
           setInitialState(data);
-          // setVisitor(false);
         })
         .then(setLoading(false))
         .catch((e) => console.log(e));
@@ -68,9 +59,8 @@ const YouriLink = () => {
       locPathname !== "/dashboard" &&
       locPathname !== "/dashboard/appearance"
     ) {
-      getData(username)
+      getData(username) // send a request for visitor
         .then((data) => {
-          // console.log("YouriLink - username");
           data.error ? setErr(data.error) : setInitialState(data);
         })
         .then(setLoading(false))
@@ -78,6 +68,7 @@ const YouriLink = () => {
     } // eslint-disable-next-line
   }, [locPathname]);
 
+  // set background theme based on appearance.bg_color
   const setTheme = (theme) => {
     console.log("setTheme function triggered");
     switch (theme) {
@@ -117,7 +108,6 @@ const YouriLink = () => {
           <Card />
         </YouriLinkContainer>
       )}
-      {/* <Footer /> */}
     </>
   );
 };

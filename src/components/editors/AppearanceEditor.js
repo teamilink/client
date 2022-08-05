@@ -8,12 +8,11 @@ import {
 } from "../../services/appearanceServices";
 import { getRandomImage } from "../../services/imageService";
 
-const AppearanceEditor = () => {
+const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
   const { store, dispatch } = useGlobalState();
-  const { appearance, currentUserId } = store;
+  const { appearance } = store;
 
   const pictureRef = useRef();
-  const [picture, setPicture] = useState("");
   const [loading, setLoading] = useState(false);
 
   // limit to get a random image
@@ -21,71 +20,67 @@ const AppearanceEditor = () => {
   const [err, setErr] = useState(null);
 
   const handleFile = (event) => {
-    console.log("image attached!");
-    setPicture(event.target.files[0]);
+    handlePicture(event.target.files[0]);
+    // generate timestamp for picture attachment
+    dispatch({
+      type: "addPicTimestamp",
+      data: Date.now(),
+    });
   };
 
-  const handleRandomImage = () => {
+  const getAndStoreImg = () => {
+    getRandomImage().then((url) => {
+      dispatch({
+        type: "addRandomImage",
+        data: url,
+      });
+    });
+  };
+
+  const handleRandomImage = (event) => {
+    event.preventDefault();
+
     setClickCount(clickCount + 1);
     if (clickCount < 2) {
-      getRandomImage().then((url) =>
-        dispatch({
-          type: "addRandomImage",
-          data: url,
-        })
-      );
+      getAndStoreImg();
     } else {
+      getAndStoreImg();
       setErr("Sorry, you can only get 3 pictures");
     }
-    console.log(err);
   };
 
   const handleChange = (event) => {
-    const eventTarget = event.currentTarget;
-    console.log("handleChange - appearance");
     dispatch({
       type: "editAppearance",
-      data: eventTarget,
+      data: event.currentTarget,
     });
   };
 
   const handleClick = (event) => {
     event.preventDefault();
-    console.log("button clicked!");
     pictureRef.current.click();
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("AppearanceEditor component submit clicked!");
     setLoading(true);
-    const data = new FormData();
 
-    data.append("appearance[profile_title]", appearance.profile_title);
-    data.append("appearance[bio]", appearance.bio);
-    data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[picture]", picture);
-    data.append("appearance[user_id]", currentUserId);
+    // call the function in the parent components
+    const formData = appendFormData();
 
-    // only add bg_image_url when it has value
-    // otherwise null/undefined become "null"/"undefined"
-    appearance.bg_image_url &&
-      data.append("appearance[bg_image_url]", appearance.bg_image_url);
-
-    saveAppearance(data, appearance.id).then((result) => {
+    // send a request to the server
+    saveAppearance(formData, appearance.id).then((result) => {
       setLoading(false);
       dispatch({
         type: "setAppearance",
         data: result,
       });
       window.location.reload();
-      console.log("done!", appearance);
     });
   };
 
   const handleReset = (event) => {
     event.preventDefault();
-    console.log("delete clicked!", event);
 
     if (appearance.id) {
       destroyAppearance(appearance.id).then(
@@ -93,14 +88,13 @@ const AppearanceEditor = () => {
           type: "resetAppearance",
         })
       );
-      setPicture("");
+      handlePicture("");
     } else if (appearance.id === undefined) {
       dispatch({
         type: "resetAppearance",
       });
-      setPicture("");
+      handlePicture("");
     }
-    console.log("appearance after reset", appearance);
   };
 
   return (
