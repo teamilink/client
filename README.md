@@ -1,5 +1,7 @@
 # iLink - Client
 
+_This readme file is only for the **client side** of iLink. To read the combined version, please visit the [iLinkDocs](https://github.com/teamilink/iLinkDocs) repository._
+
 iLink optimises your social media presence by linking all the landing pages under one main URL as an online business card.
 
 <hr />
@@ -17,8 +19,6 @@ iLink optimises your social media presence by linking all the landing pages unde
 
 ## Installation & Instructions
 
-#### Client
-
 - Clone the client repository
   `$ git clone git@github.com:teamilink/client.git`
 - Move into the directory
@@ -29,24 +29,6 @@ iLink optimises your social media presence by linking all the landing pages unde
 - Run the server
   `$ npm start` or `$ yarn run start`
   - The server will run on port 3000
-
-#### Server
-
-- Clone the server repository
-  `$ git clone git@github.com:teamilink/server.git`
-- Move into the directory
-  `$ cd server`
-- Install the dependencies and libraries that used in this project
-  `$ bundle install` and `$ bundle update`
-- Set the local database
-  `$ rails db:create db:migrate`
-  - If you have any error to create your database, please run `$ rails db:drop` first then run the command line again
-  - This project runs without any initial data, but if you wish you can run `$ rails db:seed` to start the project with test data
-- Run the server
-  `$ rails s` or `$ rails start`
-  - The server will run on port 4000
-
-<hr />
 
 ## Overview
 
@@ -79,13 +61,11 @@ Account Dashboard
 
 This app aims at social media influencers, marketing and branding professionals and other social media content creators that are looking to grow and gather all their followers across multiple different platforms into one single platform for their web visitors.
 
-<hr />
-
 ## Tech stack
 
 The following is the technology stack used for this project.
 
-- **Programming Language:** Ruby and Javascript
+- **Programming Language:** Javascript
 - **Client Side:** React.js library, Material UI & PostCSS.
 - **Server Side:** Ruby on Rails framework
 - **Testing:** RSpec, Jest, React-testing-libraries, Cypress
@@ -97,8 +77,6 @@ The following is the technology stack used for this project.
 - **Project Management Tools:** Trello and Discord
 
 ### Libraries & Dependencies
-
-#### Client
 
 - **react** for building client side using create-react-app (CRA)
 - **axios** for handling HTTP requests
@@ -112,173 +90,28 @@ The following is the technology stack used for this project.
 - **Material UI** for injecting styling to the iframe and creating tabs, forms, and buttons
 - **PostCSS** for overall layouts and styling
 
-#### Server
-
-- **rails** for building server side api
-- **postgresql** for database
-- **puma** for the app server
-- **bcrypt** for secure password
-- **knock** for authentication
-- **rspec** for testing code
-- **factory_bot** for creating test fixtures
-- **database_cleaner** for cleaning the database for testing
-- **image_processing** for Active Storage variant
-- **aws-sdk-s3** for storing uploaded images and generating accessable urls
-- **jsonapi-serializer** for serializing Rails models
-
-<hr />
-
-## Dataflow Diagram
-
-![](/docs/T3A2-DFD.png)
-
-<br>
-
-### ERD for reference
-
-![](/docs/T3A2-ERD.png)
-
-<hr />
-
-## Application Architecture Diagram
-
-![](/docs/T3A2-AAD.png)
-
-<hr />
-
-## User Stories
-
-1. As a digital marketer, he/she should be able to register for a new account with his/her information and profile image, so that he/she could use the service for my marketing purposes.
-
-2. As a digital marketer, he/she should be able to log in with secure authentication into his/her account, so that he/she could manage all their social media and landing pages links with the service.
-
-3. As a digital marketer, he/she should be able to upload his/her profile image, so that they could make a personalised page.
-
-4. As a digital marketer, he/she should be able to choose a random image, so that they could create the page look better.
-
-5. As a digital marketer, he/she should be able to create a new card in his/her account, so that he/she could gather all his/her links and add everything into the card.
-
-6. As a digital marketer, he/she should be able to see the preview of the page, so that he/she could check what the links look like and update them if needed.
-
-7. As a digital marketer, he/she should be able to view all the links that he/she has added into the system, so that he/she could make any changes of links and descriptions to make sure all are correctly added.
-
-8. As a digital marketer, he/she should be able to remove or edit any existing links, so that he/she could change the links that he/she had added incorrectly previously.
-
-<hr />
-
-## Wireframes
-
-**Home Page**
-
-![](/docs/wireframes/HomePage.png)
-
-- The username typed in the input field will be taken to the register page
-- The username will be the endpoint of the created link
-  eg. `https://iLink.in/yourname`
-
-**Sign up Page**
-
-![](/docs/wireframes/RegisterPage.png)
-
-- If the sign up is successful, the new user will be taken to the dashboard
-- Otherwise, it shows an error message to the user
-
-**Login Page**
-
-![](/docs/wireframes/LoginPage.png)
-
-- If the login succeeds, the new user will be taken to the dashboard
-- Otherwise, it shows an error message to the user
-
-**Dashboard - Link**
-
-![](/docs/wireframes/Dashboard-Links.png)
-
-- Dashboard has a separate navigation bar
-  - Links and Appearance tabs for creating a card in the Dashboard
-  - Upgrade and Logout tabs take the user outside of the Dashboard
-- By default, there are three input fields for creating links
-- A user can control the visibility of each link using the switch button
-- Each link can be reset once clicked a trash icon
-- Users can preview the card while creating on the right side of the screen. For mobile view, there will be the Preview button instead
-- Once Save button is clicked the input data is stored in the database
-
-**Dashboard - Appearance**
-
-![](/docs/wireframes/Dashboard-Appearance.png)
-
-- A profile photo can be uploaded
-- User can manipulate their bio
-- Background colour can be changed using a colour picker
-- A background image can be set using Random button
-- Add Background Image will be a paid feature
-- Remove Image button resets the background images and uses just a colour
-- Likewise Link tab, users can see the preview
-
-**Upgrade**
-
-![](/docs/wireframes/UpgradePage.png)
-
-- Upgrade page is _an extra feature after completing MVP_
-- Get Primium button is linked with Stripe for payment
-- Upgrade page will connect to additional features
-  - Add extra links
-  - Add a background image file or set a custom background image
-
-<hr />
-
 ## Screenshots of the App
 
 **Home**
-![](/docs/screenshots/Home.png)
+![](/screenshots/Home.png)
 
 **Sign up**
-![](/docs/screenshots/Signup.png)
+![](/screenshots/Signup.png)
 
 **Dashboard - Links**
-![](/docs/screenshots/Dashboard-Links.png)
+![](/screenshots/Dashboard-Links.png)
 
 **Dashboard - Appearance**
-![](/docs/screenshots/Dashboard-Appearance.png)
+![](/screenshots/Dashboard-Appearance.png)
 
 **iLink Profile - Valid Username**
-![](/docs/screenshots/iLink-profile.png)
+![](/screenshots/iLink-profile.png)
 
 **iLink Profile - Invalid Username**
-![](/docs/screenshots/iLink-profile-invalid.png)
+![](/screenshots/iLink-profile-invalid.png)
 
 **Not Found**
-![](/docs/screenshots/not_found.png)
-
-<hr />
-
-## Screenshots of the Trello board
-
-Trello project management tool is being used throughout the entire project from planning stage to implementation.
-
-We started off the project by planning and designing the system documentation that covers the application architectural and wireframe of the site. By keeping track of the process, we took advantage of the trello management tool which allows us to create a board with multiple cards that represents each task that needs to be included in the system documentation. Then, each task is being allocated fairly to each member of the group with a deadline.
-
-Each member of the group will then be responsible for the task assigned to them and mark off the task once completed. The group is working on the project remotely from Brisbane and Sydney. The following screenshot showed the progress of our work throughout the planning process. For more information, you could preview the full version of our trello board at [**here**](https://trello.com/b/vwtGNhLx/t3a2-part-a)
-
-### Stage 1 - Design planning
-
-![](/docs/trello/Stage1-Planning.PNG)
-
-### Stage 2 - Progressing
-
-![](/docs/trello/Stage2-Progressing.PNG)
-
-### Stage 3 - Completed
-
-![](/docs/trello/Stage3-Completed.PNG)
-
-### Stage 4 - Project implementation start (Part B)
-
-![](/docs/trello/Stage4-Project-Implementation.PNG)
-![](</docs/trello/Stage4-Project-Implementation(2).PNG>)
-![](</docs/trello/Stage4-Project-Implementation(3).PNG>)
-
-<hr />
+![](/screenshots/not_found.png)
 
 ## Reference Links
 
