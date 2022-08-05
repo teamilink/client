@@ -79,6 +79,7 @@ const AppearanceEditor = () => {
         data: result,
       });
       window.location.reload();
+      console.log("done!", appearance);
     });
   };
 
@@ -205,7 +206,7 @@ const AppearanceEditor = () => {
               variant="outlined"
               id="submit"
               value="Save"
-              // onSubmit={handleSubmit}
+              data-testid="save"
               className={styles.button}
             >
               Save
@@ -215,6 +216,7 @@ const AppearanceEditor = () => {
               variant="outlined"
               id="submit"
               value="Reset"
+              data-testid="reset"
               onClick={handleReset}
               className={styles.button}
             >

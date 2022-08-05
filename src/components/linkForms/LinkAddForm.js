@@ -62,6 +62,7 @@ const LinkAddForm = () => {
           variant="standard"
           id="title"
           name="title"
+          data-testid="link_title"
           value={newLink.title || ""}
           onChange={handleChange}
           inputProps={{ maxLength: 100 }}
@@ -74,14 +75,21 @@ const LinkAddForm = () => {
           id="link_address"
           name="link_address"
           type="url"
+          data-testid="link_address"
           value={newLink.link_address || ""}
           onChange={handleChange}
         />
         <div className={styles.buttons}>
-          <Button variant="text" type="submit" color="secondary">
+          <Button
+            data-testid="save"
+            variant="text"
+            type="submit"
+            color="secondary"
+          >
             Save
           </Button>
           <Button
+            data-testid="clear"
             variant="text"
             type="reset"
             onClick={clearForm}
