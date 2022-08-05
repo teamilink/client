@@ -73,41 +73,44 @@ const Login = () => {
   return (
     <section className={styles.container}>
       <Navbar />
+      <div className={styles.formContainer}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div
+            className={`${styles.error} ${
+              err ? styles.display : styles.hidden
+            }`}
+          >
+            <Alert severity="error" variant="outlined">
+              {err && err}
+            </Alert>
+          </div>
+          <h1 className={styles.title}>Nice to see you again!</h1>
+          <TextField
+            required
+            type="email"
+            label="Email"
+            variant="standard"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleUserData}
+          />
+          <TextField
+            required
+            label="Password"
+            variant="standard"
+            name="password"
+            id="password"
+            type="password"
+            value={formData.password}
+            onChange={handleUserData}
+          />
 
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div
-          className={`${styles.error} ${err ? styles.display : styles.hidden}`}
-        >
-          <Alert severity="error" variant="outlined">
-            {err && err}
-          </Alert>
-        </div>
-        <h1 className={styles.title}>Nice to see you again!</h1>
-        <TextField
-          required
-          type="email"
-          label="Email"
-          variant="standard"
-          name="email"
-          id="email"
-          value={formData.email}
-          onChange={handleUserData}
-        />
-        <TextField
-          required
-          label="Password"
-          variant="standard"
-          name="password"
-          id="password"
-          type="password"
-          value={formData.password}
-          onChange={handleUserData}
-        />
-
-        <Button variant="outlined" type="submit" color="primary">
-          Login
-        </Button>
-      </form>
+          <Button variant="outlined" type="submit" color="primary">
+            Login
+          </Button>
+        </form>
+      </div>
     </section>
   );
 };
