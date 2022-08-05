@@ -117,4 +117,4 @@ The following is the technology stack used for this project.
 - [iLink Part A - Trello Board](https://trello.com/b/vwtGNhLx/t3a2-part-a)
 - [iLink Part B - Trello Board](https://trello.com/b/PY27jXUy/t3a2-part-b)
 - [iLink - Slide Deck for Part A](https://www.canva.com/design/DAFFim6i7co/uUwexPtZMTMt71YQwHYxwA/view?utm_content=DAFFim6i7co&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
-- [iLink - Slide Deck for Part B](https://www.canva.com/design/DAFIPGhVCBQ/23sgypgNdu5MORrvwsGv5w/view?utm_content=DAFIPGhVCBQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- [iLink - Slide Deck for Part B](https://www.canva.com/design/DAFIbcFDLno/ZVy-5DlxTncpmvXmp1wlDQ/view?utm_content=DAFIbcFDLno&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
