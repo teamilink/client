@@ -1,5 +1,7 @@
 # iLink - Client
 
+_This readme file is only for the **client side** of iLink. To read the combined version, please visit the [iLinkDocs](https://github.com/teamilink/iLinkDocs) repository._
+
 iLink optimises your social media presence by linking all the landing pages under one main URL as an online business card.
 
 <hr />
