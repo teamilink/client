@@ -25,16 +25,23 @@ const AppearanceEditor = () => {
     setPicture(event.target.files[0]);
   };
 
-  const handleRandomImage = () => {
+  const getAndStoreImg = () => {
+    getRandomImage().then((url) => {
+      console.log(url);
+      dispatch({
+        type: "addRandomImage",
+        data: url,
+      });
+    });
+  };
+
+  const handleRandomImage = (event) => {
+    event.preventDefault();
     setClickCount(clickCount + 1);
     if (clickCount < 2) {
-      getRandomImage().then((url) =>
-        dispatch({
-          type: "addRandomImage",
-          data: url,
-        })
-      );
+      getAndStoreImg();
     } else {
+      getAndStoreImg();
       setErr("Sorry, you can only get 3 pictures");
     }
     console.log(err);

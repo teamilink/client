@@ -66,9 +66,9 @@
   margin-bottom: 1rem;
 }
 
-.random {
+/* .random {
   display: none;
-}
+} */
 
 .random.inactive{
   cursor: none;
