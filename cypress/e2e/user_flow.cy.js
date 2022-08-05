@@ -1,9 +1,8 @@
 /// <reference types="cypress" />
-import "@testing-library/cypress/add-commands";
 
 describe("User Flow", () => {
   before(() => {
-    cy.visit(`${Cypress.env("development")}/login`);
+    cy.visit(`${Cypress.env("development")}/login`); // switch to production to test the deployed app
     cy.get("#email").type("heavy@test.com");
     cy.get("#password").type("test123");
     cy.get("form").submit();

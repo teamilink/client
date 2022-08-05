@@ -1,9 +1,8 @@
 /// <reference types="cypress" />
-// import '@testing-library/cypress/add-commands'
 
 describe("Sign up", () => {
   it("visits the iLink", () => {
-    cy.visit(Cypress.env("development"));
+    cy.visit(Cypress.env("development")); // switch to production to test the deployed app
   });
 
   it("types a username and submit it to navigate to the signup", () => {
