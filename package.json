@@ -16,14 +16,14 @@
     "react-frame-component": "^5.2.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -44,7 +44,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.18.9",
-    "react-test-renderer": "^18.2.0"
+    "@babel/preset-env": "^7.18.9"
   }
 }

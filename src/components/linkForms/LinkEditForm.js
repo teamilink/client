@@ -57,6 +57,7 @@ const LinkEditForm = ({ link }) => {
           variant="standard"
           id="title"
           name="title"
+          data-testid="link_title"
           value={title}
           onChange={handleChange}
           inputProps={{ maxLength: 100 }}
@@ -68,17 +69,24 @@ const LinkEditForm = ({ link }) => {
           id="link_address"
           name="link_address"
           type="url"
+          data-testid="link_address"
           value={link_address}
           onChange={handleChange}
         />
         <div className={styles.buttons}>
-          <Button variant="text" type="submit" color="secondary">
+          <Button
+            data-testid="update"
+            variant="text"
+            type="submit"
+            color="secondary"
+          >
             Update
           </Button>
           <Button
             variant="text"
             type="submit"
             color="secondary"
+            data-testid="delete"
             name={id}
             id={id}
             onClick={handleDelete}

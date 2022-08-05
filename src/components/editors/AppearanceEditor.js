@@ -67,10 +67,10 @@ const AppearanceEditor = () => {
     data.append("appearance[picture]", picture);
     data.append("appearance[user_id]", currentUserId);
 
-    // only add picture_url when it has value
+    // only add bg_image_url when it has value
     // otherwise null/undefined become "null"/"undefined"
-    appearance.picture_url &&
-      data.append("appearance[picture_url]", appearance.picture_url);
+    appearance.bg_image_url &&
+      data.append("appearance[bg_image_url]", appearance.bg_image_url);
 
     saveAppearance(data, appearance.id).then((result) => {
       setLoading(false);
@@ -79,6 +79,7 @@ const AppearanceEditor = () => {
         data: result,
       });
       window.location.reload();
+      console.log("done!", appearance);
     });
   };
 
@@ -127,7 +128,7 @@ const AppearanceEditor = () => {
                   onClick={handleClick}
                 >
                   {(picture && picture.name) ||
-                    (appearance.uploaded_picture_url && "Picture added") ||
+                    (appearance.picture_url && "Picture added") ||
                     "No file"}
                 </button>
               )}
@@ -136,8 +137,8 @@ const AppearanceEditor = () => {
             <button
               className={`${styles.random} ${err && styles.inactive}`}
               type="click"
-              name="picture_url"
-              id="picture_url"
+              name="bg_image_url"
+              id="bg_image_url"
               onClick={handleRandomImage}
             >
               {!err && clickCount === 0 ? `Get a random image` : err}
@@ -205,7 +206,7 @@ const AppearanceEditor = () => {
               variant="outlined"
               id="submit"
               value="Save"
-              // onSubmit={handleSubmit}
+              data-testid="save"
               className={styles.button}
             >
               Save
@@ -215,6 +216,7 @@ const AppearanceEditor = () => {
               variant="outlined"
               id="submit"
               value="Reset"
+              data-testid="reset"
               onClick={handleReset}
               className={styles.button}
             >
