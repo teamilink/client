@@ -8,8 +8,6 @@ import styles from "./Form.module.css";
 import Navbar from "../navbar/Navbar";
 
 const SignUp = () => {
-  console.log("Signup");
-
   const { dispatch } = useGlobalState();
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,12 +36,13 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // send a request for signup
     signUpUser(formData)
       .then((user) => {
         if (user.error) {
           setErr(user.error);
         } else {
-          console.log("signup user", user);
+          // store the data in the state & the session storage
           dispatch({
             type: "setLoggedInUser",
             data: user.username,
@@ -56,9 +55,11 @@ const SignUp = () => {
             type: "setCurrentUserId",
             data: user.id,
           });
+
           sessionStorage.setItem("id", user.id);
           sessionStorage.setItem("username", user.username);
           sessionStorage.setItem("token", user.jwt);
+
           navigate("/dashboard");
         }
       })

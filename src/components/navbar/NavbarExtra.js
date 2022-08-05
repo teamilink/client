@@ -3,7 +3,8 @@ import NavbarLink from "./NavbarLink";
 import NavbarTabs from "./NavbarTabs";
 import styles from "./NavbarExtra.module.css";
 
-const NavbarExtra = (props) => {
+const NavbarExtra = () => {
+  // navigation for dashboard
   return (
     <div className={styles.header}>
       <NavbarTabs />

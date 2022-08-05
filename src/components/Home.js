@@ -10,9 +10,9 @@ const Home = () => {
   const [username, setUsername] = useState("");
 
   const handleSubmit = (e) => {
-    // go to signup
-    // navigate("/signup");
     e.preventDefault();
+
+    // pass the username to the Signup component
     navigate("/signup", { state: { username: username } });
   };
 

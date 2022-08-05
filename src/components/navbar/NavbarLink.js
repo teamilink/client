@@ -6,6 +6,7 @@ const NavbarLink = () => {
   const { store } = useGlobalState();
   const { loggedInUser } = store;
 
+  // display the link based on the current url
   const ilinkUrl = window.location.href.includes("localhost")
     ? `http://localhost:3000/ilink/${loggedInUser}`
     : `https://ilinkapp.netlify.app/ilink/${loggedInUser}`;

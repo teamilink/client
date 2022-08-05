@@ -7,35 +7,34 @@ import Navbar from "../navbar/Navbar";
 import styles from "./Form.module.css";
 
 const Login = () => {
-  console.log("Login");
   const { dispatch } = useGlobalState();
-
   const navigate = useNavigate();
+  const location = useLocation();
+
   const initialFormData = {
     email: "",
     password: "",
   };
-
   const [formData, setUser] = useState(initialFormData);
   const [err, setErr] = useState(null);
 
-  const location = useLocation();
   useEffect(() => {
+    // set the user authorisation in route and send the state
     if (location.state === "Unauthorised") {
-      console.log(location.state);
       setErr("Login to your dashboard");
     }
   }, [location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("auth login button clicked");
+
+    // send a request for signin
     signInUser(formData)
       .then((user) => {
         if (user.error) {
           setErr(user.error);
         } else {
-          console.log("signin user", user);
+          // store the data in the state & the session storage
           dispatch({
             type: "setLoggedInUser",
             data: user.username,
@@ -52,6 +51,7 @@ const Login = () => {
           sessionStorage.setItem("id", user.id);
           sessionStorage.setItem("username", user.username);
           sessionStorage.setItem("token", user.jwt);
+
           navigate("/dashboard");
         }
       })

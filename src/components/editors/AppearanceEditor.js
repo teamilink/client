@@ -21,7 +21,6 @@ const AppearanceEditor = () => {
   const [err, setErr] = useState(null);
 
   const handleFile = (event) => {
-    console.log("image attached!");
     setPicture(event.target.files[0]);
   };
 
@@ -37,6 +36,7 @@ const AppearanceEditor = () => {
 
   const handleRandomImage = (event) => {
     event.preventDefault();
+
     setClickCount(clickCount + 1);
     if (clickCount < 2) {
       getAndStoreImg();
@@ -44,41 +44,37 @@ const AppearanceEditor = () => {
       getAndStoreImg();
       setErr("Sorry, you can only get 3 pictures");
     }
-    console.log(err);
   };
 
   const handleChange = (event) => {
-    const eventTarget = event.currentTarget;
-    console.log("handleChange - appearance");
     dispatch({
       type: "editAppearance",
-      data: eventTarget,
+      data: event.currentTarget,
     });
   };
 
   const handleClick = (event) => {
     event.preventDefault();
-    console.log("button clicked!");
     pictureRef.current.click();
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("AppearanceEditor component submit clicked!");
     setLoading(true);
-    const data = new FormData();
 
+    // create FormData to send the data including a file
+    const data = new FormData();
     data.append("appearance[profile_title]", appearance.profile_title);
     data.append("appearance[bio]", appearance.bio);
     data.append("appearance[bg_color]", appearance.bg_color);
     data.append("appearance[picture]", picture);
     data.append("appearance[user_id]", currentUserId);
-
     // only add bg_image_url when it has value
     // otherwise null/undefined become "null"/"undefined"
     appearance.bg_image_url &&
       data.append("appearance[bg_image_url]", appearance.bg_image_url);
 
+    // send a request to the server
     saveAppearance(data, appearance.id).then((result) => {
       setLoading(false);
       dispatch({
@@ -86,13 +82,11 @@ const AppearanceEditor = () => {
         data: result,
       });
       window.location.reload();
-      console.log("done!", appearance);
     });
   };
 
   const handleReset = (event) => {
     event.preventDefault();
-    console.log("delete clicked!", event);
 
     if (appearance.id) {
       destroyAppearance(appearance.id).then(
@@ -107,7 +101,6 @@ const AppearanceEditor = () => {
       });
       setPicture("");
     }
-    console.log("appearance after reset", appearance);
   };
 
   return (

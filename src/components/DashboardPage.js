@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import LinkEditor from "./editors/LinkEditor";
 import AppearanceEditor from "./editors/AppearanceEditor";
-import Preview from "./preview/Preview";
+import PreviewDefault from "./preview/PreviewDefault";
 import PreviewModal from "./preview/PreviewModal";
 import styles from "./DashboardPage.module.css";
 import NavbarExtra from "./navbar/NavbarExtra";
 import { Button } from "@mui/material";
 
 const DashboardPage = () => {
-  console.log("Dashboard");
   let location = useLocation();
+
+  // control modal for mobile view
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
@@ -28,10 +29,11 @@ const DashboardPage = () => {
           </Button>
           <p>Save before preview!</p>
         </div>
+
         {openModal ? (
           <PreviewModal openModal={openModal} handleClose={handleClose} />
         ) : (
-          <Preview />
+          <PreviewDefault />
         )}
       </section>
     </section>
