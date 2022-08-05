@@ -86,23 +86,14 @@ This app aims at social media influencers, marketing and branding professionals 
 The following is the technology stack used for this project.
 
 - **Programming Language:** Ruby and Javascript
-
 - **Client Side:** React.js library, Material UI & PostCSS.
-
 - **Server Side:** Ruby on Rails framework
-
 - **Testing:** RSpec, Jest, React-testing-libraries, Cypress
-
 - **Database:** PostgreSQL
-
 - **Cloud Storage:** Amazon S3
-
 - **Cloud Hosting:** Netlify for Client side and Heroku for server side
-
 - **Utilities:** Balsamiq Wireframes, Draw.io
-
 - **DevOps:** Github, Git Version Control, Visual Studio Code
-
 - **Project Management Tools:** Trello and Discord
 
 ### Libraries & Dependencies
@@ -228,7 +219,7 @@ The following is the technology stack used for this project.
 
 ![](/docs/wireframes/UpgradePage.png)
 
-- Upgrade page is an extra feature after completing MVP
+- Upgrade page is _an extra feature after completing MVP_
 - Get Primium button is linked with Stripe for payment
 - Upgrade page will connect to additional features
   - Add extra links
@@ -250,8 +241,14 @@ The following is the technology stack used for this project.
 **Dashboard - Appearance**
 ![](/docs/screenshots/Dashboard-Appearance.png)
 
-**iLink Profile**
+**iLink Profile - Valid Username**
 ![](/docs/screenshots/iLink-profile.png)
+
+**iLink Profile - Invalid Username**
+![](/docs/screenshots/iLink-profile-invalid.png)
+
+**Not Found**
+![](/docs/screenshots/not_found.png)
 
 <hr />
 
