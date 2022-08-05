@@ -8,12 +8,11 @@ import {
 } from "../../services/appearanceServices";
 import { getRandomImage } from "../../services/imageService";
 
-const AppearanceEditor = () => {
+const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
   const { store, dispatch } = useGlobalState();
-  const { appearance, currentUserId } = store;
+  const { appearance } = store;
 
   const pictureRef = useRef();
-  const [picture, setPicture] = useState("");
   const [loading, setLoading] = useState(false);
 
   // limit to get a random image
@@ -21,12 +20,16 @@ const AppearanceEditor = () => {
   const [err, setErr] = useState(null);
 
   const handleFile = (event) => {
-    setPicture(event.target.files[0]);
+    handlePicture(event.target.files[0]);
+    // generate timestamp for picture attachment
+    dispatch({
+      type: "addPicTimestamp",
+      data: Date.now(),
+    });
   };
 
   const getAndStoreImg = () => {
     getRandomImage().then((url) => {
-      console.log(url);
       dispatch({
         type: "addRandomImage",
         data: url,
@@ -62,20 +65,11 @@ const AppearanceEditor = () => {
     event.preventDefault();
     setLoading(true);
 
-    // create FormData to send the data including a file
-    const data = new FormData();
-    data.append("appearance[profile_title]", appearance.profile_title);
-    data.append("appearance[bio]", appearance.bio);
-    data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[picture]", picture);
-    data.append("appearance[user_id]", currentUserId);
-    // only add bg_image_url when it has value
-    // otherwise null/undefined become "null"/"undefined"
-    appearance.bg_image_url &&
-      data.append("appearance[bg_image_url]", appearance.bg_image_url);
+    // call the function in the parent components
+    const formData = appendFormData();
 
     // send a request to the server
-    saveAppearance(data, appearance.id).then((result) => {
+    saveAppearance(formData, appearance.id).then((result) => {
       setLoading(false);
       dispatch({
         type: "setAppearance",
@@ -94,12 +88,12 @@ const AppearanceEditor = () => {
           type: "resetAppearance",
         })
       );
-      setPicture("");
+      handlePicture("");
     } else if (appearance.id === undefined) {
       dispatch({
         type: "resetAppearance",
       });
-      setPicture("");
+      handlePicture("");
     }
   };
 

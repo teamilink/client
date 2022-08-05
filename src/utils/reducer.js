@@ -54,20 +54,11 @@ export const reducer = (state, action) => {
         ...state,
         links: deletedItem,
       };
-    // case "setUploadImage":
-    //   let appearanceWithImage = {
-    //     ...state.appearance,
-    //     picture_name: action.data.original_filename,
-    //     picture_url: action.data.url,
-    //   };
-    //   return {
-    //     ...state,
-    //     appearance: appearanceWithImage,
-    //   };
     case "addRandomImage":
       let appearanceWithRandomImg = {
         ...state.appearance,
         bg_image_url: action.data,
+        img_timestamp: Date.now(),
       };
       return {
         ...state,
@@ -87,6 +78,15 @@ export const reducer = (state, action) => {
         ...state,
         appearance: updatedAppearance,
       };
+    case "addPicTimestamp":
+      let newTimestamp = {
+        ...state.appearance,
+        pic_timestamp: action.data,
+      };
+      return {
+        ...state,
+        appearance: newTimestamp,
+      };
     case "resetAppearance":
       let initialData = {
         profile_title: "",
@@ -94,6 +94,8 @@ export const reducer = (state, action) => {
         bg_color: "",
         bg_image_url: null,
         picture_url: null,
+        img_timestamp: "",
+        pic_timestamp: "",
       };
       return {
         ...state,

@@ -1,0 +1,25 @@
+@value ilinkBlack from '../../common/colours.css';
+
+.frame {
+  width: 370px;
+  height: 760px;
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: top left;
+  transform: scale(0.749213) translateX(-50%) translateY(-50%) translate3d(0px, 0px, 0px);
+
+  border: 1.1rem solid ilinkBlack;
+  border-radius: 3rem;
+  overflow-y: auto;
+}
+
+/* .frame.hide {
+  display: none;
+}
+
+.frame.show {
+  display: block;
+} */
