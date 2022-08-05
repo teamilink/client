@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const iLinkAPI = axios.create({
-  baseURL: "https://ilink-server.herokuapp.com",
-  // baseURL: "http://localhost:4000",
+  // baseURL: "https://ilink-server.herokuapp.com",
+  baseURL: "http://localhost:4000",
 });
 
 iLinkAPI.interceptors.request.use((req) => {

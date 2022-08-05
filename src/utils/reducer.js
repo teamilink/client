@@ -67,7 +67,7 @@ export const reducer = (state, action) => {
     case "addRandomImage":
       let appearanceWithRandomImg = {
         ...state.appearance,
-        picture_url: action.data,
+        bg_image_url: action.data,
       };
       return {
         ...state,
@@ -92,7 +92,7 @@ export const reducer = (state, action) => {
         profile_title: "",
         bio: "",
         bg_color: "",
-        uploaded_picture_url: null,
+        bg_image_url: null,
         picture_url: null,
       };
       return {
