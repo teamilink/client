@@ -85,7 +85,6 @@ The following is the technology stack used for this project.
 - **dotenv** for storing environment variables
 - **Jest** for testing Javascript
 - **react-testing-library** for testing react components and UI
-- **react-test-renderer** for rendering test, snapshots
 - **Cypress** for E2E test
 - **Material UI** for injecting styling to the iframe and creating tabs, forms, and buttons
 - **PostCSS** for overall layouts and styling
