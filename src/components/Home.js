@@ -36,7 +36,7 @@ const Home = () => {
           onChange={handleChange}
           className={styles.paddedRight}
         />
-        <Button variant="outlined" type="button" color="primary">
+        <Button variant="outlined" type="submit" color="primary">
           Claim your iLink
         </Button>
       </form>
