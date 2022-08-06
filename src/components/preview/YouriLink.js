@@ -70,7 +70,6 @@ const YouriLink = () => {
 
   // set background theme based on appearance.bg_color
   const setTheme = (theme) => {
-    console.log("setTheme function triggered");
     switch (theme) {
       case "light":
         return `linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%)`;

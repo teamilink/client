@@ -8,24 +8,20 @@ export const getData = async (data) => {
 };
 
 export const getDashbaord = async (token) => {
-  console.log("getDashbaord - service");
   const response = await iLinkAPI.get("/dashboard");
   return response.data;
 };
 
 export const getAniLink = async (username) => {
-  console.log("getAniLink - service");
   const response = await iLinkAPI.get(`/dashboard?username=${username}`);
   return response.data;
 };
 
 export const saveLink = (link) => {
-  console.log("saveLink - service");
   return link.id ? updateLink(link) : createLink(link);
 };
 
 export const createLink = async (link) => {
-  console.log("createLink - service");
   const response = await iLinkAPI.post("/links", link);
   return response.data;
 };
