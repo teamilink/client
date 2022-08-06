@@ -1,6 +1,6 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../../utils/stateContext";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Toolbar, Tabs, Tab } from "@mui/material";
 import styles from "./NavbarTabs.module.css";
 
@@ -35,12 +35,14 @@ const NavbarTabs = () => {
               value="/dashboard"
               component={NavLink}
               to="/dashboard"
+              key="dashboard"
             />
             <Tab
               label="Appearance"
               value="/dashboard/appearance"
               component={NavLink}
               to="/dashboard/appearance"
+              key="appearance"
             />
             <Tab
               label="Logout"
@@ -48,6 +50,7 @@ const NavbarTabs = () => {
               component={NavLink}
               to="/logout"
               onClick={logout}
+              key="logout"
             />
           </Tabs>
         ) : (
@@ -58,12 +61,14 @@ const NavbarTabs = () => {
               component={NavLink}
               to="/login"
               data-testid="login"
+              key="login"
             />
             <Tab
               label="SignUp"
               value="/signup"
               component={NavLink}
               to="/signup"
+              key="signup"
             />
           </Tabs>
         )}

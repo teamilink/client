@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
-import { TextField, Button } from "@mui/material";
-import styles from "./AppearanceEditor.module.css";
 import { useGlobalState } from "../../utils/stateContext";
 import {
   destroyAppearance,
   saveAppearance,
 } from "../../services/appearanceServices";
 import { getRandomImage } from "../../services/imageService";
+import { TextField, Button } from "@mui/material";
+import styles from "./AppearanceEditor.module.css";
 
 const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
   const { store, dispatch } = useGlobalState();

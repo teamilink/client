@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
-
 import Navbar from "./navbar/Navbar";
+import { Button, TextField } from "@mui/material";
 import styles from "./Home.module.css";
 
 const Home = () => {

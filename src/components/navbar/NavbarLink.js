@@ -8,7 +8,7 @@ const NavbarLink = () => {
 
   // display the link based on the current url
   const ilinkUrl = window.location.href.includes("localhost")
-    ? `http://localhost:3000/ilink/${loggedInUser}`
+    ? `http://localhost:${window.location.port}/ilink/${loggedInUser}`
     : `https://ilinkapp.netlify.app/ilink/${loggedInUser}`;
 
   return (

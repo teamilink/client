@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { getData } from "../../services/linksServices";
 import { useGlobalState } from "../../utils/stateContext";
+import { getData } from "../../services/linksServices";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Card from "./Card";
 
 import { Typography } from "@mui/material";

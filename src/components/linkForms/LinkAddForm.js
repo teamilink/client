@@ -5,8 +5,6 @@ import { useGlobalState } from "../../utils/stateContext";
 import { saveLink } from "../../services/linksServices";
 
 const LinkAddForm = () => {
-  // console.log("LinkAddForm");
-
   const { store, dispatch } = useGlobalState();
   const { currentUserId } = store;
   const initialLinkState = {
@@ -19,15 +17,15 @@ const LinkAddForm = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("clicked onSubmit");
+
+    // send a request to save the link
     saveLink(newLink).then((response) => {
-      console.log(response);
       dispatch({
         type: "addLink",
         data: response,
       });
     });
-    // onSave(newLink);
+
     event.target.reset();
     setNewLink(initialLinkState);
   };
@@ -42,14 +40,9 @@ const LinkAddForm = () => {
       ...newLink,
       [eventTarget.name]: eventTarget.value,
     });
-    // dispatch({
-    //   type: "setALink",
-    //   data: eventTarget,
-    // });
   };
 
   const clearForm = () => {
-    console.log("clicked clearForm");
     setNewLink(initialLinkState);
   };
 
@@ -86,7 +79,7 @@ const LinkAddForm = () => {
             type="submit"
             color="secondary"
           >
-            Save
+            Save to view
           </Button>
           <Button
             data-testid="clear"
