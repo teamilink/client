@@ -1,8 +1,7 @@
 import React from "react";
-import styles from "./Preview.module.css";
-
-import { Modal } from "@mui/material";
 import ILinkFrame from "./ILinkFrame";
+import { Modal } from "@mui/material";
+import styles from "./Preview.module.css";
 
 const PreviewModal = ({ openModal, handleClose }) => {
   const closeWindow = () => {
@@ -13,7 +12,7 @@ const PreviewModal = ({ openModal, handleClose }) => {
     <div className={styles.preview}>
       {openModal && (
         <Modal open={openModal} onClose={closeWindow}>
-          <ILinkFrame openModal={openModal} />
+          <ILinkFrame />
         </Modal>
       )}
     </div>

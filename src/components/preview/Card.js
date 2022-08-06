@@ -16,8 +16,6 @@ import {
 const Card = () => {
   const { store } = useGlobalState();
   const { links, appearance, loggedInUser } = store;
-  console.log("card links", links);
-  console.log("card appearance", appearance);
 
   // find newly uploaded or added profile image
   const findNewer = () => {

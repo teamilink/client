@@ -1,14 +1,14 @@
 import React, { useState } from "react";
+import { useGlobalState } from "../utils/stateContext";
+import { saveAppearance } from "../services/appearanceServices";
 import { useLocation } from "react-router-dom";
 import LinkEditor from "./editors/LinkEditor";
 import AppearanceEditor from "./editors/AppearanceEditor";
 import PreviewDefault from "./preview/PreviewDefault";
 import PreviewModal from "./preview/PreviewModal";
-import styles from "./DashboardPage.module.css";
 import NavbarExtra from "./navbar/NavbarExtra";
+import styles from "./DashboardPage.module.css";
 import { Button } from "@mui/material";
-import { useGlobalState } from "../utils/stateContext";
-import { saveAppearance } from "../services/appearanceServices";
 
 const DashboardPage = () => {
   let location = useLocation();
@@ -67,7 +67,6 @@ const DashboardPage = () => {
           <Button sx={{ backgroundColor: "white" }} onClick={handleOpenModal}>
             {!openModal ? "Preview" : null}
           </Button>
-          <p>Save before preview!</p>
         </div>
 
         {openModal ? (

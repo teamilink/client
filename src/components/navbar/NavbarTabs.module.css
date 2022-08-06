@@ -1,7 +1,6 @@
 @value ilinkWhite, ilinkBrightBlue from '../../common/colours.css';
 @value mediaQuery from '../../common/size.css';
 
-
 .navbar {
   width: 100%;
   height: auto;
@@ -21,6 +20,5 @@
 @media screen and (max-width: mediaQuery) {
   .navbar {
     flex-basis: auto;
-
   }
 }

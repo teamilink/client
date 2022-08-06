@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { signUpUser } from "../../services/authServices";
+import React, { useEffect, useState } from "react";
 import { useGlobalState } from "../../utils/stateContext";
+import { signUpUser } from "../../services/authServices";
+import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../navbar/Navbar";
 import { TextField, Button, Alert } from "@mui/material";
 import styles from "./Form.module.css";
-import Navbar from "../navbar/Navbar";
 
 const SignUp = () => {
   const { dispatch } = useGlobalState();

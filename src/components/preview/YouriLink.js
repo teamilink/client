@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { getData } from "../../services/linksServices";
 import { useGlobalState } from "../../utils/stateContext";
+import { getData } from "../../services/linksServices";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Card from "./Card";
 
 import { Typography } from "@mui/material";
@@ -70,7 +70,6 @@ const YouriLink = () => {
 
   // set background theme based on appearance.bg_color
   const setTheme = (theme) => {
-    console.log("setTheme function triggered");
     switch (theme) {
       case "light":
         return `linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%)`;
