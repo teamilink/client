@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { useGlobalState } from "../../utils/stateContext";
 import {
   CardContainer,
@@ -16,6 +17,8 @@ import {
 const Card = () => {
   const { store } = useGlobalState();
   const { links, appearance, loggedInUser } = store;
+  const params = useParams();
+  const profileUsername = params.username;
 
   // find newly uploaded or added profile image
   const findNewer = () => {
@@ -41,7 +44,9 @@ const Card = () => {
           />
         ) : (
           <LetterProfile>
-            {loggedInUser ? loggedInUser.charAt(0).toUpperCase() : "A"}
+            {loggedInUser
+              ? loggedInUser.charAt(0).toUpperCase()
+              : profileUsername.charAt(0).toUpperCase()}
           </LetterProfile>
         )}
         <Text>
