@@ -3,7 +3,7 @@ import { useGlobalState } from "../../utils/stateContext";
 import { signUpUser } from "../../services/authServices";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
-import { TextField, Button, Alert } from "@mui/material";
+import { TextField, Button, Alert, CircularProgress } from "@mui/material";
 import styles from "./Form.module.css";
 
 const SignUp = () => {
@@ -17,6 +17,7 @@ const SignUp = () => {
   };
 
   const [formData, setUser] = useState(initialFormData);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
 
   useEffect(() => {
@@ -34,11 +35,13 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // send a request for signup
     signUpUser(formData)
       .then((user) => {
         if (user.error) {
+          setLoading(false);
           setErr(user.error);
         } else {
           // store the data in the state & the session storage
@@ -62,7 +65,10 @@ const SignUp = () => {
           navigate("/dashboard");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   const handleUserData = (e) => {
@@ -143,8 +149,18 @@ const SignUp = () => {
             variant="outlined"
             type="submit"
             color="primary"
+            disabled={loading}
           >
             Sign Up
+            {loading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: "rgb(30, 216, 229)",
+                  position: "absolute",
+                }}
+              />
+            )}
           </Button>
         </form>
       </div>

@@ -3,7 +3,7 @@ import { useGlobalState } from "../../utils/stateContext";
 import { signInUser } from "../../services/authServices";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
-import { TextField, Button, Alert } from "@mui/material";
+import { TextField, Button, Alert, CircularProgress } from "@mui/material";
 import styles from "./Form.module.css";
 
 const Login = () => {
@@ -16,6 +16,7 @@ const Login = () => {
     password: "",
   };
   const [formData, setUser] = useState(initialFormData);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
 
   useEffect(() => {
@@ -27,11 +28,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // send a request for signin
     signInUser(formData)
       .then((user) => {
         if (user.error) {
+          setLoading(false);
           setErr(user.error);
         } else {
           // store the data in the state & the session storage
@@ -57,6 +60,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
 
     setUser(initialFormData);
@@ -106,8 +110,22 @@ const Login = () => {
             onChange={handleUserData}
           />
 
-          <Button variant="outlined" type="submit" color="primary">
+          <Button
+            variant="outlined"
+            type="submit"
+            color="primary"
+            disabled={loading}
+          >
             Login
+            {loading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: "rgb(30, 216, 229)",
+                  position: "absolute",
+                }}
+              />
+            )}
           </Button>
         </form>
       </div>
