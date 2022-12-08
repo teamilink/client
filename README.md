@@ -10,7 +10,7 @@ iLink optimises your social media presence by linking all the landing pages unde
   - Test User
     - Email: `coder@test.com`, Password: `test123`
     - Profile: [https://ilinkapp.netlify.app/ilink/coder_academy](https://ilinkapp.netlify.app/ilink/coder_academy)
-- **Deployed Server**: [https://ilink-server.herokuapp.com/links](https://ilink-server.herokuapp.com/links)
+- **Deployed Server**: [https://ilink-server.onrender.com/links](https://ilink-server.onrender.com/links)
 - **Client Repo**: [https://github.com/teamilink/client](https://github.com/teamilink/client)
 - **Server Repo**: [https://github.com/teamilink/server](https://github.com/teamilink/server)
 - **Part A Docs Repo**: [https://github.com/teamilink/iLinkDocs](https://github.com/teamilink/iLinkDocs)
@@ -71,7 +71,7 @@ The following is the technology stack used for this project.
 - **Testing:** RSpec, Jest, React-testing-libraries, Cypress
 - **Database:** PostgreSQL
 - **Cloud Storage:** Amazon S3
-- **Cloud Hosting:** Netlify for Client side and Heroku for server side
+- **Cloud Hosting:** Netlify for Client side and Render for server side
 - **Utilities:** Balsamiq Wireframes, Draw.io
 - **DevOps:** Github, Git Version Control, Visual Studio Code
 - **Project Management Tools:** Trello and Discord
