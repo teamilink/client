@@ -10,7 +10,7 @@ iLink optimises your social media presence by linking all the landing pages unde
   - Test User
     - Email: `coder@test.com`, Password: `test123`
     - Profile: [https://ilinkapp.netlify.app/ilink/coder_academy](https://ilinkapp.netlify.app/ilink/coder_academy)
-- **Deployed Server**: [https://ilink-server.onrender.com/links](https://ilink-server.onrender.com/links)
+- **Deployed Server**: [https://ilink-server-new.herokuapp.com/links](https://ilink-server-new.herokuapp.com/links)
 - **Client Repo**: [https://github.com/teamilink/client](https://github.com/teamilink/client)
 - **Server Repo**: [https://github.com/teamilink/server](https://github.com/teamilink/server)
 - **Part A Docs Repo**: [https://github.com/teamilink/iLinkDocs](https://github.com/teamilink/iLinkDocs)
