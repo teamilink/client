@@ -5,7 +5,7 @@ import {
   saveAppearance,
 } from "../../services/appearanceServices";
 import { getRandomImage } from "../../services/imageService";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Alert } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
 
 const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
@@ -104,6 +104,12 @@ const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
           <h1 className={styles.subtitle}>Profile</h1>
           <div className={styles.box}>
             <div className={styles.inputContainer}>
+              <Alert severity="error">
+                Due to the expiration of AWS free tier, we're moving to
+                Cloudinary. In the meantime, please bear with us. We'll get back
+                to you the full functionality soon.
+                <p>Last update: 28 February 2023 17:00 AEDT</p>
+              </Alert>
               <input
                 type="file"
                 ref={pictureRef}
@@ -120,6 +126,7 @@ const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
                     picture && (picture.name ? styles.blue : styles.grey)
                   }`}
                   onClick={handleClick}
+                  disabled={true}
                 >
                   {(picture && picture.name) ||
                     (appearance.picture_url && "Picture added") ||
@@ -134,6 +141,7 @@ const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
               name="bg_image_url"
               id="bg_image_url"
               onClick={handleRandomImage}
+              disabled={true}
             >
               {!err && clickCount === 0 ? `Get a random image` : err}
               {clickCount > 0 &&

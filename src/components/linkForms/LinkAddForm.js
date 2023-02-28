@@ -73,20 +73,14 @@ const LinkAddForm = () => {
           onChange={handleChange}
         />
         <div className={styles.buttons}>
-          <Button
-            data-testid="save"
-            variant="text"
-            type="submit"
-            color="secondary"
-          >
+          <Button data-testid="save" variant="outlined" type="submit">
             Save to view
           </Button>
           <Button
             data-testid="clear"
-            variant="text"
+            variant="outlined"
             type="reset"
             onClick={clearForm}
-            color="secondary"
           >
             Clear
           </Button>
