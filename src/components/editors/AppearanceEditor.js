@@ -5,7 +5,7 @@ import {
   saveAppearance,
 } from "../../services/appearanceServices";
 import { getRandomImage, imageUploader } from "../../services/imageService";
-import { TextField, Button, Alert } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import styles from "./AppearanceEditor.module.css";
 
 const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
@@ -127,7 +127,6 @@ const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
                     picture && (picture.name ? styles.blue : styles.grey)
                   }`}
                   onClick={handleClick}
-                  // disabled={true}
                 >
                   {(picture && picture.name) ||
                     (appearance.picture_url && "Picture added") ||
@@ -142,7 +141,6 @@ const AppearanceEditor = ({ appendFormData, handlePicture, picture }) => {
               name="bg_image_url"
               id="bg_image_url"
               onClick={handleRandomImage}
-              // disabled={true}
             >
               {!err && clickCount === 0 ? `Get a random image` : err}
               {clickCount > 0 &&
