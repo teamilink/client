@@ -32,16 +32,16 @@ const Card = () => {
     }
   };
 
+  const profileUrl =
+    (!appearance.bg_image_url && !appearance.picture_url && findNewer()) ||
+    appearance.bg_image_url ||
+    appearance.picture_url;
+
   return (
     <CardContainer>
       <Box>
         {appearance && (appearance.picture_url || appearance.bg_image_url) ? (
-          <Profile
-            alt="profile"
-            src={
-              (appearance.bg_image_url || appearance.picture_url) && findNewer()
-            }
-          />
+          <Profile alt="profile" src={profileUrl} />
         ) : (
           <LetterProfile>
             {loggedInUser

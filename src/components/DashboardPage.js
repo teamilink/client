@@ -39,7 +39,7 @@ const DashboardPage = () => {
     data.append("appearance[profile_title]", appearance.profile_title);
     data.append("appearance[bio]", appearance.bio);
     data.append("appearance[bg_color]", appearance.bg_color);
-    data.append("appearance[picture]", picture);
+    data.append("appearance[picture_url]", picture.url);
     data.append("appearance[user_id]", currentUserId);
     data.append("appearance[img_timestamp]", appearance.img_timestamp);
     data.append("appearance[pic_timestamp]", appearance.pic_timestamp);
