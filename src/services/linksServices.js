@@ -27,13 +27,11 @@ export const createLink = async (link) => {
 };
 
 export const updateLink = async (link) => {
-  console.log("updateLink - service");
   const response = await iLinkAPI.put(`/links/${link.id}`, link);
   return response.data;
 };
 
 export const deleteLink = async (id) => {
-  console.log("deleteLink - service");
   const response = await iLinkAPI.delete(`/links/${id}`);
   return response.data;
 };
