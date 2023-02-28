@@ -74,18 +74,12 @@ const LinkEditForm = ({ link }) => {
           onChange={handleChange}
         />
         <div className={styles.buttons}>
-          <Button
-            data-testid="update"
-            variant="text"
-            type="submit"
-            color="secondary"
-          >
+          <Button data-testid="update" variant="outlined" type="submit">
             Update
           </Button>
           <Button
-            variant="text"
+            variant="outlined"
             type="submit"
-            color="secondary"
             data-testid="delete"
             name={id}
             id={id}
