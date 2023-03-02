@@ -70,7 +70,7 @@ The following is the technology stack used for this project.
 - **Server Side:** Ruby on Rails framework
 - **Testing:** RSpec, Jest, React-testing-libraries, Cypress
 - **Database:** PostgreSQL
-- **Cloud Storage:** Amazon S3
+- **Cloud Storage:** Cloudinary (previously Amazon S3)
 - **Cloud Hosting:** Netlify for Client side and Render for server side
 - **Utilities:** Balsamiq Wireframes, Draw.io
 - **DevOps:** Github, Git Version Control, Visual Studio Code
